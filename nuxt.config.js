@@ -1,14 +1,11 @@
-const pkg = require('./package')
-
-
 module.exports = {
   mode: 'universal',
   head: {
-    title: pkg.name,
+    title: 'Lemonce',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: '' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -16,9 +13,10 @@ module.exports = {
   },
   loading: { color: '#fff' },
   css: [
+    {src: '@fortawesome/fontawesome-free/css/all.min.css'}
   ],
   plugins: [
-    
+    '~/plugins/i18n.js'
   ],
   modules: [
     'bootstrap-vue/nuxt',
@@ -27,7 +25,6 @@ module.exports = {
     extend(config, ctx) {
 
     }
-    // transpile 
   },
   router: {
     // middleware: will be called for every route change
