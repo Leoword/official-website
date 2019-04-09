@@ -24,5 +24,6 @@ export default {
 <style>
 #container {
   min-height: 600px;
+  padding-top: 60px;
 }
 </style>

@@ -16,7 +16,9 @@ module.exports = {
     {src: '@fortawesome/fontawesome-free/css/all.min.css'}
   ],
   plugins: [
-    '~/plugins/i18n.js'
+    '~/plugins/i18n.js',
+    '~/plugins/register.js',
+    '~/plugins/connect.js'
   ],
   modules: [
     'bootstrap-vue/nuxt',
