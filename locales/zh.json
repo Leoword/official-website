@@ -1,5 +1,6 @@
 {
   "info": {
+    "shortName": "橙子",
     "name": "天津橙子科技有限公司",
     "address": {
       "label": "地址",
@@ -7,5 +8,9 @@
     },
     "Tel": "电话",
     "email": "邮箱"
+  },
+  "operate": {
+    "search": "搜索",
+    "switch": "切换语言"
   }
 }

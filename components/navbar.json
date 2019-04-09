@@ -1,0 +1,18 @@
+[
+	{
+		"label": "项目一",
+		"url": "/index"
+	},
+	{
+		"label": "项目二",
+		"url": "/category"
+	},
+	{
+		"label": "项目三",
+		"url": "/category/1"
+	},
+	{
+		"label": "项目四",
+		"url": "/category/2"
+	}
+]

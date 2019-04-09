@@ -1,12 +1,19 @@
+import Cookies from 'js-cookie';
+
+function persistenceState(store) {
+  store.subscribe((mutation, {locale, activeItem}) => {
+    
+    Cookies.set('lang', locale);
+  });
+}
+
 export default {
   state() {
     return {
       locales: ['en', 'zh'],
-      locale: 'zh'
-    }
-  },
-  getters: {
-
+      locale: 'en',
+      activeItem: 0
+    };
   },
   mutations: {
     setLang(state, locale) {
@@ -14,5 +21,8 @@ export default {
         state.locale = locale
       }
     }
-  }
+  },
+  plugins: [
+    persistenceState
+  ]
 }

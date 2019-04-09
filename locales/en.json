@@ -1,5 +1,6 @@
 {
   "info": {
+    "shortName": "OrChange",
     "name": "Tianjin Or-Change Tech Co.,Ltd",
     "address": {
       "label": "Address",
@@ -7,5 +8,9 @@
     },
     "Tel": "Tel",
     "email": "Email"
+  },
+  "operate": {
+    "search": "Search",
+    "switch": "Switch"
   }
 }

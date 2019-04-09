@@ -1,5 +1,5 @@
 <template>
-  <div id="footer">
+  <div id="footer" class="py-5">
 		<div id="info">
 			<div id="logo">
 				<img src="~/assets/images/logo.png" />

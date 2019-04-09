@@ -20,6 +20,7 @@ module.exports = {
   ],
   modules: [
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios'
   ],
   build: {
     extend(config, ctx) {
@@ -30,4 +31,15 @@ module.exports = {
     // middleware: will be called for every route change
   },
   // srcDir: default equal with rootDir
+  axios: {
+    proxy: true,
+    prefix: '/api',
+    credentials: true
+  },
+  proxy: {
+    '/api/': {
+      target: 'http://127.0.0.1:8080',
+      changeOrigin: true
+    }
+  }
 }
