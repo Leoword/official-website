@@ -23,9 +23,13 @@
     "vue-i18n": "^8.10.0"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.2",
+    "json-loader": "^0.5.7",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "yaml-loader": "^0.5.0"
   },
   "repository": {
     "type": "git",
