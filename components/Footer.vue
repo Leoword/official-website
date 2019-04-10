@@ -12,27 +12,15 @@
 		<p>Copyright © 2005 - 2014 {{$t('info.name')}}</p>
   </div>
 </template>
-
 <style lang="less">
 #footer {
 	height: auto;
 	width: 100%;
-	margin-top: 50px;
 	padding: 20px 0 10px 0;
 	background-color: #f5f5f5;
 	
-	#info {
-		margin-bottom: 40px;
-			#logo {
-				text-align: center;
-				margin-bottom: 20px;
-				img{
-					width: 60px;
-				}
-			}
-	}
-
 	p {
+		// height: 14px;
 		line-height: 14px;
 		color: #8f8f8f;
 		font-size: 14px;
@@ -48,4 +36,16 @@
 		}
 	}
 }
+
+#info {
+	margin-bottom: 40px;
+	#logo {
+		text-align: center;
+		margin-bottom: 20px;
+		img{
+			width: 60px;
+		}
+	}
+}
+
 </style>

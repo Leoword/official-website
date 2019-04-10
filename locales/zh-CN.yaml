@@ -1,12 +1,12 @@
 info:
-	shortName: '橙子'
-	name: '天津橙子科技有限公司'
-	address:
-		label: '地址'
-		value: '天津市西青区李七庄街凌奥创意产业园一期7号楼一层101室'
-	Tel: '电话'
-	email: '邮箱'
-	
+  shortName: 橙子
+  name: '天津橙子科技有限公司'
+  address:
+    label: 地址
+    value: 天津市西青区李七庄街凌奥创意产业园一期7号楼一层101室
+  Tel: '电话'
+  email: '邮箱'
+  
 operate:
-	search: '搜索'
-	switch: '切换语言'
+  search: '搜索'
+  switch: '切换语言'

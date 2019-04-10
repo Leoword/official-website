@@ -1,9 +1,44 @@
 <template>
+	<div class="banner-box">
+
+    <b-link class="banner-link">
+      <b-img src="https://picsum.photos/1024/480/?image=52"
+      fluid-grow></b-img>
+    </b-link>
+    <div class="banner-text">
+      <h1>Banner-text</h1>
+    </div>
+  </div>
 </template>
 
 <script>
+
 export default {
-	name: 'format-banner'
+	data() {
+      return {
+      }
+    },
+    methods: {
+		},
+	name: 'format-banner',
+	props: ['options']
 }
 </script>
+
+<style lang="less">
+
+.banner-box {
+  position: relative;
+  .banner-link img {
+    max-height: 600px;
+  }
+  .banner-text {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%)
+  }
+}
+
+</style>
 
