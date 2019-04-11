@@ -28,30 +28,28 @@ import data from "../staticdata/carousel.json"
 
 export default {
 	data() {
-      return {
-        slide: 0,
-        sliding: null,
-        data
-      }
+    return {
+      slide: 0,
+      sliding: null,
+      data
+    }
+  },
+  methods: {
+    onSlideStart(slide) {
+      this.sliding = true
     },
-    methods: {
-      onSlideStart(slide) {
-        this.sliding = true
-      },
-      onSlideEnd(slide) {
-        this.sliding = false
-      }
-		},
+    onSlideEnd(slide) {
+      this.sliding = false
+    }
+  },
 	name: 'format-carousel',
 	props: ['options']
 }
 </script>
 
 <style lang="less" scoped>
-
-  .img-fluid {
-    height: 0;
-  }
-
+.img-fluid {
+  height: 0;
+}
 </style>
 

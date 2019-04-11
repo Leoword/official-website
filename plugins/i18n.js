@@ -15,7 +15,7 @@ context.keys().forEach(key => {
 
 export default ({ app, store }) => {
 	app.i18n = new VueI18n({
-		locale: Cookies.get('lang'),
+		locale: Cookies.get('lang') ? Cookies.get('lang') : 'zh-CN',
 		messages: list
 	});
 

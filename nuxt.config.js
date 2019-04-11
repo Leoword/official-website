@@ -13,7 +13,8 @@ module.exports = {
 	},
 	loading: { color: '#fff' },
 	css: [
-		{src: '@fortawesome/fontawesome-free/css/all.min.css'}
+		{src: '@fortawesome/fontawesome-free/css/all.min.css'},
+		{src: 'animate.css/animate.min.css'},
 	],
 	plugins: [
 		'~/plugins/i18n.js',
