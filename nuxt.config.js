@@ -47,5 +47,21 @@ module.exports = {
 			target: 'http://127.0.0.1:8080',
 			changeOrigin: true
 		}
+	},
+	server: {
+		port: 8080,
+		db: {
+			database: 'offical',
+			username: 'root',
+			password: '123456',
+			host: 'localhost',
+			dialect: 'mysql',
+			freezeTableName: true,
+			force: true
+		},
+		storage: {
+			path: 'store/page.json',
+			intervalTime: 60000
+		}
 	}
-}
+};

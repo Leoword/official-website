@@ -1,15 +1,25 @@
+global.validate = require('koa2-validation');
+global.Joi = require('joi');
+global.Router = require('koa-router');
+
+const bodyParser = require('koa-bodyparser');
+const router = require('./router');
 const Koa = require('koa');
-const consola = require('consola');
+
+require('./model');
 const { Nuxt, Builder } = require('nuxt');
 
 const app = new Koa();
 
-// Import and Set Nuxt.js options
+app.context.sequelize = require('./lib/sequelize');
+
+app.use(bodyParser());
+app.use(router.routes());
+
 let config = require('../nuxt.config.js');
 config.dev = !(app.env === 'production');
 
 async function start() {
-	// Instantiate nuxt.js
 	const nuxt = new Nuxt(config);
 
 	const {
@@ -17,7 +27,6 @@ async function start() {
 		port = process.env.PORT || 3000
 	} = nuxt.options.server;
 
-	// Build in development
 	if (config.dev) {
 		const builder = new Builder(nuxt);
 		await builder.build();
@@ -25,6 +34,7 @@ async function start() {
 		await nuxt.ready();
 	}
 
+	//改这里
 	app.use(ctx => {
 		ctx.status = 200;
 		ctx.respond = false; // Bypass Koa's built-in response handling
@@ -33,10 +43,6 @@ async function start() {
 	});
 
 	app.listen(port, host);
-	consola.ready({
-		message: `Server listening on http://${host}:${port}`,
-		badge: true
-	});
 }
 
 start();

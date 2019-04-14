@@ -1,0 +1,18 @@
+const router = module.exports = new Router();
+
+const {section: sectionValidate, format: formatValidate} = require('../validator');
+const {section, format} = require('../middleware');
+
+router.post('/section', validate(sectionValidate.create), section.create);
+router.get('/section', validate(sectionValidate.create), section.getList);
+router.get('/section/:id', section.getRetrive);
+router.put('/section/:id', validate(sectionValidate.update), section.getRetrive, section.update);
+router.delete('/section/:id', section.getRetrive, section.delete);
+
+router.post('/format', validate(formatValidate.create), format.create);
+router.get('/format', validate(formatValidate.create), format.getList);
+router.get('/format/:id', format.getRetrive);
+router.put('/format/:id', validate(formatValidate.update), format.getRetrive);
+router.delete('/format/:id', format.getRetrive, format.delete);
+
+router.get('/section/:id/article', section.getRetrive, section.getCollection);
