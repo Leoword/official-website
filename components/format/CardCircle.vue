@@ -82,7 +82,7 @@ export default {
 	img {
     &:hover {
       transition: all 0.2s;
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
 	}	
 }

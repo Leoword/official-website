@@ -21,7 +21,8 @@
 				<b-button
 					variant="primary"
 					class="position-absolute w-50 rounded-0 ml-4"
-					style="bottom:-20px">{{item.target}}</b-button>
+					style="bottom:-20px"
+					:href="item.url">{{item.target}}</b-button>
 			</b-card>
 		</b-card-group>
 	</b-container>
