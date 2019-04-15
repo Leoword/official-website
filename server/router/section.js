@@ -1,4 +1,6 @@
+const Router = require('koa-router');
 const router = module.exports = new Router();
+const validate = require('koa2-validation');
 
 const {section: sectionValidate, format: formatValidate} = require('../validator');
 const {section, format} = require('../middleware');
@@ -15,4 +17,4 @@ router.get('/format/:id', format.getRetrive);
 router.put('/format/:id', validate(formatValidate.update), format.getRetrive);
 router.delete('/format/:id', format.getRetrive, format.delete);
 
-router.get('/section/:id/article', section.getRetrive, section.getCollection);
+router.get('/section/:id/collection', section.getRetrive, section.getCollection);

@@ -16,4 +16,4 @@ module.exports = async function (ctx, next) {
 	await next();
 
 	response.body = section;
-}
+};

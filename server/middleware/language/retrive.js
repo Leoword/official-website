@@ -30,5 +30,5 @@ module.exports = async function (ctx, next) {
 	response.body = {
 		hash: article.hash, title: language.title, language: language.name,
 		abstract: language.abstract, content: commit.content
-	}
-}
+	};
+};

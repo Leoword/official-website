@@ -17,4 +17,4 @@ module.exports = async function (ctx) {
 	});
 
 	response.body = section;
-}
+};

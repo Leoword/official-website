@@ -1,3 +1,5 @@
+const Joi = require('joi');
+
 exports.section = {
 	create: {
 		body: {

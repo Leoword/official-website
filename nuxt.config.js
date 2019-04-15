@@ -36,32 +36,11 @@ module.exports = {
 	router: {
 		// middleware: will be called for every route change
 	},
-	// srcDir: default equal with rootDir
 	axios: {
-		proxy: true,
 		prefix: '/api',
 		credentials: true
 	},
-	proxy: {
-		'/api/': {
-			target: 'http://127.0.0.1:8080',
-			changeOrigin: true
-		}
-	},
 	server: {
-		port: 8080,
-		db: {
-			database: 'offical',
-			username: 'root',
-			password: '123456',
-			host: 'localhost',
-			dialect: 'mysql',
-			freezeTableName: true,
-			force: true
-		},
-		storage: {
-			path: 'store/page.json',
-			intervalTime: 60000
-		}
+		port: 8080
 	}
 };
