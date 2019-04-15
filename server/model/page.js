@@ -18,7 +18,7 @@ const Page = class Page {
 
 let id = 1;
 
-exports.register = {
+module.exports = {
 	pages: [],
 	dirPath: `${process.cwd()}/${storage.dir}`,
 	get filePath() {
@@ -27,9 +27,9 @@ exports.register = {
 	init() {
 		createStore(this.dirPath, this.filePath);
 
-		const list = fs.readFileSync(this.filePath, {encoding: 'utf8'});
+		const list = JSON.parse(fs.readFileSync(this.filePath, {encoding: 'utf8'}));
 
-		this.pages = list.forEach(page => new Page(page));
+		list.forEach(page => this.pages.push(new Page(page)));
 
 		id = this.pages.length;
 	},

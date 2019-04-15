@@ -4,14 +4,14 @@ module.exports = {
 	create: {
 		body: {
 			path: Joi.string().required(),
-			sectionList: Joi.array().item(Joi.number()).required(),
+			sectionList: Joi.array(),
 			comment: Joi.string()
 		}
 	},
 	update: {
 		body: {
 			path: Joi.string(),
-			sectionList: Joi.array().item(Joi.number()),
+			sectionList: Joi.array(),
 			comment: Joi.string()
 		}
 	}
