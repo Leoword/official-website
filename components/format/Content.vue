@@ -33,7 +33,7 @@ export default {
     
   },
 	name: 'format-content',
-	props: ['options']
+	props: []
 }
 </script>
 

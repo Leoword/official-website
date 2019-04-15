@@ -15,13 +15,13 @@
 
 export default {
 	data() {
-      return {
-      }
-    },
-    methods: {
-		},
+    return {
+    }
+  },
+  methods: {
+  },
 	name: 'format-banner',
-	props: ['options']
+	props: []
 }
 </script>
 

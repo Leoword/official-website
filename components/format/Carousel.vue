@@ -12,7 +12,7 @@
       @sliding-end="onSlideEnd"
     >
       <b-carousel-slide
-        v-for="(item,index) in data"
+        v-for="(item,index) in carouselData"
         :key="index"
         :img-src="item.url"
         style="max-height:600px">
@@ -24,14 +24,13 @@
 </template>
 
 <script>
-import data from "../staticdata/carousel.json"
-
 export default {
+  name: 'format-carousel',
+  props: ['carouselData'],
 	data() {
     return {
       slide: 0,
       sliding: null,
-      data
     }
   },
   methods: {
@@ -41,9 +40,7 @@ export default {
     onSlideEnd(slide) {
       this.sliding = false
     }
-  },
-	name: 'format-carousel',
-	props: ['options']
+  }
 }
 </script>
 

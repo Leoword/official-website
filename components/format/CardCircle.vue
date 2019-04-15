@@ -6,7 +6,7 @@
         v-if="heading">{{heading}}</h1>
       <b-row
         class="mb-5">
-        <b-col v-for="(item,index) in data"
+        <b-col v-for="(item,index) in cardCircleData"
           class="text-center circle-card"
           ref="cardList"
           :key="index">
@@ -33,18 +33,16 @@
 </template>
 
 <script>
-import data from "../staticdata/card2.json"
-
 export default {
+  name: 'format-card-circle',
+  props: ['cardCircleData'],
 	data () {
 		return {
-			data,
+			// data,
       heading: 'Card-Circle',
       radius: 0
 		}
 	},
-	name: 'format-card-circle',
-  props: ['options'],
   methods: {
     setRadius() {
       const {

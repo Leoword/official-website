@@ -7,7 +7,7 @@
 		<b-card-group 
 			deck 
 			class="animated flipInX py-4">
-			<b-card v-for="(item,index) in data"
+			<b-card v-for="(item,index) in cardExtendData"
 				:key="index"
 				no-body
 				class="rounded-0 position-relative">
@@ -15,7 +15,9 @@
 					<b-img :src="item.url" fluid></b-img>
 				</b-link>
 				<h3 class="pl-3 pt-3" style="color:#999;">title</h3>
-				<b-card-text class="p-3 pb-4" style="color:#999;">
+				<b-card-text 
+					class="p-3 pb-4" 
+					style="color:#999;">
 					{{item.text}}
 				</b-card-text>
 				<b-button
@@ -30,17 +32,14 @@
 </template>
 
 <script>
-import data from "../staticdata/card2.json"
-
 export default {
+	name: 'format-card-extend',
+	props: ['cardExtendData'],
 	data () {
 		return {
-			data,
 			heading: 'format-card-extend'
 		}
-	},
-	name: 'format-card-extend',
-	props: ['options']
+	}
 }
 </script>
 

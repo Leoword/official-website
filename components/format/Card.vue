@@ -4,9 +4,9 @@
 			class="text-center my-5"
 			v-if="heading">{{heading}}</h1>
 		<b-card-group 
-			deck 
+			deck
 			class="animated bounceInLeft mb-5">
-			<b-card v-for="(item,index) in data"
+			<b-card v-for="(item,index) in cardData"
 				:key="index"
 				no-body
 				class="rounded-0">
@@ -20,17 +20,17 @@
 </template>
 
 <script>
-import data from "../staticdata/card.json"
-
 export default {
+	name: 'format-card',
+	props: ['cardData'],
 	data () {
 		return {
-			data,
 			heading: 'Card'
 		}
 	},
-	name: 'format-card',
-	props: ['options']
+	methods: {
+		
+	}
 }
 </script>
 
