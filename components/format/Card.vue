@@ -6,7 +6,7 @@
 		<b-card-group 
 			deck
 			class="animated bounceInLeft mb-5">
-			<b-card v-for="(item,index) in cardData"
+			<b-card v-for="(item,index) in options.card"
 				:key="index"
 				no-body
 				class="rounded-0">
@@ -22,7 +22,7 @@
 <script>
 export default {
 	name: 'format-card',
-	props: ['cardData'],
+	props: ['options'],
 	data () {
 		return {
 			heading: 'Card'

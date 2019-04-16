@@ -24,6 +24,8 @@
 
 <script>
 export default {
+	name: 'format-content',
+	props: ['options'],
 	data() {
     return {
       heading: 'Content'
@@ -31,9 +33,7 @@ export default {
   },
   methods: {
     
-  },
-	name: 'format-content',
-	props: []
+  }
 }
 </script>
 

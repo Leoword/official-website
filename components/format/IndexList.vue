@@ -26,7 +26,7 @@
             <b-card
               no-body
               class="border-0 pb-4"
-              v-for="(item,index) in guess"
+              v-for="(item,index) in options.guess"
               :key="index">
               <b-link :href="item.url">
                 <b-img 
@@ -53,14 +53,14 @@
 
 <script>
 export default {
-  name: 'format-index-list',
-  props: ['indexData','guess'],
+  name: 'format-indexlist',
+  props: ['options'],
 	data() {
     return {
       heading: 'List',
       perPage: 8,
       currentPage: 1,
-      index: this.indexData
+      index: this.options.index
     }
   },
   computed: {

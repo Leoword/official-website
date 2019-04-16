@@ -3,10 +3,11 @@
     <b-container class="pb-5" >
 			<b-row>
         <b-col class="border p-0">
-					<h2 class="p-3">{{contentDetailed[0].title}}</h2>
-					<b-card-text class="border-bottom pl-3 pb-3">由{{contentDetailed[0].author}}发布于{{contentDetailed[0].date}}</b-card-text>
+					<h2 class="p-3">{{options.contentDetailed[0].title}}</h2>
+					<b-card-text 
+            class="border-bottom pl-3 pb-3">由{{options.contentDetailed[0].author}}发布于{{options.contentDetailed[0].date}}</b-card-text>
 					<b-card 
-						v-html="contentDetailed[0].text"
+						v-html="options.contentDetailed[0].text"
 						class="border-0 p-3"></b-card>
         </b-col>
 
@@ -20,7 +21,7 @@
             <b-card
               no-body
               class="border-0 pb-4"
-              v-for="(item,index) in guess"
+              v-for="(item,index) in options.guess"
               :key="index">
               <b-link :href="item.url">
                 <b-img 
@@ -38,6 +39,8 @@
 
 <script>
 export default {
+  name: 'format-contentdetailed',
+  props: ['options'],
 	data() {
     return {
       heading: 'Content',
@@ -48,9 +51,7 @@ export default {
   },
   methods: {
     
-	},
-	name: 'format-content-detailed',
-	props: ['guess','contentDetailed']
+	}
 }
 </script>
 

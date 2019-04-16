@@ -9,4 +9,5 @@ context.keys().forEach(key => {
 	Vue.component(component.name, component);
 
 	Vue.prototype.$components.push(component.name);
+	
 });

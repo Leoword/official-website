@@ -22,6 +22,7 @@
 
 <script>
 export default {
+  name: 'format-contact',
 	data() {
     return {
       heading: 'Contact'
@@ -30,8 +31,6 @@ export default {
   methods: {
     
   },
-	name: 'format-contact',
-	props: ['options']
 }
 </script>
 

@@ -1,6 +1,5 @@
 <template>
 	<div>
-
     <b-carousel
       id="carousel-1"
       v-model="slide"
@@ -12,21 +11,20 @@
       @sliding-end="onSlideEnd"
     >
       <b-carousel-slide
-        v-for="(item,index) in carouselData"
+        v-for="(item,index) in options.carousel"
         :key="index"
         :img-src="item.url"
         style="max-height:600px">
 				<h1>{{item.text}}</h1>
 			</b-carousel-slide>
     </b-carousel>
-
   </div>
 </template>
 
 <script>
 export default {
   name: 'format-carousel',
-  props: ['carouselData'],
+  props: ['options'],
 	data() {
     return {
       slide: 0,

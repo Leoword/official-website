@@ -6,7 +6,7 @@
         v-if="heading">{{heading}}</h1>
       <b-row
         class="mb-5">
-        <b-col v-for="(item,index) in cardCircleData"
+        <b-col v-for="(item,index) in options.cardCircle"
           class="text-center circle-card"
           ref="cardList"
           :key="index">
@@ -34,8 +34,8 @@
 
 <script>
 export default {
-  name: 'format-card-circle',
-  props: ['cardCircleData'],
+  name: 'format-cardcircle',
+  props: ['options'],
 	data () {
 		return {
 			// data,

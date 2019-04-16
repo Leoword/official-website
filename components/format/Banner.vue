@@ -14,14 +14,14 @@
 <script>
 
 export default {
+  name: 'format-banner',
+  props: ['options'],
 	data() {
     return {
     }
   },
   methods: {
-  },
-	name: 'format-banner',
-	props: []
+  }
 }
 </script>
 

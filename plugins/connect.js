@@ -2,16 +2,18 @@ import axios from 'axios';
 import Vue from 'vue';
 
 const api = {
-  // testData: function () {
-  //   return axios.get('/api/page')
-  //   .then(res => {
-  //     // return res
-  //     console.log(res);
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   })
-  // }
-};
+  'page': function (pageId) {
+    return axios.get('/api/page/:' + pageId);
+  },
+  'section': function (sectionId) {
+    return axios.get('/api/section/:' + sectionId)
+  },
+  'format': function (formatId) {
+    return axios.get('/api/format/:' + formatId)
+  },
+  'collaction': function (collactionId) {
+    return axios.get('/api/section/:' + collactionId + '/collaction')
+  }
+}
 
 Vue.prototype.$api = api;

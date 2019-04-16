@@ -4,10 +4,10 @@
 		<h1 
 			class="text-center mb-5"
 			v-if="heading">{{heading}}</h1>
-		<b-card-group 
+		<b-card-group
 			deck 
 			class="animated flipInX py-4">
-			<b-card v-for="(item,index) in cardExtendData"
+			<b-card v-for="(item,index) in options.cardExtend"
 				:key="index"
 				no-body
 				class="rounded-0 position-relative">
@@ -33,8 +33,8 @@
 
 <script>
 export default {
-	name: 'format-card-extend',
-	props: ['cardExtendData'],
+	name: 'format-cardextend',
+	props: ['options'],
 	data () {
 		return {
 			heading: 'format-card-extend'
