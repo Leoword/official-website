@@ -1,22 +1,26 @@
 <template>
-	<b-container class="py-5 format-card">
-		<h1 
-			class="text-center my-5"
-			v-if="heading">{{heading}}</h1>
-		<b-card-group 
-			deck
-			class="animated bounceInLeft mb-5">
-			<b-card v-for="(item,index) in options.card"
-				:key="index"
-				no-body
-				class="rounded-0">
-				<b-link :href="item.url">
-					<b-img :src="item.url" fluid></b-img>
-				</b-link>
-				<b-card-text class="p-3">{{item.text}}</b-card-text>
-			</b-card>
-		</b-card-group>
-	</b-container>	
+	<div class="format-card">
+		<b-container class="py-5">
+			<h1 
+				class="text-center mb-5"
+				v-if="heading">{{heading}}</h1>
+			<b-card-group 
+				deck
+				class="animated bounceInLeft mb-5">
+				<b-card 
+					v-for="(item,index) in options"
+					:key="index"
+					no-body>
+					<b-link :href="item.url">
+						<b-img 
+							:src="item.url" 
+							fluid/>
+					</b-link>
+					<b-card-text class="p-3">{{item.text}}</b-card-text>
+				</b-card>
+			</b-card-group>
+		</b-container>	
+	</div>
 </template>
 
 <script>
@@ -27,21 +31,19 @@ export default {
 		return {
 			heading: 'Card'
 		}
-	},
-	methods: {
-		
 	}
 }
 </script>
 
 <style lang="less">
 .format-card {
+	background-color: #f6f6f6;
 	.card {
-		transition: all 0.1s;
+		transition: all 0.3s;
 
 		&:hover {
-			transform: scale(1.02);
-			box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+			transform: translateY(-5px);
+			box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 		}
 	}
 	

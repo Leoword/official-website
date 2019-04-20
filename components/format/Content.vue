@@ -1,15 +1,15 @@
 <template>
-	<div class="format-content my-5 border-top border-bottom">
-    <b-container class="pb-5">
+	<div class="format-content my-5">
+    <b-container class="py-5">
 			<h1 
-			class="text-center my-5"
+			class="text-center mb-5"
 			v-if="heading">{{heading}}</h1>
 			<b-card 
 				no-body 
 				class="border-0">
 				<b-row>
 					<b-col cols="5">
-						<b-img src="https://placekitten.com/300/300" fluid></b-img>
+						<b-img :src="options[0].url" fluid></b-img>
 					</b-col>
 					<b-col>
 						<h3>title</h3>	

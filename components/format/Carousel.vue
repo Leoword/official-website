@@ -11,7 +11,7 @@
       @sliding-end="onSlideEnd"
     >
       <b-carousel-slide
-        v-for="(item,index) in options.carousel"
+        v-for="(item,index) in options"
         :key="index"
         :img-src="item.url"
         style="max-height:600px">

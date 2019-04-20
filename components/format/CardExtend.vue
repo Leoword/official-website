@@ -6,8 +6,8 @@
 			v-if="heading">{{heading}}</h1>
 		<b-card-group
 			deck 
-			class="animated flipInX py-4">
-			<b-card v-for="(item,index) in options.cardExtend"
+			class="py-4">
+			<b-card v-for="(item,index) in options"
 				:key="index"
 				no-body
 				class="rounded-0 position-relative">
@@ -22,9 +22,11 @@
 				</b-card-text>
 				<b-button
 					variant="primary"
-					class="position-absolute w-50 rounded-0 ml-4"
+					class="position-absolute w-50 rounded-0 ml-4 card-extend-button"
 					style="bottom:-20px"
-					:href="item.url">{{item.target}}</b-button>
+					:href="item.url">
+					{{item.target}}
+				</b-button>
 			</b-card>
 		</b-card-group>
 	</b-container>
@@ -33,7 +35,7 @@
 
 <script>
 export default {
-	name: 'format-cardextend',
+	name: 'format-card-extend',
 	props: ['options'],
 	data () {
 		return {
@@ -48,6 +50,11 @@ export default {
 	background-color: #f6f6f6;
 	img {
 		height: 230px;
+	}
+	.card-extend-button {
+		&:hover {
+			width: 100%;
+		}
 	}
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-	<div class="banner-box">
-
+	<div class="format-banner">
     <b-link class="banner-link">
-      <b-img src="https://picsum.photos/1024/480/?image=52"
-      fluid-grow></b-img>
+      <b-img 
+        :src="options[0].url"
+        fluid-grow />
     </b-link>
     <div class="banner-text">
-      <h1>Banner-text</h1>
+      <h1>{{options[0].text}}</h1>
     </div>
   </div>
 </template>
@@ -16,21 +16,14 @@
 export default {
   name: 'format-banner',
   props: ['options'],
-	data() {
-    return {
-    }
-  },
-  methods: {
-  }
 }
 </script>
 
 <style lang="less">
-
-.banner-box {
+.format-banner {
   position: relative;
   .banner-link img {
-    max-height: 600px;
+    max-height: 300px;
   }
   .banner-text {
     position: absolute;
@@ -39,6 +32,5 @@ export default {
     transform: translate(-50%,-50%);
   }
 }
-
 </style>
 

@@ -1,12 +1,13 @@
 <template>
   <div class="format-card-circle">
-    <b-container class="py-5">
+    <b-container class="py-5 animated fadeInLeft">
       <h1 
-        class="text-center my-5"
+        class="text-center mb-5"
         v-if="heading">{{heading}}</h1>
       <b-row
-        class="mb-5">
-        <b-col v-for="(item,index) in options.cardCircle"
+        class="mt-5">
+        <b-col
+          v-for="(item,index) in options"
           class="text-center circle-card"
           ref="cardList"
           :key="index">
@@ -34,11 +35,10 @@
 
 <script>
 export default {
-  name: 'format-cardcircle',
+  name: 'format-card-circle',
   props: ['options'],
 	data () {
 		return {
-			// data,
       heading: 'Card-Circle',
       radius: 0
 		}
@@ -50,7 +50,7 @@ export default {
         offsetWidth: width
       } = this.$refs.cardList[0];
 
-      this.radius = Math.min(height, width) ;
+      this.radius = Math.min(height, width);
     }
   },
   mounted() {
@@ -65,21 +65,25 @@ export default {
 
 <style lang="less">
 .format-card-circle {
-	background-color: #f1f1f1;
+	// background-color: #f6f6f6;
 	.circle-card {
-    min-height: 250px;
+    min-height: 200px;
     overflow: hidden;
     a {
+      transition: all 0.2s;
       box-sizing: content-box;
       display: inline-block;
       overflow: hidden;
       border: 10px solid rgba(0, 0, 0, .2);
+      &:hover {
+        border: 10px solid rgba(0, 0, 0, .3);
+      }
     }
 	}
 	
 	img {
+    transition: all 0.2s;
     &:hover {
-      transition: all 0.2s;
       transform: scale(1.1);
     }
 	}	

@@ -1,5 +1,5 @@
 <template>
-	<b-navbar toggleable="md" id="header">
+	<b-navbar toggleable="md" id="header" style="z-index:2000">
 		<b-navbar-brand href="#" id="logo">
 			{{$t('info.shortName')}}
 		</b-navbar-brand>
