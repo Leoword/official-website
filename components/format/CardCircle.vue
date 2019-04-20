@@ -1,6 +1,6 @@
 <template>
   <div class="format-card-circle">
-    <b-container class="py-5 animated fadeInLeft">
+    <b-container class="pt-5 pb-4">
       <h1 
         class="text-center mb-5"
         v-if="heading">{{heading}}</h1>
@@ -9,6 +9,8 @@
         <b-col
           v-for="(item,index) in options"
           class="text-center circle-card"
+          cols=6
+          lg=3
           ref="cardList"
           :key="index">
           <b-link
@@ -27,6 +29,7 @@
               }"
               fluid />
           </b-link>
+          <b-card-text class="text-center pt-2">{{item.title}}</b-card-text>
         </b-col>
       </b-row>
     </b-container>	
@@ -65,7 +68,7 @@ export default {
 
 <style lang="less">
 .format-card-circle {
-	// background-color: #f6f6f6;
+  background-color: #F2F4F5;
 	.circle-card {
     min-height: 200px;
     overflow: hidden;
@@ -74,9 +77,9 @@ export default {
       box-sizing: content-box;
       display: inline-block;
       overflow: hidden;
-      border: 10px solid rgba(0, 0, 0, .2);
+      border: 7px solid rgba(0, 60, 80, 0.8);
       &:hover {
-        border: 10px solid rgba(0, 0, 0, .3);
+        border: 7px solid rgba(0,60, 80, .3);
       }
     }
 	}
@@ -86,7 +89,7 @@ export default {
     &:hover {
       transform: scale(1.1);
     }
-	}	
+  }
 }
 </style>
 

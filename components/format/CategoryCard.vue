@@ -1,6 +1,9 @@
 <template>
-	<div class="format-class-card py-3">
-    <b-container>
+	<div class="format-class-card">
+    <b-container style="" class="py-5">
+      <h1 
+        class="text-center pb-3 mb-4 border-bottom"
+        v-if="heading">{{heading}}</h1>
       <b-row>
         <b-col
           v-for="(nav,index) in options"
@@ -25,7 +28,7 @@ export default {
   props: ['options'],
 	data() {
     return {
-
+      heading: 'Choose Your Area of Interest'
     }
   }
 }
@@ -33,7 +36,7 @@ export default {
 
 <style lang="less">
 .format-class-card {
-  background-color: #dee0e0;
+  // background-color: #00758F;
   .nav-img-ele {
     &:hover {
       img {

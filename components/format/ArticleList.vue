@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-auto format-index-list">
+  <div class="overflow-auto format-article-list">
     <b-container>
       <h1
         class="text-center my-5"
@@ -14,7 +14,7 @@
             <h4 :title="list.title">
               <b-link>{{list.id}}{{list.title}}</b-link>
             </h4>
-            <b-card-text ><small>{{list.introduction}}</small></b-card-text>
+            <b-card-text class="list-summary"><small>{{list.introduction}}</small></b-card-text>
             <b-card-text><small>由{{list.author}}发布于{{list.date}}</small></b-card-text>
           </b-card>
         </b-col>
@@ -23,7 +23,7 @@
           cols="3"
           class="d-none d-md-block pt-5">
           <b-card
-            class="border rounded-0"
+            class="rounded-0"
             body-class="pb-0">
             <h5 class="mb-4">推荐阅读</h5>
             <b-card
@@ -95,5 +95,14 @@ export default {
 </script>
 
 <style lang="less">
-
+.format-article-list {
+  .list-summary {
+    // 没有效果
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+  }
+}
 </style>

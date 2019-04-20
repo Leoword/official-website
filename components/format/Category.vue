@@ -1,12 +1,13 @@
 <template>
 	<div class="format-class position-relative">
-    <b-link 
+    <b-card
+      no-body
       class="format-class-link"
       :href="options[0].url">
       <b-img 
         :src="options[0].url"
         fluid-grow />
-    </b-link>
+    </b-card>
     <div class="format-class-label position-absolute fixed-bottom">
       <b-container>
         <b-row>

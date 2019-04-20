@@ -6,7 +6,7 @@
 				v-if="heading">{{heading}}</h1>
 			<b-card-group 
 				deck
-				class="animated bounceInLeft mb-5">
+				class="animated bounceInLeft slower mb-5">
 				<b-card 
 					v-for="(item,index) in options"
 					:key="index"
@@ -37,7 +37,7 @@ export default {
 
 <style lang="less">
 .format-card {
-	background-color: #f6f6f6;
+	background-color: #F2F4F5;
 	.card {
 		transition: all 0.3s;
 

@@ -8,13 +8,17 @@
 				no-body 
 				class="border-0">
 				<b-row>
-					<b-col cols="5">
-						<b-img :src="options[0].url" fluid></b-img>
+					<b-col cols="4">
+						<b-img 
+							:src="options[0].url" 
+							fluid 
+							style="max-width: 300px;"/>
 					</b-col>
 					<b-col>
 						<h3>title</h3>	
-						<b-card-text style="color:#999;">Some quick example text to build on the card and make up the bulk of the card's content.Some quick example text to build on the card and make up the bulk of the card's content.</b-card-text>
-						<b-card-text style="color:#999;">Some quick example text to build on the card and maext to build on the card and maext to build on the card and maext to build on the card and make up the bulk of the card's content.Some quick example text to build on the card and make up the bulk of the card's content.</b-card-text>
+						<b-card-text 
+							style="color:#999;"
+							v-html="options[0].text"></b-card-text>
 					</b-col>
 				</b-row>
     	</b-card>
@@ -38,6 +42,7 @@ export default {
 </script>
 
 <style lang="less">
-
+.format-content {
+}
 </style>
 
