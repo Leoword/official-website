@@ -1,15 +1,18 @@
 <template>
-  <div id="footer" class="py-5">
+  <div 
+		id="footer" 
+		class="py-5"
+		>
 		<div id="info">
 			<div id="logo">
 				<img src="~/assets/images/logo.png" />
 			</div>
-			<p id="name">{{$t('info.name')}}</p>
-			<p>{{$t('info.address.label')}}: {{$t('info.address.value')}} 
-				{{$t('info.Tel')}}: 022-27956116</p>
-			<p>{{$t('info.email')}}: lemonce@or-change.cn</p>
+			<p id="name">{{ $t('info.name') }}</p>
+			<p>{{ $t('info.address.label') }}: {{ $t('info.address.value') }} 
+				{{ $t('info.Tel') }}: 022-27956116</p>
+			<p>{{ $t('info.email') }}: lemonce@or-change.cn</p>
 		</div>
-		<p>Copyright © 2005 - 2014 {{$t('info.name')}}</p>
+		<p>Copyright © 2005 - 2014 {{ $t('info.name') }}</p>
   </div>
 </template>
 <style lang="less">

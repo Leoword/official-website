@@ -13,9 +13,10 @@
       <b-carousel-slide
         v-for="(item,index) in options"
         :key="index"
-        :img-src="item.url"
-        style="max-height:600px">
-				<h1>{{item.text}}</h1>
+        :img-src="item.image"
+        style="max-height:600px"
+				>
+				<h1>{{ item.title }}</h1>
 			</b-carousel-slide>
     </b-carousel>
   </div>
@@ -23,23 +24,23 @@
 
 <script>
 export default {
-  name: 'format-carousel',
-  props: ['options'],
+	name: 'format-carousel',
+	props: ['options'],
 	data() {
-    return {
-      slide: 0,
-      sliding: null,
-    }
-  },
-  methods: {
-    onSlideStart(slide) {
-      this.sliding = true
-    },
-    onSlideEnd(slide) {
-      this.sliding = false
-    }
-  }
-}
+		return {
+			slide: 0,
+			sliding: null,
+		};
+	},
+	methods: {
+		onSlideStart(slide) {
+			this.sliding = true;
+		},
+		onSlideEnd(slide) {
+			this.sliding = false;
+		}
+	}
+};
 </script>
 
 <style lang="less" scoped>

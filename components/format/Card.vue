@@ -2,21 +2,25 @@
 	<div class="format-card">
 		<b-container class="py-5">
 			<h1 
+				v-if="heading"
 				class="text-center mb-5"
-				v-if="heading">{{heading}}</h1>
+				>{{ heading }}</h1>
 			<b-card-group 
 				deck
-				class="animated bounceInLeft slower mb-5">
+				class="animated bounceInLeft slower mb-5"
+				>
 				<b-card 
 					v-for="(item,index) in options"
 					:key="index"
-					no-body>
-					<b-link :href="item.url">
+					no-body
+					>
+					<b-link :href="item.image">
 						<b-img 
-							:src="item.url" 
-							fluid/>
+							:src="item.image" 
+							fluid
+							/>
 					</b-link>
-					<b-card-text class="p-3">{{item.text}}</b-card-text>
+					<b-card-text class="p-3">{{ item.abstract }}</b-card-text>
 				</b-card>
 			</b-card-group>
 		</b-container>	
@@ -30,9 +34,9 @@ export default {
 	data () {
 		return {
 			heading: 'Card'
-		}
+		};
 	}
-}
+};
 </script>
 
 <style lang="less">

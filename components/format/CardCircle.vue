@@ -2,34 +2,39 @@
   <div class="format-card-circle">
     <b-container class="pt-5 pb-4">
       <h1 
+        v-if="heading"
         class="text-center mb-5"
-        v-if="heading">{{heading}}</h1>
+        >{{ heading }}</h1>
       <b-row
-        class="mt-5">
+        class="mt-5"
+				>
         <b-col
           v-for="(item,index) in options"
-          class="text-center circle-card"
-          cols=6
-          lg=3
+          :key="index"
           ref="cardList"
-          :key="index">
+          class="text-center circle-card"
+          cols="6"
+          lg="3"
+          >
           <b-link
             class="rounded-circle"
-            :href="item.url"
+            :href="item.image"
             :style="{
               width: `${radius}px`,
               height: `${radius}px`
-            }">
+            }"
+            >
             <b-img 
               class="rounded-circle"
-              :src="item.url"
+              :src="item.image"
               :style="{
                 width: `${radius}px`,
                 height: `${radius}px`
               }"
-              fluid />
+              fluid 
+              />
           </b-link>
-          <b-card-text class="text-center pt-2">{{item.title}}</b-card-text>
+          <b-card-text class="text-center pt-2">{{ item.title }}</b-card-text>
         </b-col>
       </b-row>
     </b-container>	
@@ -38,32 +43,32 @@
 
 <script>
 export default {
-  name: 'format-card-circle',
-  props: ['options'],
+	name: 'format-card-circle',
+	props: ['options'],
 	data () {
 		return {
-      heading: 'Card-Circle',
-      radius: 0
-		}
+			heading: 'Card-Circle',
+			radius: 0
+		};
 	},
-  methods: {
-    setRadius() {
-      const {
-        offsetHeight: height,
-        offsetWidth: width
-      } = this.$refs.cardList[0];
+	mounted() {
+		window.addEventListener('resize', this.setRadius);
+		this.setRadius();
+	},
+	destroyed() {
+		window.removeEventListener('resize', this.setRadius);
+	},
+	methods: {
+		setRadius() {
+			const {
+				offsetHeight: height,
+				offsetWidth: width
+			} = this.$refs.cardList[0];
 
-      this.radius = Math.min(height, width);
-    }
-  },
-  mounted() {
-    window.addEventListener('resize', this.setRadius);
-    this.setRadius();
-  },
-  destroyed() {
-    window.removeEventListener('resize', this.setRadius);
-  }
-}
+			this.radius = Math.min(height, width);
+		}
+	}
+};
 </script>
 
 <style lang="less">

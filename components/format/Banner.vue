@@ -3,10 +3,11 @@
     <b-link class="banner-link">
       <b-img 
         :src="options[0].url"
-        fluid-grow />
+        fluid-grow 
+        />
     </b-link>
     <div class="banner-text">
-      <h1>{{options[0].text}}</h1>
+      <h1>{{ options[0].text }}</h1>
     </div>
   </div>
 </template>
@@ -14,9 +15,9 @@
 <script>
 
 export default {
-  name: 'format-banner',
-  props: ['options'],
-}
+	name: 'format-banner',
+	props: ['options'],
+};
 </script>
 
 <style lang="less">

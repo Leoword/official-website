@@ -3,10 +3,12 @@
     <b-card
       no-body
       class="format-class-link"
-      :href="options[0].url">
+      :href="options[0].image"
+      >
       <b-img 
-        :src="options[0].url"
-        fluid-grow />
+        :src="options[0].image"
+        fluid-grow 
+        />
     </b-card>
     <div class="format-class-label position-absolute fixed-bottom">
       <b-container>
@@ -15,9 +17,10 @@
             v-for="(nav,index) in options"
             :key="index"
             :class="{active:indexActive === index,'class-label-tap': true}"
-            @click="activeClass(index)">
+            @click="activeClass(index)"
+						>
             <b-link class="text-white">
-              <b-card-text class="text-center py-3">{{nav.title}}</b-card-text>
+              <b-card-text class="text-center py-3">{{ nav.title }}</b-card-text>
             </b-link>
           </b-col>
         </b-row>
@@ -28,19 +31,19 @@
 
 <script>
 export default {
-  name: 'format-category',
-  props: ['options'],
+	name: 'format-category',
+	props: ['options'],
 	data() {
-    return {
-      indexActive: 0
-    }
-  },
-  methods: {
-    activeClass (index) {
-      this.indexActive = index;
-    }
-  }
-}
+		return {
+			indexActive: 0
+		};
+	},
+	methods: {
+		activeClass (index) {
+			this.indexActive = index;
+		}
+	}
+};
 </script>
 
 <style lang="less">

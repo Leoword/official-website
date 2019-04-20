@@ -1,10 +1,10 @@
 [
 	{
-		"label": "项目一",
+		"label": "首页",
 		"url": "/index"
 	},
 	{
-		"label": "项目二",
+		"label": "文章列表",
 		"url": "/category"
 	},
 	{

@@ -2,26 +2,32 @@
 <div class="py-5 format-card-extend">
 	<b-container>
 		<h1 
+			v-if="heading"
 			class="text-center mb-3"
-			v-if="heading">{{heading}}</h1>
+			>{{ heading }}</h1>
 		<b-card-group
-			deck>
-			<b-card v-for="(item,index) in options"
+			deck
+			>
+			<b-card 
+				v-for="(item,index) in options"
 				:key="index"
 				no-body
-				class="rounded-0 position-relative my-4">
+				class="rounded-0 position-relative my-4"
+				>
 				<!-- <b-link :href="item.url">
 					<b-img :src="item.url" fluid></b-img>
 				</b-link> -->
-				<h4 class="pl-3 pt-3">{{item.title}}</h4>
+				<h4 class="pl-3 pt-3">{{ item.title }}</h4>
 				<b-card-text 
 					class="p-3 pb-4" 
-					style="color:#999;">{{item.text}}</b-card-text>
+					style="color:#999;"
+					>{{ item.abstract }}</b-card-text>
 				<b-button
 					variant="primary"
 					class="position-absolute w-50 rounded-0 ml-4 card-extend-button"
 					style="bottom:-20px"
-					:href="item.url">{{item.target}}</b-button>
+					:href="item.url"
+					>{{ item.target }}</b-button>
 			</b-card>
 		</b-card-group>
 	</b-container>
@@ -35,9 +41,9 @@ export default {
 	data () {
 		return {
 			heading: 'format-card-extend'
-		}
+		};
 	}
-}
+};
 </script>
 
 <style lang="less">

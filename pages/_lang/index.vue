@@ -8,11 +8,13 @@
 	</div> -->
 	<div id="app">
 		<component 
+			:is="name.format"
 			v-for="(name, index) in pageData.sectionList" 
 			:key="index" 
-			:is="name.format"
 			:options="name.collection"
-			:recommend="recommend"></component>
+			:recommend="recommend"
+			>
+			</component>
 	</div>
 </template>
 
@@ -23,14 +25,14 @@ import pageData from '../../components/staticdata/home.json';
 // import recommendData from '../../components/staticdata/recommend.json';
 // import pageData from '../../components/staticdata/test.json';
 export default {
-	fetch({store}) {
-
-	},
 	asyncData({app}) {
 		return {
 			recommend: [],
 			pageData
-		}
+		};
+	},
+	fetch({store}) {
+
 	},
 	mounted() {
 		// 动态获取数据
@@ -43,17 +45,17 @@ export default {
 		// 	});
 		// })
 
-		this.dataProcess()
+		this.dataProcess();
 		
 	},
 	methods: {
 		dataProcess() {
-			if (typeof recommendData !== "undefined") {
+			if (typeof recommendData !== 'undefined') {
 				this.recommend = recommendData;
 			}		
 		}
 	}
-}
+};
 </script>
 
 <style lang="less">
