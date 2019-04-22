@@ -9,6 +9,8 @@ module.exports = async function (ctx, next) {
 
 	if (!category) {
 		ctx.throw(404, 'The category is not existed.');
+
+		return;
 	}
 
 	ctx.data = category;
@@ -16,4 +18,4 @@ module.exports = async function (ctx, next) {
 	next();
 
 	response.body = category;
-}
+};

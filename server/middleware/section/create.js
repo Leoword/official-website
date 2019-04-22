@@ -10,6 +10,8 @@ module.exports = async function (ctx) {
 
 	if (!format) {
 		ctx.throw(404, 'The format is not existed.');
+
+		return;
 	}
 
 	const section = await Section.create({

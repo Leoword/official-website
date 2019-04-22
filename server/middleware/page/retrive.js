@@ -7,6 +7,8 @@ module.exports = function (ctx, next) {
 
 	if (!page) {
 		ctx.throw(404, 'The page is not existed.');
+
+		return;
 	}
 
 	next();

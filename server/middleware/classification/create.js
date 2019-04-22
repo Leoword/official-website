@@ -15,4 +15,4 @@ module.exports = async function (ctx) {
 	} catch (e) {
 		ctx.throw(500, 'Internal Error.');
 	}
-}
+};

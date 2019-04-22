@@ -9,6 +9,8 @@ module.exports = async function (ctx, next) {
 
 	if (!section) {
 		ctx.throw(404, 'The section is not existed.');
+
+		return;
 	}
 
 	ctx.data = section;

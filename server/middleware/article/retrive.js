@@ -8,7 +8,9 @@ module.exports = async function (ctx, next) {
 
 	if (!article) {
 		ctx.throw(404, 'The article is not existed.');
+
+		return;
 	}
 
 	await next();
-}
+};

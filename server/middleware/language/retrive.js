@@ -11,12 +11,16 @@ module.exports = async function (ctx, next) {
 
 	if (!article) {
 		ctx.throw(404, 'The article is not existed.');
+
+		return;
 	}
 
 	const language = await Language.findByPK(languageId);
 
 	if (!language) {
 		ctx.throw(404, 'The language of article is not existed.');
+
+		return;
 	}
 
 	const commit = await Commit.findByPK(language.head);

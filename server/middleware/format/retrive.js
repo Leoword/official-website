@@ -8,6 +8,8 @@ module.exports = async function (ctx, next) {
 
 	if (!format) {
 		ctx.throw(404, 'The format is not existed.');
+
+		return;
 	}
 
 	ctx.data = format;
@@ -15,4 +17,4 @@ module.exports = async function (ctx, next) {
 	await next();
 
 	response.body = format;
-}
+};

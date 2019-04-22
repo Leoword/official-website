@@ -4,9 +4,21 @@ exports.section = {
 	create: {
 		body: {
 			formatId: Joi.number().required(),
-			collection: Joi.object().keys({
-				
-			}).required(),
+			collection: Joi.array().items(
+				Joi.object().keys({
+					type: Joi.string().allow(['file', 'article']).required(),
+					args: Joi.object().keys({
+						category: Joi.string(),
+						type: Joi.string(),
+						thumbnail: Joi.boolean(),
+						exp: {
+							limit: Joi.number(),
+							hash: Joi.string(),
+							title: Joi.string()
+						}
+					})
+				})
+			).required(),
 			comment: Joi.string().max(200)
 		},
 		query: {
@@ -16,9 +28,21 @@ exports.section = {
 	update: {
 		body: {
 			formatId: Joi.number(),
-			collection: Joi.object().keys({
-				
-			}),
+			collection: Joi.array().items(
+				Joi.object().keys({
+					type: Joi.string().allow(['file', 'article']).required(),
+					args: Joi.object().keys({
+						category: Joi.string(),
+						type: Joi.string(),
+						thumbnail: Joi.boolean(),
+						exp: {
+							limit: Joi.number(),
+							hash: Joi.string(),
+							title: Joi.string()
+						}
+					})
+				})
+			),
 			comment: Joi.string().max(200)
 		}
 	}

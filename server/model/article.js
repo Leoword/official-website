@@ -42,6 +42,9 @@ exports.Language = sequelize.define('language', {
 	asset: {
 		type: Sequelize.STRING,
 	},
+	thumbnail: {
+		type: Sequelize.STRING,
+	},
 	head: {
 		type: Sequelize.UUID
 	}
