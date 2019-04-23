@@ -10,14 +10,16 @@
       @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd"
     >
-      <b-carousel-slide
-        v-for="(item,index) in options"
-        :key="index"
-        :img-src="item.image"
-        style="max-height:600px"
-				>
-				<h1>{{ item.title }}</h1>
-			</b-carousel-slide>
+			<b-link>
+				<b-carousel-slide
+					v-for="(item,index) in options"
+					:key="index"
+					:img-src="item.image"
+					style="max-height:600px"
+					>
+					<h1>{{ item.title }}</h1>
+				</b-carousel-slide>
+			</b-link>
     </b-carousel>
   </div>
 </template>

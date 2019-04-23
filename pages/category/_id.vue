@@ -1,4 +1,4 @@
 <script>
 import Index from '~/pages/_lang/category/_id.vue';
-export default Index
+export default Index;
 </script>

@@ -19,7 +19,10 @@
             :class="{active:indexActive === index,'class-label-tap': true}"
             @click="activeClass(index)"
 						>
-            <b-link class="text-white">
+            <b-link
+              class="text-white"
+              :to="nav.url"
+              >
               <b-card-text class="text-center py-3">{{ nav.title }}</b-card-text>
             </b-link>
           </b-col>
@@ -51,6 +54,7 @@ export default {
   .format-class-label {
     background-color: rgba(0, 0, 0, 0.5);
     .class-label-tap {
+			transition: all 0.2s;
       a {
         text-decoration: none;
       }

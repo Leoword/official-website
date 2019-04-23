@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import pageData from '../../../components/staticdata/articleList.json';
+import articleListData from '../../../components/staticdata/articleList.json';
 import recommendData from '../../../components/staticdata/recommend.json';
 export default {
 	asyncData({app}) {
 		return {
-			recommendData,
-			pageData
+			pageData: {},
+			recommendData: []
 		};
 	},
 	fetch({store}) {
@@ -26,14 +26,15 @@ export default {
 	},
 	mounted() {
 		// 动态获取数据
-		// this.$api.page(1)
-		// .then(res => {
-		// 	res.data.sectionList.forEach(item => {
-		// 		const formatName = item.format.slice(7);
-		// 		this.components.push(item.format);
-		// 		this.data[formatName] = item.format.collection;
+		// Promise.all([this.$api.category(this.$route.params.id), this.$api.recommend])
+		// 	.then(res => {
+		// 		this.pageData = res[0].data;
+		// 		this.recommendData = res[1].data;
 		// 	});
-		// })
+
+		// 静态数据
+		this.pageData = articleListData;
+		this.recommendData = recommendData;
 	}
 };
 </script>

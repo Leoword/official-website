@@ -1,11 +1,4 @@
 <template>
-	<!-- <div id="app">
-		<component 
-			v-for="(name, index) in components" 
-			:key="index" 
-			:is="name"
-			:options="data"></component>
-	</div> -->
 	<div id="app">
 		<component 
 			:is="name.format"
@@ -19,41 +12,26 @@
 </template>
 
 <script>
-import pageData from '../../components/staticdata/home.json';
-// import pageData from '../../components/staticdata/articleList.json';
-// import pageData from '../../components/staticdata/article.json';
-// import recommendData from '../../components/staticdata/recommend.json';
-// import pageData from '../../components/staticdata/test.json';
+import homeData from '../../components/staticdata/home.json';
 export default {
 	asyncData({app}) {
 		return {
 			recommend: [],
-			pageData
+			pageData: {}
 		};
 	},
 	fetch({store}) {
-
+ 
 	},
 	mounted() {
 		// 动态获取数据
 		// this.$api.page(1)
-		// .then(res => {
-		// 	res.data.sectionList.forEach(item => {
-		// 		const formatName = item.format.slice(7);
-		// 		this.components.push(item.format);
-		// 		this.data[formatName] = item.format.collection;
+		// 	.then(res => {
+		// 		this.pageData = res.data;
 		// 	});
-		// })
 
-		this.dataProcess();
-		
-	},
-	methods: {
-		dataProcess() {
-			if (typeof recommendData !== 'undefined') {
-				this.recommend = recommendData;
-			}		
-		}
+		// 静态数据
+		this.pageData = homeData;
 	}
 };
 </script>

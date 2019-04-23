@@ -4,7 +4,7 @@
       <div 
         class="pb-3"
 				>
-        <b-link>文章列表</b-link>
+        <b-link to="/category">文章列表</b-link>
         <i class="fas fa-angle-right px-2"></i>
         <small style="color:#999">{{ options[0].title }}</small>
       </div>
@@ -41,7 +41,10 @@
               no-body
               class="border-0 pb-4"
 							>
-              <b-link :href="item.image">
+              <b-link 
+                target="_blank"
+								:to="item.url"
+                >
                 <b-img 
 									:src="item.image" 
 									fluid

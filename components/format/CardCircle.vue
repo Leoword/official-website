@@ -23,6 +23,7 @@
               width: `${radius}px`,
               height: `${radius}px`
             }"
+            :to="item.url"
             >
             <b-img 
               class="rounded-circle"
@@ -74,6 +75,7 @@ export default {
 <style lang="less">
 .format-card-circle {
   background-color: #F2F4F5;
+  // background-image: url('../../assets/images/bg.jpg');
 	.circle-card {
     min-height: 200px;
     overflow: hidden;
@@ -82,9 +84,9 @@ export default {
       box-sizing: content-box;
       display: inline-block;
       overflow: hidden;
-      border: 7px solid rgba(0, 60, 80, 0.8);
+      border: 7px solid rgba(0, 123, 255, .3);
       &:hover {
-        border: 7px solid rgba(0,60, 80, .3);
+        border: 7px solid rgba(0,123, 255, .8);
       }
     }
 	}
@@ -93,6 +95,13 @@ export default {
     transition: all 0.2s;
     &:hover {
       transform: scale(1.1);
+    }
+  }
+}
+@media screen and (max-width:576px){
+  .format-card-circle {
+    .circle-card {
+      min-height: 150px;
     }
   }
 }

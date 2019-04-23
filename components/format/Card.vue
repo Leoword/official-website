@@ -7,14 +7,14 @@
 				>{{ heading }}</h1>
 			<b-card-group 
 				deck
-				class="animated bounceInLeft slower mb-5"
+				class="animated bounceInLeft mb-5"
 				>
 				<b-card 
 					v-for="(item,index) in options"
 					:key="index"
 					no-body
 					>
-					<b-link :href="item.image">
+					<b-link to="">
 						<b-img 
 							:src="item.image" 
 							fluid
