@@ -1,43 +1,27 @@
 <template>
 	<div id="app">
-		<component 
-			:is="name.format"
-			v-for="(name, index) in pageData.sectionList" 
-			:key="index" 
-			:options="name.collection"
-			:recommend="recommend"
+		<component
+			:is="section.format"
+			v-for="(section, index) in pageData.sectionList"
+			:key="index"
+			:options="section.collection"
 			>
 			</component>
 	</div>
 </template>
 
 <script>
-import homeData from '../../components/staticdata/home.json';
+import connectFunction from '~/plugins/connect.js';
 export default {
-	asyncData({app}) {
-		return {
-			recommend: [],
-			pageData: {}
-		};
-	},
-	fetch({store}) {
- 
-	},
-	mounted() {
-		// 动态获取数据
-		// this.$api.page(1)
-		// 	.then(res => {
-		// 		this.pageData = res.data;
-		// 	});
-
-		// 静态数据
-		this.pageData = homeData;
+	asyncData() {
+		return connectFunction.page()
+			.then((res) => {
+				return {pageData: res.data};
+			});
 	}
+	// async asyncData() {
+	// 	let {data} = await api.page();
+	// 	return {pageData: data};
+	// }
 };
 </script>
-
-<style lang="less">
-
-</style>
-
-

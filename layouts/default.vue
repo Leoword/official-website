@@ -15,7 +15,7 @@ export default {
 		PageHeader,
 		PageFooter
 	}
-}
+};
 </script>
 
 

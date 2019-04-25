@@ -1,10 +1,10 @@
 <template>
 	<div id="app">
 		<component
-			:is="name.format"
-			v-for="(name, index) in pageData.sectionList"
+			:is="section.format"
+			v-for="(section, index) in pageData.sectionList"
 			:key="index"
-			:options="name.collection"
+			:options="section.collection"
 			:recommend="recommendData"
 			>
 			</component>
@@ -12,39 +12,18 @@
 </template>
 
 <script>
-import articleData from '../../../components/staticdata/article.json';
-import recommendData from '../../../components/staticdata/recommend.json';
+import connectFunction from '~/plugins/connect.js';
 export default {
-	asyncData({app}) {
-		return {
-			pageData: {},
-			recommendData: []
-		};
-	},
-	fetch({store}) {
-
-	},
-	mounted() {
-		// 动态获取数据
-		// Promise.all([this.$api.article(1, 1), this.$api.recommend])
-		// 	.then(res => {
-		// 		this.pageData = res[0].data;
-		// 		this.recommendData = res[1].data;
-		// 	});
-
-		// 静态数据
-		this.pageData = articleData;
-		this.recommendData = recommendData;
-
-		window.console.log(this.$route);
-
+	asyncData() {
+		return Promise.all([
+			connectFunction.article(),
+			connectFunction.recommend()
+		]).then((res) => {
+			return {
+				pageData: res[0].data,
+				recommendData: res[1].data
+			};
+		});
 	}
-
 };
 </script>
-
-<style lang="less">
-
-</style>
-
-
