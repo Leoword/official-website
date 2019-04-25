@@ -84,6 +84,7 @@ dist
 sw.*
 
 staticdata
+.store
 config.js
 
-store
+launch.json

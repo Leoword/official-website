@@ -5,7 +5,7 @@ module.exports = async function (ctx, next) {
 	const Section = sequelize.model('section');
 
 	const filteredList = await sectionList.filter(async sectionId => {
-		const section = await Section.findByPK(sectionId);
+		const section = await Section.findByPk(sectionId);
 
 		return section;
 	});

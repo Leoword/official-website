@@ -1,5 +1,6 @@
 const bodyParser = require('koa-bodyparser');
 const Koa = require('koa');
+const routerList = require('./lib/getRouters');
 const {Pages} = require('./model');
 
 const router = require('./router');
@@ -14,6 +15,8 @@ app.use(bodyParser());
 app.use(router.routes());
 
 config.dev = !(app.env === 'production');
+
+config.router.routes = routerList(Pages);
 
 async function start() {
 	const nuxt = new Nuxt(config);

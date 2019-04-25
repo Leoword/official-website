@@ -4,7 +4,7 @@ module.exports = async function (ctx, next) {
 	const Format = sequelize.model('format');
 	const {id} = request.params;
 
-	const format = await Format.findByPK(id);
+	const format = await Format.findByPk(id);
 
 	if (!format) {
 		ctx.throw(404, 'The format is not existed.');

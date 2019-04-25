@@ -4,6 +4,8 @@ module.exports = async function (ctx) {
 	const {sequelize, response, request} = ctx;
 	const category = ctx.data;
 
+	const Category = sequelize.model('category');
+
 	const {name, comment, parent} = request;
 
 	const list = await Category.findAll({
@@ -22,7 +24,7 @@ module.exports = async function (ctx) {
 	}
 
 	if (parent) {
-		const parentCategory = await Category.findByPK(parent);
+		const parentCategory = await Category.findByPk(parent);
 
 		if (!parentCategory) {
 			ctx.throw(404, 'The parent category is not existed.');

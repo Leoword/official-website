@@ -18,7 +18,7 @@ module.exports = async function (ctx) {
 		ctx.throw(400, 'The language is not existed.');
 	}
 
-	const article = await Article.findByPK(articleId);
+	const article = await Article.findByPk(articleId);
 
 	if (!article) {
 		ctx.throw(404, 'The article is not existed.');

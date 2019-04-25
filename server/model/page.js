@@ -2,14 +2,16 @@ const fs = require('fs');
 const storage = require('../config').storage;
 
 const Page = class Page {
-	constructor(id, path, sectionList, comment) {
+	constructor(id, name, path, sectionList, comment) {
 		this.id = id;
+		this.name = name;
 		this.path = path;
 		this.sectionList = sectionList;
 		this.comment = comment;
 	}
 
-	update({path, sectionList, comment}) {
+	update({name, path, sectionList, comment}) {
+		this.name = name ? name : this.name;
 		this.path = path ? path : this.path;
 		this.sectionList = sectionList ? sectionList : this.sectionList;
 		this.comment = comment ? comment : this.comment;
@@ -33,8 +35,8 @@ module.exports = {
 
 		id = this.pages.length;
 	},
-	create({path, sectionList, comment}) {
-		const page = new Page(id ++, path, sectionList, comment);
+	create({name, path, sectionList, comment}) {
+		const page = new Page(id ++, name, path, sectionList, comment);
 
 		const origin = Object.assign({}, this.pages);
 
@@ -56,11 +58,11 @@ module.exports = {
 	findByPK(id) {
 		return this.pages.find(page => page.id === id);
 	},
-	update(id, {path, sectionList, comment}) {
+	update(id, {name, path, sectionList, comment}) {
 		const page = this.findByPK(id);
 		const origin = Object.assign({}, this.pages);
 
-		page.update({path, sectionList, comment});
+		page.update({name, path, sectionList, comment});
 
 		const result = persistent(this.filePath, JSON.stringify(this.pages));
 
@@ -70,7 +72,7 @@ module.exports = {
 			throw new Error('Internal Error');
 		}
 
-		return {path, sectionList, comment};
+		return {name, path, sectionList, comment};
 	},
 	delete(id) {
 		const origin = Object.assign({}, this.pages);

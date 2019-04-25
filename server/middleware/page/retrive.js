@@ -13,5 +13,5 @@ module.exports = function (ctx, next) {
 
 	next();
 
-	response.body = {path: page.path, sectionList: page.sectionList};
+	response.body = {name: page.name, path: page.path, sectionList: page.sectionList};
 };

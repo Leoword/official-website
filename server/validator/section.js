@@ -19,7 +19,8 @@ exports.section = {
 					})
 				})
 			).required(),
-			comment: Joi.string().max(200)
+			comment: Joi.string().max(200),
+			name: Joi.string().required()
 		},
 		query: {
 			formatId: Joi.number()
@@ -43,7 +44,8 @@ exports.section = {
 					})
 				})
 			),
-			comment: Joi.string().max(200)
+			comment: Joi.string().max(200),
+			name: Joi.string()
 		}
 	}
 };
@@ -51,14 +53,14 @@ exports.section = {
 exports.format = {
 	create: {
 		body: {
-			name: Joi.string().max(15).required(),
-			comment: Joi.string().max(200)
+			name: Joi.string().required(),
+			comment: Joi.string()
 		}
 	},
 	update: {
 		body: {
-			name: Joi.string().max(15),
-			comment: Joi.string().max(200)
+			name: Joi.string(),
+			comment: Joi.string()
 		}
 	}
 };

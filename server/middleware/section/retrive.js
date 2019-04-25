@@ -5,7 +5,7 @@ module.exports = async function (ctx, next) {
 
 	const {id} = request.params;
 
-	const section = await Section.findByPK(id);
+	const section = await Section.findByPk(id);
 
 	if (!section) {
 		ctx.throw(404, 'The section is not existed.');

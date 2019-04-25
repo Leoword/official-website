@@ -5,7 +5,7 @@ module.exports = async function (ctx, next) {
 
 	const {id} = request.params;
 
-	const category = await Category.findByPK(id);
+	const category = await Category.findByPk(id);
 
 	if (!category) {
 		ctx.throw(404, 'The category is not existed.');

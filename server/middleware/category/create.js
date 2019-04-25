@@ -18,7 +18,7 @@ module.exports = async function (ctx) {
 	}
 
 	if (parent) {
-		const parentCategory = await Category.findByPK(parent);
+		const parentCategory = await Category.findByPk(parent);
 
 		if (!parentCategory) {
 			ctx.throw(404, 'The parent category is not existed.');

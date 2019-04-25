@@ -7,7 +7,7 @@ module.exports = async function (ctx, next) {
 
 	const {articleId, languageId} = request.params;
 
-	const article = await Article.findByPK(articleId);
+	const article = await Article.findByPk(articleId);
 
 	if (!article) {
 		ctx.throw(404, 'The article is not existed.');
@@ -15,7 +15,7 @@ module.exports = async function (ctx, next) {
 		return;
 	}
 
-	const language = await Language.findByPK(languageId);
+	const language = await Language.findByPk(languageId);
 
 	if (!language) {
 		ctx.throw(404, 'The language of article is not existed.');
@@ -23,7 +23,7 @@ module.exports = async function (ctx, next) {
 		return;
 	}
 
-	const commit = await Commit.findByPK(language.head);
+	const commit = await Commit.findByPk(language.head);
 
 	ctx.data = {
 		language, commit

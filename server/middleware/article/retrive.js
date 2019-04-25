@@ -4,7 +4,7 @@ module.exports = async function (ctx, next) {
 
 	const {articleId} = request.params;
 
-	const article = await Article.findByPK(articleId);
+	const article = await Article.findByPk(articleId);
 
 	if (!article) {
 		ctx.throw(404, 'The article is not existed.');
