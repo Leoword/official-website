@@ -40,7 +40,5 @@ module.exports = {
 		prefix: '/api',
 		credentials: true
 	},
-	server: {
-		port: 8080
-	}
+	server: {}
 };

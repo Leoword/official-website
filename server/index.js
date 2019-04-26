@@ -1,27 +1,18 @@
 const bodyParser = require('koa-bodyparser');
 const Koa = require('koa');
-const routerList = require('./lib/getRouters');
-const {Pages} = require('./model');
 
-const router = require('./router');
 const { Nuxt, Builder } = require('nuxt');
 const app = new Koa();
 let config = require('../nuxt.config.js');
 
-app.context.sequelize = require('./lib/sequelize');
-app.context.Page = Pages;
-
 app.use(bodyParser());
-app.use(router.routes());
 
 config.dev = !(app.env === 'production');
-
-config.router.routes = routerList(Pages);
 
 async function start() {
 	const nuxt = new Nuxt(config);
 	const {
-		host = process.env.HOST || '127.0.0.1',
+		host = process.env.HOST || '0.0.0.0',
 		port = process.env.PORT || 3000
 	} = nuxt.options.server;
 
