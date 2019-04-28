@@ -1,3 +1,5 @@
+const config = require('./config.json');
+
 module.exports = {
 	mode: 'universal',
 	head: {
@@ -10,6 +12,9 @@ module.exports = {
 		link: [
 			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
 		]
+	},
+	env: {
+		baseUrl: config.BASE_URL || 'http://localhost:3000'
 	},
 	loading: { color: '#fff' },
 	css: [
@@ -34,7 +39,6 @@ module.exports = {
 		}
 	},
 	router: {
-		// middleware: will be called for every route change
 	},
 	axios: {
 		prefix: '/api',

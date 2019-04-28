@@ -16,7 +16,7 @@
 					>
 					<b-link to="">
 						<b-img 
-							:src="item.image" 
+							:src="item.thumbnail" 
 							fluid
 							/>
 					</b-link>

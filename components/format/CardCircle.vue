@@ -18,7 +18,7 @@
           >
           <b-link
             class="rounded-circle"
-            :href="item.image"
+            :href="item.thumbnail"
             :style="{
               width: `${radius}px`,
               height: `${radius}px`
@@ -27,7 +27,7 @@
             >
             <b-img 
               class="rounded-circle"
-              :src="item.image"
+              :src="item.thumbnail"
               :style="{
                 width: `${radius}px`,
                 height: `${radius}px`

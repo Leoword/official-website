@@ -43,7 +43,7 @@
 							>
               <b-link 
                 target="_blank"
-								:to="item.url"
+								:to="`/article/${item.hash}`"
                 >
                 <b-img 
 									:src="item.image" 

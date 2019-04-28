@@ -15,7 +15,7 @@
 					class="d-none d-md-block"
 					>
 						<b-img
-							:src="options[0].image"
+							:src="options[0].thumbnail"
 							fluid
 							style="max-width:300px;"
 							/>

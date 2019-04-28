@@ -28,8 +28,8 @@
 					variant="primary"
 					class="position-absolute w-50 rounded-0 ml-4 card-extend-button"
 					style="bottom:-20px"
-					:href="item.url"
-					:to="item.url"
+					:href="`/article/${item.hash}`"
+					:to="`/article/${item.hash}`"
 					>{{ item.target }}</b-button>
 			</b-card>
 		</b-card-group>

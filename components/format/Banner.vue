@@ -2,7 +2,7 @@
 	<div class="format-banner">
     <b-link class="banner-link">
       <b-img 
-        :src="options[0].url"
+        :src="options[0].URL"
         fluid-grow 
         />
     </b-link>

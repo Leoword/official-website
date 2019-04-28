@@ -14,7 +14,7 @@
 				<b-carousel-slide
 					v-for="(item,index) in options"
 					:key="index"
-					:img-src="item.image"
+					:img-src="item.URL"
 					style="max-height:600px"
 					>
 					<h1>{{ item.title }}</h1>
