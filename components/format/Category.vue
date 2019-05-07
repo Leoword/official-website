@@ -3,7 +3,6 @@
     <b-card
       no-body
       class="format-class-link"
-      :href="options[0].image"
       >
       <b-img 
         :src="options[0].URL"
@@ -23,7 +22,9 @@
               class="text-white"
               :to="nav.url"
               >
-              <b-card-text class="text-center py-3">{{ nav.title }}</b-card-text>
+              <b-card-text class="text-center py-3">
+                {{ nav.title | substr }}
+              </b-card-text>
             </b-link>
           </b-col>
         </b-row>
@@ -33,8 +34,15 @@
 </template>
 
 <script>
+import {getSubStr} from './mixin.js';
+
 export default {
 	name: 'format-category',
+	filters: {
+		substr(value) {
+			return getSubStr(value, 10, 6);
+		}
+	},
 	props: ['options'],
 	data() {
 		return {
@@ -45,18 +53,24 @@ export default {
 		activeClass (index) {
 			this.indexActive = index;
 		}
+	},
+	async asyncData() {
+
 	}
 };
 </script>
 
 <style lang="less">
 .format-class {
+	height: 400px;
+	overflow: hidden;
   .format-class-label {
     background-color: rgba(0, 0, 0, 0.5);
     .class-label-tap {
 			transition: all 0.2s;
       a {
         text-decoration: none;
+        font-size: 14px;
       }
       &:hover {
         background-color: rgba(0, 0, 0, 0.2);

@@ -1,33 +1,28 @@
 <template>
 	<div class="overflow-auto">
 		<b-container>
-			<h1
-				v-if="heading"
-				class="text-center my-5"
-				>{{ heading }}</h1>
 			<b-row>
-				<!-- 文章列表 -->
 				<b-col class="pt-3">
 					<b-card
-						v-for="(list,index) in articleList"
+						v-for="(article,index) in articleList"
 						id="list"
 						:key="index"
 						class="border-0"
 						>
-						<h4 :title="list.title">
+						<h4 :title="article.title">
 							<b-link
 								to="/article"
-								target="_blank"
-								>{{ list.id }}{{ list.title }}</b-link>
+								>
+								{{ article.id }}{{ article.title }}
+							</b-link>
 						</h4>
 						<b-card-text 
 							class="list-summary" 
-							style="min-height:65px;"
 							>
-							<small>{{ list.abstract | abstractClip }}</small>
+							<small>{{ article.abstract | substr }}</small>
 						</b-card-text>
 						<b-card-text style="color:#999;">
-							<small>由{{ list.author }}发布于{{ list.date }}</small>
+							<small>由{{ article.author }}发布于{{ article.date }}</small>
 						</b-card-text>
 					</b-card>
 				</b-col>
@@ -40,7 +35,9 @@
 						class="rounded-0"
 						body-class="pb-0"
 						>
-						<h5 class="mb-4">推荐阅读</h5>
+						<h5 class="mb-4">
+							推荐阅读
+						</h5>
 						<b-card
 							v-for="(item,index) in recommend"
 							:key="index"
@@ -77,15 +74,13 @@
 </template>
 
 <script>
+import {getSubStr} from './mixin.js';
+
 export default {
 	name: 'format-article-list',
 	filters: {
-		abstractClip (value) {
-			if (/.*[\u4e00-\u9fa5]+.*$/.test(value)) {
-				return value.substr(0, 170) + '...';
-			} else {
-				return value.substr(0, 373) + '...';
-			}
+		substr(value) {
+			return getSubStr(value, 150, 60);
 		}
 	},
 	props: [
@@ -124,10 +119,15 @@ export default {
 				}
 			},10);
 		}
+	},
+	async asyncData() {
+
 	}
 };
 </script>
 
 <style lang="less">
-
+p.list-summary {
+	max-height:65px;
+}
 </style>

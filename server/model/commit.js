@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./sequelize');
 
-const markdownIt = require('markdown-it');
-
 module.exports = sequelize.define('commit', {
 	hash: {
 		type: Sequelize.UUID,

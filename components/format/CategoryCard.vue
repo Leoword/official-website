@@ -5,7 +5,7 @@
 				<b-col
 					v-for="(nav,index) in options"
 					:key="index"
-					class="text-center nav-img-ele pt-3"
+					class="text-center nav-img-ele"
 					>
 					<b-link :to="nav.URL"> 
 						<b-img
@@ -13,7 +13,9 @@
 							:src="nav.URL" 
 							style="height:60px;width:60px;"
 							/>
-						<b-card-text class="text-center pt-2">{{ nav.title }}</b-card-text>
+						<b-card-text class="text-center pt-2">
+							{{ nav.title | substr }}
+						</b-card-text>
 					</b-link>
 				</b-col>
 			</b-row>
@@ -22,12 +24,22 @@
 </template>
 
 <script>
+import {getSubStr} from './mixin.js';
+
 export default {
 	name: 'format-category-card',
+	filters: {
+		substr(value) {
+			return getSubStr(value, 5, 3);
+		}
+	},
 	props: ['options'],
 	data() {
 		return {
 		};
+	},
+	async asyncData() {
+
 	}
 };
 </script>
@@ -44,6 +56,7 @@ export default {
 			}
 		}
 		a {
+			font-size: 14px;
 			color: #999;
 		}
 	}

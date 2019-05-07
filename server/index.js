@@ -35,3 +35,5 @@ async function start() {
 }
 
 start();
+
+// nuxt nuxtConfig pageConfig

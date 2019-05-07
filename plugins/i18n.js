@@ -13,7 +13,7 @@ context.keys().forEach(key => {
 	list[name] = require(`~/locales/${name}.yaml`);
 });
 
-export default ({ app, store }) => {
+export default ({ app }) => {
 	app.i18n = new VueI18n({
 		locale: Cookies.get('lang') ? Cookies.get('lang') : 'zh-CN',
 		messages: list

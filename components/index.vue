@@ -1,6 +1,5 @@
 <template>
 	<div id="app">
-		<page-header></page-header>
 		<component
 			:is="section.format"
 			v-for="(section, index) in pageData.sectionList"
@@ -8,27 +7,18 @@
 			:options="section.collection"
 			>
 			</component>
-		<page-footer></page-footer>
 	</div>
 </template>
 
 <script>
-import PageHeader from '~/components/Header.vue';
-import PageFooter from '~/components/Footer.vue';
-
-import homeData from '../../components/staticdata/home.json';
+import homeData from '../components/staticdata/articleList.json';
 import Vue from 'vue';
 
-// 引用model
-
 export default {
-	components: {
-		PageHeader,
-		PageFooter
-	},
-	async asyncData() {
-		// const text = await Vue.prototype.$components['format-banner']();
+	async asyncData(context) {
+		// const result = await context.req.db.Page.read();
 
+		console.log(context.route.params, context.route);
 		return {
 			pageData: homeData
 		};

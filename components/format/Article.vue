@@ -4,7 +4,9 @@
       <div 
         class="pb-3"
 				>
-        <b-link to="/category">文章列表</b-link>
+        <b-link to="/category">
+					文章列表
+				</b-link>
         <i class="fas fa-angle-right px-2"></i>
         <small style="color:#999">{{ options[0].title }}</small>
       </div>
@@ -14,11 +16,15 @@
 					<h3 
             class="p-3"
             style="font-weight:bold;"
-						>{{ options[0].title }}</h3>
+						>
+						{{ options[0].title }}
+						</h3>
 					<b-card-text 
             class="pl-3 pb-3"
             style="color:#999;"
-						>由{{ options[0].author }}发布于{{ options[0].date }}</b-card-text>
+						>
+						由{{ options[0].author }}发布于{{ options[0].date }}
+					</b-card-text>
 					<b-card 
 						class="border-0 p-3"
 						v-html="options[0].content"
@@ -34,7 +40,9 @@
             class="border rounded-0"
             body-class="pb-0"
 						>
-            <h5 class="mb-4">推荐阅读</h5>
+            <h5 class="mb-4">
+							推荐阅读
+						</h5>
             <b-card
               v-for="(item,index) in recommend"
               :key="index"
@@ -68,6 +76,9 @@ export default {
 		'options',
 		'recommend'
 	],
+	async asyncData() {
+
+	}
 };
 </script>
 

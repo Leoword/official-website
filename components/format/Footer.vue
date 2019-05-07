@@ -7,14 +7,30 @@
 			<div id="logo">
 				<img src="~/assets/images/logo.png" />
 			</div>
-			<p id="name">{{ $t('info.name') }}</p>
-			<p>{{ $t('info.address.label') }}: {{ $t('info.address.value') }} 
-				{{ $t('info.Tel') }}: 022-27956116</p>
+			<p id="name">
+				{{ $t('info.name') }}
+			</p>
+			<p>
+				{{ $t('info.address.label') }}: {{ $t('info.address.value') }} 
+				{{ $t('info.Tel') }}: 022-27956116
+			</p>
 			<p>{{ $t('info.email') }}: lemonce@or-change.cn</p>
 		</div>
 		<p>Copyright © 2005 - 2014 {{ $t('info.name') }}</p>
   </div>
 </template>
+
+<script>
+export default {
+	name: 'format-footer',
+	props: ['options'],
+	async asyncData() {
+
+	}
+};
+</script>
+
+
 <style lang="less">
 #footer {
 	height: auto;

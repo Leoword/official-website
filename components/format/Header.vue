@@ -27,7 +27,9 @@
 				v-for="(item, index) in data" 
 				:key="index" 
 				:href="item.url"
-				>{{ item.label }}</b-nav-item>
+				>
+				{{ item.label }}
+			</b-nav-item>
 			</b-navbar-nav>
 
 			<b-navbar-nav class="ml-auto">
@@ -54,7 +56,9 @@
 						size="sm" 
 						class="my-2 my-sm-0" 
 						type="submit"
-						>{{ $t('operate.search') }}</b-button>
+						>
+						{{ $t('operate.search') }}
+					</b-button>
 				</b-nav-form>
 			</b-navbar-nav>
 		</b-collapse>
@@ -66,7 +70,7 @@ import data from './navbar.json';
 import Cookies from 'js-cookie';
 
 export default {
-	props: ['categoryList'],
+	name: 'format-header',
 	data() {
 		return {
 			data
@@ -82,6 +86,10 @@ export default {
 			location.reload();
 		}
 	},
+	props: ['options'],
+	async asyncData() {
+
+	}
 };
 </script>
 

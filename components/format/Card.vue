@@ -6,7 +6,7 @@
 				class="animated bounceInLeft"
 				>
 				<b-card 
-					v-for="(item, index) in renderData"
+					v-for="(item, index) in options"
 					:key="index"
 					no-body
 					>
@@ -16,7 +16,9 @@
 							fluid
 							/>
 					</b-link>
-					<b-card-text class="px-3 py-2">{{ item.abstract | substr }}</b-card-text>
+					<b-card-text class="px-3 py-2">
+						{{ item.abstract | substr }}
+					</b-card-text>
 				</b-card>
 			</b-card-group>
 		</b-container>	
@@ -28,22 +30,14 @@ import {getSubStr} from './mixin.js';
 
 export default {
 	name: 'format-card',
-	props: ['options'],
 	filters: {
 		substr(value) {
 			return getSubStr(value, 80, 30);
 		}
 	},
-	computed: {
-		renderData() {
-			return this.options.map(({hash, thumbnail, abstract}) => {
-				return {
-					hash: hash ? hash : '#',
-					thumbnail: thumbnail ? thumbnail : '',
-					abstract: abstract ? abstract : this.$t('card.abstract')
-				};
-			}).slice(0, 4);
-		}
+	props: ['options'],
+	async asyncData() {
+
 	}
 };
 </script>

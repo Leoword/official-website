@@ -33,7 +33,7 @@ export default {
 		}
 	},
 	async asyncData() {
-		return 'test';
+		
 	}
 };
 </script>

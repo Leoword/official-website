@@ -1,60 +1,57 @@
 <template>
-	<div class="format-content py-5">
+	<div class="format-content my-3">
     <b-container>
-			<b-card
-				no-body
-				class="border-0"
+			<b-row>
+				<b-col
+				cols="4"
+				class="d-none d-md-block"
 				>
-				<b-row>
-					<b-col
-					cols="4"
-					class="d-none d-md-block"
-					>
-						<b-img
-							:src="renderData.thumbnail"
-							fluid
-							style="max-width:300px;"
-							/>
-					</b-col>
-					<b-col class="position-relative pb-5">
-						<h3>{{ renderData.title }}</h3>
-						<b-card
-							class="border-0"
-							style="color:#999;"
-							>{{renderData.abstract}}</b-card>
-						<b-button
-							variant="outline-info"
-							block
-							class="position-absolute fixed-bottom"
-							:to="`/article/${renderData.hash}`"
-							>More</b-button>
-					</b-col>
-				</b-row>
-			</b-card>
+					<img
+						:src="options.thumbnail"
+						fluid
+						style="width: 100%;max-height: 300px"
+						/>
+				</b-col>
+				<b-col>
+					<p
+						class="border-0"
+						style="color:#999;"
+						>
+						{{ options.abstract | substr }}
+					</p>
+					<b-button
+						variant="outline-info"
+						block
+						:to="`/article/${options.hash}`"
+						class="position-absolute fixed-bottom"
+						>
+						More
+					</b-button>
+				</b-col>
+			</b-row>
     </b-container>
   </div>
 </template>
 
 <script>
+import {getSubStr} from './mixin.js';
+
 export default {
 	name: 'format-content',
+	filters: {
+		substr(value) {
+			return getSubStr(value, 370, 140);
+		}
+	},
 	props: ['options'],
 	data() {
 		return {
 		};
 	},
-	computed: {
-		renderData() {
-			const {thumbnail, abstract, hash} = this.options;
-
-			return {
-				hash: hash ? hash : '#',
-				thumbnail: thumbnail ? thumbnail : '~/assets/images/placeholder',
-				abstract: abstract ? abstract : this.$t('card.abstract')
-			};
-		}
-	},
 	methods: {
+
+	},
+	async asyncData() {
 
 	}
 };
@@ -62,8 +59,12 @@ export default {
 
 <style lang="less">
 .format-content {
+	max-height: 350px;
 	p {
+		overflow: hidden;
+		max-height: 200px;
 		text-indent: 2em;
+		font-size: 15px;
 	}
 }
 </style>

@@ -3,7 +3,7 @@
     <b-container class="pt-5 pb-4">
       <b-row>
         <b-col
-          v-for="(item,index) in renderData"
+          v-for="(item,index) in options"
           :key="index"
           ref="cardList"
           class="text-center circle-card"
@@ -29,7 +29,9 @@
               fluid 
               />
           </b-link>
-          <b-card-text class="text-center pt-2">{{ item.abstract | substr }}</b-card-text>
+          <b-card-text class="text-center pt-2">
+            {{ item.abstract | substr }}
+          </b-card-text>
         </b-col>
       </b-row>
     </b-container>	
@@ -41,27 +43,16 @@ import {getSubStr} from './mixin.js';
 
 export default {
 	name: 'format-card-circle',
-	props: ['options'],
-	data () {
-		return {
-			radius: 0
-		};
-	},
 	filters: {
 		substr(value) {
 			return getSubStr(value, 25, 10);
 		}
 	},
-	computed: {
-		renderData() {
-			return this.options.map(({hash, thumbnail, abstract}) => {
-				return {
-					hash: hash ? hash : '#',
-					thumbnail: thumbnail ? thumbnail : '',
-					abstract: abstract ? abstract : this.$t('card.abstract')
-				};
-			}).slice(0, 4);
-		}
+	props: ['options'],
+	data () {
+		return {
+			radius: 0
+		};
 	},
 	mounted() {
 		this.setRadius();
@@ -78,6 +69,9 @@ export default {
 
 			this.radius = width - 60;
 		}
+	},
+	async asyncData() {
+
 	}
 };
 </script>
