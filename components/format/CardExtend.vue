@@ -1,10 +1,6 @@
 <template>
 <div class="py-5 format-card-extend">
 	<b-container>
-		<h1
-			v-if="heading"
-			class="text-center mb-3"
-			>{{ heading }}</h1>
 		<b-card-group
 			deck
 			>
@@ -15,7 +11,7 @@
 				class="rounded-0 position-relative my-4"
 				style="min-height:240px;"
 				>
-				<h4 class="pl-3 pt-3 text-center">{{ item.title }}</h4>
+				<h4 class="text-center px-2 pt-3">{{ item.title }}</h4>
 				<i
 					class="fas fa-quote-left pl-3 py-3"
 					style="color:#007BFF;font-size:1.3em;"
@@ -30,7 +26,7 @@
 					style="bottom:-20px"
 					:href="`/article/${item.hash}`"
 					:to="`/article/${item.hash}`"
-					>{{ item.target }}</b-button>
+					>{{$t('cardExtend.link')}}</b-button>
 			</b-card>
 		</b-card-group>
 	</b-container>
@@ -43,22 +39,16 @@ export default {
 	props: ['options'],
 	data () {
 		return {
-			heading: ''
 		};
-	}
+	},
+	// computed
 };
 </script>
 
 <style lang="less">
 .format-card-extend {
 	background-color: #DCE6EA;
-	// background-image: url('https://picsum.photos/1024/480/?image=10');
-	// background-position: center top;
-	// background-repeat: no-repeat;
-	// background-size: cover;
-	img {
-		height: 230px;
-	}
+
 	.card-extend-button {
 		&:hover {
 			width: 100%;

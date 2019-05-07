@@ -6,7 +6,7 @@
       :href="options[0].image"
       >
       <b-img 
-        :src="options[0].image"
+        :src="options[0].URL"
         fluid-grow 
         />
     </b-card>

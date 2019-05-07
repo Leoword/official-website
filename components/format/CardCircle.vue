@@ -1,15 +1,9 @@
 <template>
   <div class="format-card-circle">
     <b-container class="pt-5 pb-4">
-      <h1 
-        v-if="heading"
-        class="text-center mb-5"
-        >{{ heading }}</h1>
-      <b-row
-        class="mt-5"
-				>
+      <b-row>
         <b-col
-          v-for="(item,index) in options"
+          v-for="(item,index) in renderData"
           :key="index"
           ref="cardList"
           class="text-center circle-card"
@@ -35,7 +29,7 @@
               fluid 
               />
           </b-link>
-          <b-card-text class="text-center pt-2">{{ item.title }}</b-card-text>
+          <b-card-text class="text-center pt-2">{{ item.abstract | substr }}</b-card-text>
         </b-col>
       </b-row>
     </b-container>	
@@ -43,18 +37,35 @@
 </template>
 
 <script>
+import {getSubStr} from './mixin.js';
+
 export default {
 	name: 'format-card-circle',
 	props: ['options'],
 	data () {
 		return {
-			heading: 'Card-Circle',
 			radius: 0
 		};
 	},
+	filters: {
+		substr(value) {
+			return getSubStr(value, 25, 10);
+		}
+	},
+	computed: {
+		renderData() {
+			return this.options.map(({hash, thumbnail, abstract}) => {
+				return {
+					hash: hash ? hash : '#',
+					thumbnail: thumbnail ? thumbnail : '',
+					abstract: abstract ? abstract : this.$t('card.abstract')
+				};
+			}).slice(0, 4);
+		}
+	},
 	mounted() {
-		window.addEventListener('resize', this.setRadius);
 		this.setRadius();
+		window.addEventListener('resize', this.setRadius);
 	},
 	destroyed() {
 		window.removeEventListener('resize', this.setRadius);
@@ -62,11 +73,10 @@ export default {
 	methods: {
 		setRadius() {
 			const {
-				offsetHeight: height,
 				offsetWidth: width
 			} = this.$refs.cardList[0];
 
-			this.radius = Math.min(height, width);
+			this.radius = width - 60;
 		}
 	}
 };
@@ -74,11 +84,7 @@ export default {
 
 <style lang="less">
 .format-card-circle {
-  background-color: #F2F4F5;
-  // background-image: url('../../assets/images/bg.jpg');
 	.circle-card {
-    min-height: 200px;
-    overflow: hidden;
     a {
       transition: all 0.2s;
       box-sizing: content-box;
@@ -96,7 +102,13 @@ export default {
     &:hover {
       transform: scale(1.1);
     }
-  }
+	}
+	
+	.card-text {
+		max-height: 60px;
+		overflow-y: hidden;
+		font-size: 14px;
+	}
 }
 @media screen and (max-width:576px){
   .format-card-circle {

@@ -22,6 +22,6 @@ export default ({ app, store }) => {
 	Vue.prototype.$language = list;
 
 	app.i18n.path = (link) => {
-		return `/${app.i18n.locale}/${link}`
+		return `/${app.i18n.locale}/${link}`;
 	};
-}
+};

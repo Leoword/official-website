@@ -10,3 +10,12 @@ info:
 operate:
   search: '搜索'
   switch: '切换语言'
+
+cardExtend:
+  link: '去看看'
+
+banner:
+  title: 'Banner图默认描述'
+
+card:
+  abstract: 'Card 默认描述'

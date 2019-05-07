@@ -16,7 +16,7 @@
 						>
 						<h4 :title="list.title">
 							<b-link
-								to="`/article"
+								to="/article"
 								target="_blank"
 								>{{ list.id }}{{ list.title }}</b-link>
 						</h4>

@@ -1,20 +1,18 @@
-const config = require('./config.json');
-
 module.exports = {
 	mode: 'universal',
 	head: {
-		title: 'Lemonce',
+		title: 'OrChange',
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ hid: 'description', name: 'description', content: '' }
+			{ hid: 'description', name: 'description', content: 'Orange\'s official website' }
 		],
 		link: [
 			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
 		]
 	},
 	env: {
-		baseUrl: config.BASE_URL || 'http://localhost:3000'
+		baseUrl: 'http://localhost:3000'
 	},
 	loading: { color: '#fff' },
 	css: [
@@ -23,26 +21,21 @@ module.exports = {
 	],
 	plugins: [
 		'~/plugins/i18n.js',
-		'~/plugins/register.js',
-		'~/plugins/connect.js'
+		'~/plugins/register.js'
 	],
 	modules: [
-		'bootstrap-vue/nuxt',
-		'@nuxtjs/axios'
+		'bootstrap-vue/nuxt'
 	],
 	build: {
-		extend(config, ctx) {
+		extractCSS: true,
+		splitChunks: true,
+		extend(config) {
 			config.module.rules.push({
 				test:/\.yaml$/,
 				loader: 'json-loader!yaml-loader'
 			});
 		}
 	},
-	router: {
-	},
-	axios: {
-		prefix: '/api',
-		credentials: true
-	},
+	router: {},
 	server: {}
 };

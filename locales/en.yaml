@@ -10,3 +10,13 @@ info:
 operate:
   search: 'Search'
   switch: 'Switch'
+
+cardExtend:
+  link: 'Look'
+
+banner:
+  title: 'banner default description'
+
+card:
+  abstract: 'card default description'
+  

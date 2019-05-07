@@ -1,20 +1,16 @@
 <template>
 	<div class="format-class-card">
-		<b-container class="py-5">
-			<h1 
-				v-if="heading"
-				class="text-center pb-3 mb-4 border-bottom"
-				>{{ heading }}</h1>
+		<b-container class="py-2">
 			<b-row>
 				<b-col
 					v-for="(nav,index) in options"
 					:key="index"
 					class="text-center nav-img-ele pt-3"
 					>
-					<b-link :to="nav.url">
+					<b-link :to="nav.URL"> 
 						<b-img
 							class="rounded-circle"
-							:src="nav.image" 
+							:src="nav.URL" 
 							style="height:60px;width:60px;"
 							/>
 						<b-card-text class="text-center pt-2">{{ nav.title }}</b-card-text>
@@ -31,7 +27,6 @@ export default {
 	props: ['options'],
 	data() {
 		return {
-			heading: 'Choose Your Area of Interest'
 		};
 	}
 };
