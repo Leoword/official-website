@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import Cookies from 'js-cookie';
 
 Vue.use(VueI18n);
 
@@ -15,13 +14,9 @@ context.keys().forEach(key => {
 
 export default ({ app }) => {
 	app.i18n = new VueI18n({
-		locale: Cookies.get('lang') ? Cookies.get('lang') : 'zh-CN',
+		locale: 'zh-CN',
 		messages: list
 	});
 
 	Vue.prototype.$language = list;
-
-	app.i18n.path = (link) => {
-		return `/${app.i18n.locale}/${link}`;
-	};
 };

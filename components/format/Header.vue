@@ -33,7 +33,7 @@
 			</b-navbar-nav>
 
 			<b-navbar-nav class="ml-auto">
-				<b-nav-item-dropdown 
+				<!-- <b-nav-item-dropdown 
 					:text="$t('operate.switch')" 
 					right
 					>
@@ -44,7 +44,7 @@
 					>
 					{{ index }}
 					</b-dropdown-item>
-				</b-nav-item-dropdown>
+				</b-nav-item-dropdown> -->
 
 				<b-nav-form>
 					<b-form-input 
@@ -67,7 +67,6 @@
 
 <script>
 import data from './navbar.json';
-import Cookies from 'js-cookie';
 
 export default {
 	name: 'format-header',
@@ -76,18 +75,13 @@ export default {
 			data
 		};
 	},
-	mounted() {
-		Cookies.set(Cookies.get('lang'));
-	},
+	props: ['options'],
 	methods: {
 		setLang(lang) {
-			Cookies.set('lang', lang);
-
-			location.reload();
+			this.$i18n.locale = lang;
 		}
 	},
-	props: ['options'],
-	async asyncData() {
+	async asyncData(context, options) {
 
 	}
 };

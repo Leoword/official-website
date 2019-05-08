@@ -24,7 +24,7 @@
 export default {
 	name: 'format-footer',
 	props: ['options'],
-	async asyncData() {
+	async asyncData(context, options) {
 
 	}
 };

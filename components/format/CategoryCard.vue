@@ -38,7 +38,7 @@ export default {
 		return {
 		};
 	},
-	async asyncData() {
+	async asyncData(context, options) {
 
 	}
 };

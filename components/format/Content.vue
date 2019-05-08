@@ -51,7 +51,7 @@ export default {
 	methods: {
 
 	},
-	async asyncData() {
+	async asyncData(context, options) {
 
 	}
 };

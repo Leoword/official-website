@@ -1,39 +1,36 @@
-const bodyParser = require('koa-bodyparser');
 const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
+const Router = require('koa-router');
 
-const { Nuxt, Builder } = require('nuxt');
-let config = require('../nuxt.config.js');
+const db = require('./model');
+const Website = require('./website');
+const config = require('../nuxt.config.js');
+
 const app = new Koa();
 
-app.use(bodyParser());
+const router = new Router().get('/reset', async () => {
+	await website.reset();
+});
 
 config.dev = !(app.env === 'production');
 
-async function start() {
-	const nuxt = new Nuxt(config);
-	const {
-		host = process.env.HOST || '0.0.0.0',
-		port = process.env.PORT || 3000
-	} = nuxt.options.server;
+const website = app.context.website = new Website(config, async function () {
+	return await db.Page.read();
+});
 
-	if (config.dev) {
-		const builder = new Builder(nuxt);
-		await builder.build();
-	} else {
-		await nuxt.ready();
-	}
-
-	app.use(ctx => {
-
+app
+	.use(bodyParser())
+	.use(router.routes())
+	.use(ctx => {
 		ctx.status = 200;
 		ctx.respond = false;
-
-		nuxt.render(ctx.req, ctx.res);
+		
+		ctx.website.nuxt.render(ctx.req, ctx.res);
 	});
 
-	app.listen(port, host);
-}
+const {
+	host = process.env.HOST || '0.0.0.0',
+	port = process.env.PORT || 3000
+} = config.server;
 
-start();
-
-// nuxt nuxtConfig pageConfig
+website.reset().then(() => app.listen(port, host));

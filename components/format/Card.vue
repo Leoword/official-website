@@ -36,7 +36,7 @@ export default {
 		}
 	},
 	props: ['options'],
-	async asyncData() {
+	async asyncData(context, options) {
 
 	}
 };

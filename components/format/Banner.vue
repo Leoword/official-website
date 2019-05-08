@@ -32,7 +32,7 @@ export default {
 			};
 		}
 	},
-	async asyncData() {
+	async asyncData(context, options) {
 		
 	}
 };

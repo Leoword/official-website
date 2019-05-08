@@ -1,27 +1,52 @@
 <template>
 	<div id="app">
 		<component
-			:is="section.format"
-			v-for="(section, index) in pageData.sectionList"
+			:is="section.name"
+			v-for="(section, index) in sectionList"
 			:key="index"
-			:options="section.collection"
+			:options="section.options"
+			:class="section.classList"
 			>
 			</component>
 	</div>
 </template>
 
 <script>
-import homeData from '../components/staticdata/articleList.json';
+// import homeData from '../components/staticdata/article.json';
 import Vue from 'vue';
 
 export default {
 	async asyncData(context) {
-		// const result = await context.req.db.Page.read();
+		const {title, body, meta} = context.route.meta;
+		const methodMapping = Vue.$components;
 
-		console.log(context.route.params, context.route);
 		return {
-			pageData: homeData
+			head: {
+				title, meta
+			},
+			sectionList: body.map(async section => {
+				const {name, options, classList} = section;
+
+				const collection = await methodMapping[name](context, options);
+
+				return {
+					name, classList, options: collection
+				};
+			})
 		};
+	},
+	head() {
+		return {
+			title: this.title,
+			meta: this.meta
+		};
+	},
+	mounted() {
+		const lang = this.$route.params.lang;
+
+		if (this.$language[lang]) {
+			this.$i18n.locale = lang;
+		}
 	}
 };
 </script>

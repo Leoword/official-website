@@ -120,7 +120,7 @@ export default {
 			},10);
 		}
 	},
-	async asyncData() {
+	async asyncData(context, options) {
 
 	}
 };

@@ -70,7 +70,7 @@ export default {
 			this.radius = width - 60;
 		}
 	},
-	async asyncData() {
+	async asyncData(context, options) {
 
 	}
 };

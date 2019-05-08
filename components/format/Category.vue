@@ -54,7 +54,7 @@ export default {
 			this.indexActive = index;
 		}
 	},
-	async asyncData() {
+	async asyncData(context, options) {
 
 	}
 };

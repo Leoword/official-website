@@ -42,7 +42,7 @@ export default {
 			this.sliding = false;
 		}
 	},
-	async asyncData() {
+	async asyncData(context, options) {
 
 	}
 };

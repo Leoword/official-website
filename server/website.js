@@ -1,0 +1,62 @@
+const { Nuxt, Builder } = require('nuxt');
+
+function merge(config, pageList) {
+	return Object.assign({}, config, {
+		router: {
+			extendRoutes(routes) {
+				pageList.forEach(page => {
+					const {name, title, meta, router, body} = page.options;
+
+					routes.push({
+						path: router,
+						name: name,
+						component: '~/components/index.vue',
+						meta: {
+							title, meta, body
+						}
+					}, {
+						path: `/:lang${router}`,
+						name: name,
+						component: '~/components/index.vue',
+						meta: {
+							title, meta, body
+						}
+					});
+				});
+
+				routes.push({
+					path: '/',
+					redirect: '/index'
+				});
+			}
+		}
+	});
+}
+
+module.exports = class Website {
+	constructor(configTemplate, getPage) {
+		this.config = configTemplate;
+		this._getPage = getPage;
+		this.nuxt = null;
+	}
+
+	async reset() {
+		const pageList = await this._getPage(this);
+
+		if (!Array.isArray(pageList)) {
+			throw new Error('The result should be an array.');
+		}
+
+		const config = merge(this.config, pageList);
+		const nuxt = new Nuxt(config);
+
+		if (config.dev) {
+			const builder = new Builder(nuxt);
+			await builder.build();
+		} else {
+			await nuxt.ready();
+		}
+
+		return this.nuxt = nuxt;
+	}
+};

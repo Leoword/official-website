@@ -76,8 +76,8 @@ export default {
 		'options',
 		'recommend'
 	],
-	async asyncData() {
-
+	async asyncData(context, options) {
+    
 	}
 };
 </script>

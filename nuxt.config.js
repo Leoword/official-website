@@ -36,6 +36,14 @@ module.exports = {
 			});
 		}
 	},
-	router: {},
+	router: {
+		extendRoutes(routes, resolve) {
+			routes.push({
+				path: '/:lang/index',
+				name: 'index',
+				component: '~/components/index.vue'
+			});
+		}
+	},
 	server: {}
 };
