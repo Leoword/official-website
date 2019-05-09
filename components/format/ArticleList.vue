@@ -36,7 +36,7 @@
 						body-class="pb-0"
 						>
 						<h5 class="mb-4">
-							推荐阅读
+							{{ $t('article.recommend') }}
 						</h5>
 						<b-card
 							v-for="(item,index) in options.recommend"
@@ -127,6 +127,8 @@ export default {
 	}) {
 		let articleList = [];
 		let recommend = [];
+
+		articleList = await axios.getArticleList();
 
 		if (id) {
 			articleList = await axios.getArticleList({

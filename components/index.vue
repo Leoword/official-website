@@ -16,33 +16,36 @@ import Vue from 'vue';
 
 export default {
 	async asyncData(context) {
-		const {title, body, meta} = context.route.meta;
+		const {title, body, meta} = context.route.meta[0];
 		const {params, query} = context.route;
 		const methodMapping = Vue.$components;
+		const sectionList = [];
+
+		for (let section of body) {
+			const {name, options, classList} = section;
+
+			const collection = await methodMapping[name](options, {
+				id: params.id
+			}, {
+				query
+			}, context);
+			
+			sectionList.push({
+				name, classList, options: collection
+			});
+		}
 
 		return {
 			head: {
 				title, meta
 			},
-			sectionList: body.map(async section => {
-				const {name, options, classList} = section;
-
-				const collection = await methodMapping[name](options, {
-					id: params.id
-				}, {
-					query
-				}, context);
-
-				return {
-					name, classList, options: collection
-				};
-			})
+			sectionList
 		};
 	},
 	head() {
 		return {
-			title: this.title,
-			meta: this.meta
+			title: this.head.title,
+			meta: this.head.meta
 		};
 	},
 	mounted() {

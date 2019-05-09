@@ -28,14 +28,14 @@
 					:key="index"
 				>
 					<b-nav-item 
-						v-if="!item.dropdown"
+						v-if="!item.children"
 						:href="item.url"
 					>
 						{{ item.label }}
 					</b-nav-item>
 
 					<b-nav-item-dropdown
-						v-if="!item.children"
+						v-if="item.children"
 						:text="item.label"
 						right
 					>
@@ -84,7 +84,7 @@ export default {
 		jumpTo() {
 			this.$router.push(
 				{
-					name: 'article-list', 
+					path: '/article', 
 					query: {
 						keyword: this.keyword
 					}

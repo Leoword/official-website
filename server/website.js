@@ -5,7 +5,7 @@ function merge(config, pageList) {
 		router: {
 			extendRoutes(routes) {
 				pageList.forEach(page => {
-					const {name, title, meta, router, body} = page.options;
+					const {name, title, meta, router, body} = page;
 
 					routes.push({
 						path: router,

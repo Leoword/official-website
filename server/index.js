@@ -5,13 +5,15 @@ const router = require('./router');
 const db = require('./model');
 const Website = require('./website');
 const config = require('../nuxt.config.js');
+const { setBackend } = require('./model/page');
+
+setBackend(require('../backend/fs'));
 
 const app = new Koa();
 
 config.dev = !(app.env === 'production');
 
 app.context.db = db;
-
 const website = app.context.website = new Website(config, async function () {
 	return await db.Page.read();
 });

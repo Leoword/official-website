@@ -3,7 +3,7 @@ const sequelize = require('./sequelize');
 
 module.exports = sequelize.define('commit', {
 	hash: {
-		type: Sequelize.UUID,
+		type: Sequelize.STRING(70),
 		primaryKey: true,
 		defaultValue: Sequelize.UUIDV4
 	},
@@ -12,7 +12,7 @@ module.exports = sequelize.define('commit', {
 		allowNull: false
 	},
 	articleId: {
-		type: Sequelize.UUID,
+		type: Sequelize.STRING,
 		allowNull: false
 	},
 	title: {
@@ -31,7 +31,7 @@ module.exports = sequelize.define('commit', {
 		allowNull: false
 	},
 	base: {
-		type: Sequelize.UUID
+		type: Sequelize.STRING(70)
 	},
 	author: {
 		type: Sequelize.STRING
