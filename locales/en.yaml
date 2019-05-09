@@ -14,9 +14,15 @@ operate:
 cardExtend:
   link: 'Look'
 
-banner:
-  title: 'banner default description'
+content:
+  more: 'More'
 
-card:
-  abstract: 'card default description'
+fixed:
+  see: 'To See'
+
+article:
+  list: 'article list'
+  by: 'By'
+  published: 'published in'
+  recommend: 'Recommend'
   

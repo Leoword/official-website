@@ -25,7 +25,7 @@
 						:to="`/article/${options.id}`"
 						class="position-absolute fixed-bottom"
 						>
-						More
+						{{ $t('content.more') }}
 					</b-button>
 				</b-col>
 			</b-row>

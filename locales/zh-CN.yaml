@@ -14,8 +14,14 @@ operate:
 cardExtend:
   link: '去看看'
 
-banner:
-  title: 'Banner图默认描述'
+content:
+  more: '查看更多'
 
-card:
-  abstract: 'Card 默认描述'
+fixed:
+  see: '去看看'
+
+article:
+  list: '文章列表'
+  by: '由'
+  published: '发布于'
+  recommend: '推荐阅读'

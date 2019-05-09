@@ -31,7 +31,9 @@
 						size="lg"
 						style="position:absolute;right:1rem;bottom:1rem;"
 						to=""
-					>To See</b-button>
+					>
+						{{ $t(fixed.see) }}
+					</b-button>
 				</b-card>
 			</b-card-group>
 		</b-container>

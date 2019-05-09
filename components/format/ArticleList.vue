@@ -22,7 +22,7 @@
 							<small>{{ article.abstract | substr }}</small>
 						</b-card-text>
 						<b-card-text style="color:#999;">
-							<small>由{{ article.author }}发布于{{ article.createdAt }}</small>
+							<small> {{ $t('article.by') }} {{ article.author }} {{ $t('article.published') }} {{ article.createdAt }}</small>
 						</b-card-text>
 					</b-card>
 				</b-col>

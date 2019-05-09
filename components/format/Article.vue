@@ -5,7 +5,7 @@
         class="pb-3"
 				>
         <b-link to="/category">
-					文章列表
+					{{ $t('article.list') }}
 				</b-link>
         <i class="fas fa-angle-right px-2"></i>
         <small style="color:#999">{{ options.article.title }}</small>
@@ -23,7 +23,7 @@
             class="pl-3 pb-3"
             style="color:#999;"
 						>
-						由{{ options.article.author }}发布于{{ options.article.createdAt }}
+						{{ $t('article.by') }}{{ options.article.author }} {{ $t('article.published') }} {{ options.article.createdAt }}
 					</b-card-text>
 					<b-card 
 						class="border-0 p-3"
@@ -41,7 +41,7 @@
             body-class="pb-0"
 						>
             <h5 class="mb-4">
-							推荐阅读
+							{{ $t('article.recommend') }}
 						</h5>
             <b-card
               v-for="(item,index) in options.recommend"
