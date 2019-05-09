@@ -4,11 +4,6 @@
 		style="min-height:500px;"
 	>
     <b-container>
-			<h1
-				v-if="heading"
-				class="text-center mb-4"
-				style="color:#fff;"
-				>{{ heading }}</h1>
 			<div class="fixed-background-line"></div>
 			<b-card-group>
 				<b-card
@@ -44,13 +39,31 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios.js';
+
 export default {
 	name: 'format-fixed-background',
 	props: ['options'],
-	data () {
-		return {
-			heading: 'Fixed Background'
-		};
+	async asyncData(options) {
+		const { articleId, categoryId, limit, keyword, lang } = options;
+
+		if (articleId) {
+			const article = await axios.getArticle(articleId, options.lang);
+
+			return {
+				id: article,
+				thumbnail: article.thumbnail,
+				abstract: article.abstract
+			};
+		}
+
+		const articleList = await axios.getArticleList({
+			categoryId,
+			limit: limit ? limit : 1,
+			keyword, lang
+		});
+
+		return articleList[0];
 	}
 };
 </script>

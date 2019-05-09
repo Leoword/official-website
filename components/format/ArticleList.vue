@@ -4,7 +4,7 @@
 			<b-row>
 				<b-col class="pt-3">
 					<b-card
-						v-for="(article,index) in articleList"
+						v-for="(article,index) in options.articleList"
 						id="list"
 						:key="index"
 						class="border-0"
@@ -22,7 +22,7 @@
 							<small>{{ article.abstract | substr }}</small>
 						</b-card-text>
 						<b-card-text style="color:#999;">
-							<small>由{{ article.author }}发布于{{ article.date }}</small>
+							<small>由{{ article.author }}发布于{{ article.createdAt }}</small>
 						</b-card-text>
 					</b-card>
 				</b-col>
@@ -39,7 +39,7 @@
 							推荐阅读
 						</h5>
 						<b-card
-							v-for="(item,index) in recommend"
+							v-for="(item,index) in options.recommend"
 							:key="index"
 							no-body
 							class="border-0 pb-4"
@@ -75,6 +75,7 @@
 
 <script>
 import {getSubStr} from './mixin.js';
+import axios from '~/plugins/axios.js';
 
 export default {
 	name: 'format-article-list',
@@ -84,8 +85,7 @@ export default {
 		}
 	},
 	props: [
-		'options',
-		'recommend'
+		'options'
 	],
 	data() {
 		return {
@@ -120,8 +120,59 @@ export default {
 			},10);
 		}
 	},
-	async asyncData(context, options) {
+	async asyncData(options, {
+		id
+	}, {
+		keyword
+	}) {
+		let articleList = [];
+		let recommend = [];
 
+		if (id) {
+			articleList = await axios.getArticleList({
+				categoryId: id
+			});
+		}
+
+		if (keyword) {
+			articleList = await axios.getArticleList({
+				keyword
+			});
+		}
+
+		if (options.articleList) {
+			const { categoryId, limit, keyword, lang } = options.articleList;
+
+			articleList = await axios.getArticleList({
+				categoryId: id ? id : categoryId,
+				limit, keyword, lang
+			});
+		}
+
+		if (options.recommend) {
+			const { categoryId, limit, keyword, lang } = options.recommend;
+
+			recommend = await axios.getArticleList({categoryId, limit, keyword, lang});
+		}
+
+		return {
+			articleList: articleList.map(article =>  {
+				return {
+					id: article.id,
+					title: article.title,
+					abstract: article.abstract,
+					author: article.author,
+					createdAt: article.createdAt
+				};
+			}),
+			recommend: recommend.map(article => {
+				return {
+					id: article.id,
+					thumbnail: article.thumbnail,
+					title: article.title
+				};
+			})
+		};
 	}
 };
 </script>

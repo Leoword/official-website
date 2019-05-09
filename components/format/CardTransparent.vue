@@ -15,9 +15,32 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios.js';
+
 export default {
 	name: 'format-card-transparent',
-	props: ['options']
+	props: ['options'],
+	async asyncData(context, options) {
+		const { articleId, categoryId, limit, keyword, lang } = options;
+
+		if (articleId) {
+			const article = await axios.getArticle(articleId, options.lang);
+
+			return {
+				id: article,
+				thumbnail: article.thumbnail,
+				abstract: article.abstract
+			};
+		}
+
+		const articleList = await axios.getArticleList({
+			categoryId,
+			limit: limit ? limit : 1,
+			keyword, lang
+		});
+
+		return articleList[0];
+	}
 }; 
 </script>
 

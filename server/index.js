@@ -1,6 +1,6 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
-const Router = require('koa-router');
+const router = require('./router');
 
 const db = require('./model');
 const Website = require('./website');
@@ -8,11 +8,9 @@ const config = require('../nuxt.config.js');
 
 const app = new Koa();
 
-const router = new Router().get('/reset', async () => {
-	await website.reset();
-});
-
 config.dev = !(app.env === 'production');
+
+app.context.db = db;
 
 const website = app.context.website = new Website(config, async function () {
 	return await db.Page.read();

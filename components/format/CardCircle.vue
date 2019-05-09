@@ -40,6 +40,7 @@
 
 <script>
 import {getSubStr} from './mixin.js';
+import axios from '~/plugins/axios.js';
 
 export default {
 	name: 'format-card-circle',
@@ -70,8 +71,16 @@ export default {
 			this.radius = width - 60;
 		}
 	},
-	async asyncData(context, options) {
+	async asyncData(options) {
+		const { categoryId, limit, keyword, lang } = options;
 
+		const articleList = await axios.getArticleList({
+			categoryId,
+			limit: limit ? limit : 4,
+			keyword, lang
+		});
+
+		return articleList;
 	}
 };
 </script>

@@ -12,12 +12,12 @@
 </template>
 
 <script>
-// import homeData from '../components/staticdata/article.json';
 import Vue from 'vue';
 
 export default {
 	async asyncData(context) {
 		const {title, body, meta} = context.route.meta;
+		const {params, query} = context.route;
 		const methodMapping = Vue.$components;
 
 		return {
@@ -27,7 +27,11 @@ export default {
 			sectionList: body.map(async section => {
 				const {name, options, classList} = section;
 
-				const collection = await methodMapping[name](context, options);
+				const collection = await methodMapping[name](options, {
+					id: params.id
+				}, {
+					query
+				}, context);
 
 				return {
 					name, classList, options: collection

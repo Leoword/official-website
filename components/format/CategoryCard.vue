@@ -3,14 +3,14 @@
 		<b-container class="py-2">
 			<b-row>
 				<b-col
-					v-for="(nav,index) in options"
+					v-for="(nav,index) in options.navbar"
 					:key="index"
 					class="text-center nav-img-ele"
 					>
-					<b-link :to="nav.URL"> 
+					<b-link :to="nav.url"> 
 						<b-img
 							class="rounded-circle"
-							:src="nav.URL" 
+							:src="nav.image" 
 							style="height:60px;width:60px;"
 							/>
 						<b-card-text class="text-center pt-2">
@@ -38,8 +38,12 @@ export default {
 		return {
 		};
 	},
-	async asyncData(context, options) {
+	async asyncData(options) {
+		const { navbar } = options;
 
+		return {
+			navbar
+		};
 	}
 };
 </script>

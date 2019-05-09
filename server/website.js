@@ -38,10 +38,14 @@ module.exports = class Website {
 		this.config = configTemplate;
 		this._getPage = getPage;
 		this.nuxt = null;
+
+		this.pageList = null;
 	}
 
 	async reset() {
 		const pageList = await this._getPage(this);
+
+		this.pageList = pageList;
 
 		if (!Array.isArray(pageList)) {
 			throw new Error('The result should be an array.');

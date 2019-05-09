@@ -10,7 +10,7 @@
 					:key="index"
 					no-body
 					>
-					<b-link :to="`/article/${item.hash}`">
+					<b-link :to="`/article/${item.id}`">
 						<b-img
 							:src="item.thumbnail" 
 							fluid
@@ -27,6 +27,7 @@
 
 <script>
 import {getSubStr} from './mixin.js';
+import axios from '~/plugins/axios.js';
 
 export default {
 	name: 'format-card',
@@ -36,8 +37,22 @@ export default {
 		}
 	},
 	props: ['options'],
-	async asyncData(context, options) {
+	async asyncData(options) {
+		const { categoryId, limit, keyword, lang } = options;
 
+		const articleList = await axios.getArticleList({
+			categoryId,
+			limit: limit ? limit : 4,
+			keyword, lang
+		});
+
+		return articleList.map(article => {
+			return {
+				id: article.id,
+				thumbnail: article.thumbnail,
+				abstract: article.abstract
+			};
+		});
 	}
 };
 </script>

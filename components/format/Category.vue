@@ -5,7 +5,7 @@
       class="format-class-link"
       >
       <b-img 
-        :src="options[0].URL"
+        :src="options.image"
         fluid-grow 
         />
     </b-card>
@@ -13,7 +13,7 @@
       <b-container>
         <b-row>
           <b-col
-            v-for="(nav,index) in options"
+            v-for="(nav,index) in options.navbar"
             :key="index"
             :class="{active:indexActive === index,'class-label-tap': true}"
             @click="activeClass(index)"
@@ -54,8 +54,12 @@ export default {
 			this.indexActive = index;
 		}
 	},
-	async asyncData(context, options) {
+	async asyncData(options) {
+		const {image, navbar} = options;
 
+		return {
+			image, navbar
+		};
 	}
 };
 </script>

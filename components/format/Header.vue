@@ -6,7 +6,7 @@
 		>
 		<b-navbar-brand 
 			id="logo"
-			href="#" 
+			href="/" 
 			>
 			{{ $t('info.shortName') }}
 		</b-navbar-brand>
@@ -23,31 +23,37 @@
 			class="nav-collapsing"
 			>
 			<b-navbar-nav>
-				<b-nav-item 
-				v-for="(item, index) in data" 
-				:key="index" 
-				:href="item.url"
+				<span
+					v-for="(item, index) in options"
+					:key="index"
 				>
-				{{ item.label }}
-			</b-nav-item>
+					<b-nav-item 
+						v-if="!item.dropdown"
+						:href="item.url"
+					>
+						{{ item.label }}
+					</b-nav-item>
+
+					<b-nav-item-dropdown
+						v-if="!item.children"
+						:text="item.label"
+						right
+					>
+						<b-dropdown-item
+							v-for="(dropdownItem, dropdownId) in item.children"
+							:key="dropdownId" 
+							:href="dropdownItem.url"
+						>
+							{{ dropdownItem.label }}
+						</b-dropdown-item>
+					</b-nav-item-dropdown>
+				</span>
 			</b-navbar-nav>
 
 			<b-navbar-nav class="ml-auto">
-				<!-- <b-nav-item-dropdown 
-					:text="$t('operate.switch')" 
-					right
-					>
-					<b-dropdown-item 
-					v-for="(item, index) in $language" 
-					:key="index"
-					@click="setLang(index)"
-					>
-					{{ index }}
-					</b-dropdown-item>
-				</b-nav-item-dropdown> -->
-
 				<b-nav-form>
 					<b-form-input 
+						v-model="keyword"
 						size="sm" 
 						class="mr-sm-2" 
 						placeholder="Search"
@@ -55,7 +61,7 @@
 					<b-button 
 						size="sm" 
 						class="my-2 my-sm-0" 
-						type="submit"
+						@click="jumpTo"
 						>
 						{{ $t('operate.search') }}
 					</b-button>
@@ -66,22 +72,31 @@
 </template>
 
 <script>
-import data from './navbar.json';
-
 export default {
 	name: 'format-header',
 	data() {
 		return {
-			data
+			keyword: ''
 		};
 	},
 	props: ['options'],
 	methods: {
-		setLang(lang) {
-			this.$i18n.locale = lang;
+		jumpTo() {
+			this.$router.push(
+				{
+					name: 'article-list', 
+					query: {
+						keyword: this.keyword
+					}
+				}
+			);
 		}
 	},
-	async asyncData(context, options) {
+	async asyncData(options) {
+
+		const { navbar } = options;
+
+		return navbar;
 
 	}
 };

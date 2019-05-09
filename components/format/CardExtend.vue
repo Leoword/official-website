@@ -28,8 +28,8 @@
 					variant="primary"
 					class="position-absolute w-50 rounded-0 ml-4 card-extend-button"
 					style="bottom:-20px"
-					:href="`/article/${item.hash}`"
-					:to="`/article/${item.hash}`"
+					:href="`/article/${item.id}`"
+					:to="`/article/${item.id}`"
 					>
 					{{ $t('cardExtend.link') }}
 				</b-button>
@@ -41,6 +41,7 @@
 
 <script>
 import {getSubStr} from './mixin.js';
+import axios from '~/plugins/axios.js';
 
 export default {
 	name: 'format-card-extend',
@@ -55,8 +56,16 @@ export default {
 			
 		};
 	},
-	async asyncData(context, options) {
+	async asyncData(options) {
+		const { categoryId, limit, keyword, lang } = options;
 
+		const articleList = await axios.getArticleList({
+			categoryId,
+			limit: limit ? limit : 4,
+			keyword, lang
+		});
+
+		return articleList;
 	}
 };
 </script>

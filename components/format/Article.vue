@@ -8,7 +8,7 @@
 					文章列表
 				</b-link>
         <i class="fas fa-angle-right px-2"></i>
-        <small style="color:#999">{{ options[0].title }}</small>
+        <small style="color:#999">{{ options.article.title }}</small>
       </div>
 			<b-row>
         <!-- 文章内容 -->
@@ -17,17 +17,17 @@
             class="p-3"
             style="font-weight:bold;"
 						>
-						{{ options[0].title }}
+						{{ options.article.title }}
 						</h3>
 					<b-card-text 
             class="pl-3 pb-3"
             style="color:#999;"
 						>
-						由{{ options[0].author }}发布于{{ options[0].date }}
+						由{{ options.article.author }}发布于{{ options.article.createdAt }}
 					</b-card-text>
 					<b-card 
 						class="border-0 p-3"
-						v-html="options[0].content"
+						v-html="options.article.text"
 						></b-card>
         </b-col>
 
@@ -44,17 +44,17 @@
 							推荐阅读
 						</h5>
             <b-card
-              v-for="(item,index) in recommend"
+              v-for="(item,index) in options.recommend"
               :key="index"
               no-body
               class="border-0 pb-4"
 							>
               <b-link 
                 target="_blank"
-								:to="`/article/${item.hash}`"
+								:to="`/article/${item.id}`"
                 >
                 <b-img 
-									:src="item.image" 
+									:src="item.thumbnail" 
 									fluid
 									/>
               </b-link>
@@ -70,14 +70,42 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios.js';
+
 export default {
 	name: 'format-article',
 	props: [
-		'options',
-		'recommend'
+		'options'
 	],
-	async asyncData(context, options) {
-    
+	async asyncData(options, {
+		id
+	}) {
+		const articleId = id ? id : options.articleId;
+		const article = await axios.getArticle(articleId, options.lang);
+		let recommend = [];
+
+		if (options.recommend) {
+			const { categoryId, limit, keyword, lang } = options.recommend;
+
+			recommend = await axios.getArticleList({categoryId, limit, keyword, lang});
+		}
+
+
+		return {
+			article: {
+				title: article.title,
+				author: article.author,
+				text: article.text,
+				createdAt: article.createdAt
+			},
+			recommend: recommend.map(article => {
+				return {
+					id: article.id,
+					thumbnail: article.thumbnail,
+					title: article.title
+				};
+			})
+		};
 	}
 };
 </script>

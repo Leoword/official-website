@@ -1,13 +1,12 @@
 <template>
 	<div class="format-banner">
 		<b-img 
-			:src="renderData.URL"
+			:src="options.image"
 			fluid-grow 
 		/>
 		<div class="cover"></div>
 		<div class="banner-text">
-			<h2>{{ renderData.text }}</h2>
-			<h1>{{ test }}</h1>
+			<h2>{{ options.text }}</h2>
 		</div>
 	</div>
 </template>
@@ -19,21 +18,13 @@ export default {
 	props: ['options'],
 	data() {
 		return {
-			test: ''
 		};
 	},
-	computed: {
-		renderData() {
-			const {URL, text} = this.options;
-
-			return {
-				URL: URL ? URL : 'https://picsum.photos/600/200/?image=10',
-				text: text ? text : this.$t('banner.title')
-			};
-		}
-	},
-	async asyncData(context, options) {
-		
+	async asyncData(options) {
+		return {
+			image: options.image,
+			text: options.text
+		};
 	}
 };
 </script>
