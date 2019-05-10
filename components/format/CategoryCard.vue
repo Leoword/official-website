@@ -3,7 +3,7 @@
 		<b-container class="py-2">
 			<b-row>
 				<b-col
-					v-for="(nav,index) in options.navbar"
+					v-for="(nav,index) in options"
 					:key="index"
 					class="text-center nav-img-ele"
 					>
@@ -39,11 +39,8 @@ export default {
 		};
 	},
 	async asyncData(options) {
-		const { navbar } = options;
 
-		return {
-			navbar
-		};
+		return options;
 	}
 };
 </script>

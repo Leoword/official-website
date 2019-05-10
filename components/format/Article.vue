@@ -12,7 +12,7 @@
       </div>
 			<b-row>
         <!-- 文章内容 -->
-        <b-col class="p-0">
+        <b-col cols="9" class="p-0">
 					<h3 
             class="p-3"
             style="font-weight:bold;"
@@ -27,7 +27,7 @@
 					</b-card-text>
 					<b-card 
 						class="border-0 p-3"
-						v-html="options.article.text"
+						v-html="render(options.article.text)"
 						></b-card>
         </b-col>
 
@@ -71,12 +71,20 @@
 
 <script>
 import axios from '~/plugins/axios.js';
+import Markdown from 'markdown-it';
+
+const md = new Markdown();
 
 export default {
 	name: 'format-article',
 	props: [
 		'options'
 	],
+	methods: {
+		render(content) {
+			return md.render(content);
+		}
+	},
 	async asyncData(options, {
 		id
 	}) {
@@ -89,7 +97,6 @@ export default {
 
 			recommend = await axios.getArticleList({categoryId, limit, keyword, lang});
 		}
-
 
 		return {
 			article: {
@@ -111,6 +118,8 @@ export default {
 </script>
 
 <style lang="less">
-
+img {
+	width: 100%
+}
 </style>
 

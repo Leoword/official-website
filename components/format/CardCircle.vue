@@ -17,7 +17,7 @@
               width: `${radius}px`,
               height: `${radius}px`
             }"
-            :to="item.url"
+            :to="`/article/${item.id}`"
             >
             <b-img 
               class="rounded-circle"
@@ -64,11 +64,13 @@ export default {
 	},
 	methods: {
 		setRadius() {
-			const {
-				offsetWidth: width
-			} = this.$refs.cardList[0];
+			if (this.$refs.cardList) {
+				const {
+					offsetWidth: width
+				} = this.$refs.cardList[0];
 
-			this.radius = width - 60;
+				this.radius = width - 60;
+			}
 		}
 	},
 	async asyncData(options) {

@@ -1,7 +1,7 @@
 <template>
 	<div>
     <b-carousel
-      id="carousel-1"
+      id="carousel"
       v-model="slide"
       :interval="3000"
       controls
@@ -15,9 +15,8 @@
 					v-for="(item,index) in options"
 					:key="index"
 					:img-src="item.image"
-					style="max-height:600px"
 					>
-					<h1>{{ item.text }}</h1>
+					<h1>{{ item.text | substr }}</h1>
 				</b-carousel-slide>
 			</b-link>
     </b-carousel>
@@ -25,6 +24,8 @@
 </template>
 
 <script>
+import {getSubStr} from './mixin.js';
+
 export default {
 	name: 'format-carousel',
 	props: ['options'],
@@ -33,6 +34,11 @@ export default {
 			slide: 0,
 			sliding: null,
 		};
+	},
+	filters: {
+		substr(value) {
+			return getSubStr(value, 80, 30);
+		}
 	},
 	methods: {
 		onSlideStart() {
@@ -43,16 +49,27 @@ export default {
 		}
 	},
 	async asyncData(options) {
-		const { imageList } = options;
-
-		return imageList;
+		return options;
 	}
 };
 </script>
 
 <style lang="less" scoped>
+#carousel {
+	max-height: 400px;
+	overflow: hidden;
+	.carousel-item {
+		max-height: 400px;
+		overflow: hidden;
+	}
+}
 .img-fluid {
   height: 0;
+}
+.carousel-item {
+	image {
+		max-height: 200px;
+	}
 }
 </style>
 

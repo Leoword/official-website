@@ -36,6 +36,7 @@
 <script>
 import {getSubStr} from './mixin.js';
 import axios from '~/plugins/axios.js';
+import { request } from 'http';
 
 export default {
 	name: 'format-content',
@@ -50,7 +51,7 @@ export default {
 		};
 	},
 	async asyncData(options) {
-		const { articleId, categoryId, limit, keyword, lang } = options;
+		const { articleId, categoryId, keyword, lang } = options;
 
 		if (articleId) {
 			const article = await axios.getArticle(articleId, options.lang);
@@ -64,15 +65,16 @@ export default {
 
 		const articleList = await axios.getArticleList({
 			categoryId,
-			limit: limit ? limit : 1,
 			keyword, lang
 		});
 
-		return {
-			id: articleList[0].id,
-			thumbnail: articleList[0].thumbnail,
-			abstract: articleList[0].abstract
-		};
+		const result = articleList.filter(article => article.thumbnail);
+
+		if (result.length === 0) {
+			return articleList[0] ? articleList[0] : {};
+		}
+
+		return result[0];
 	}
 };
 </script>

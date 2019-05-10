@@ -1,8 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 
-const { store } = require(path.resolve('config.json'));
-const filePath = `${store.path}/${store.filename}`;
+const filePath = require(path.resolve('config.json')).store;
 
 module.exports = {
 	async read() {

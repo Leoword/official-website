@@ -8,7 +8,8 @@
 					class="card-transparent-button"
 					variant="primary"
 					size="lg"
-				>More</b-button>
+					:to="`/article/${options.id}`"
+				>{{ $t('content.more') }}</b-button>
 			</b-card>
     </b-container>
   </div>
@@ -21,7 +22,7 @@ export default {
 	name: 'format-card-transparent',
 	props: ['options'],
 	async asyncData(context, options) {
-		const { articleId, categoryId, limit, keyword, lang } = options;
+		const { articleId, categoryId, keyword, lang } = options;
 
 		if (articleId) {
 			const article = await axios.getArticle(articleId, options.lang);
@@ -35,11 +36,16 @@ export default {
 
 		const articleList = await axios.getArticleList({
 			categoryId,
-			limit: limit ? limit : 1,
 			keyword, lang
 		});
 
-		return articleList[0];
+		const result = articleList.filter(article => article.thumbnail);
+
+		if (result.length === 0) {
+			return articleList[0] ? articleList[0] : {};
+		}
+
+		return result[0];
 	}
 }; 
 </script>

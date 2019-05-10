@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./sequelize');
 
+const markdownIt = require('markdown-it');
+
 module.exports = sequelize.define('commit', {
 	hash: {
 		type: Sequelize.STRING(70),
@@ -24,8 +26,35 @@ module.exports = sequelize.define('commit', {
 		allowNull: false
 	},
 	assets: {
+		type: Sequelize.STRING,
+		get() {
+			const text = this.getDataValue('text');
+			const assets = [];
+
+			if (!text) {
+				return assets;
+			}
+
+			const nodeList = markdownIt().parse(text);
+
+			nodeList.forEach(node => {
+				if (node.children !== null) {
+					node.children.forEach(element => {
+						if (element.type === 'image') {
+							const url = element.attrs[0][1];
+
+							assets.push(url);
+						}
+					});
+				}
+			});
+
+			return assets;
+		}
+	},
+	thumbnail: {
 		type: Sequelize.STRING
-	}, 
+	},
 	text: {
 		type: Sequelize.TEXT,
 		allowNull: false

@@ -93,10 +93,7 @@ export default {
 		}
 	},
 	async asyncData(options) {
-
-		const { navbar } = options;
-
-		return navbar;
+		return options;
 
 	}
 };

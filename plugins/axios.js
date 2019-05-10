@@ -1,20 +1,26 @@
 import axios from 'axios';
 
-const prefix = '/api';
+import config from '../config.json';
+
+const prefix = `${config.websiteURL}/api`;
 
 export default {
-	getArticle(id, lang) {
-		return axios.get(`${prefix}/article/${id}`, {
-			query: {
+	async getArticle(id, lang) {
+		const res = await axios.get(`${prefix}/article/${id}`, {
+			params: {
 				lang: lang
 			}
 		});
+
+		return res.data;
 	},
-	getArticleList({ categoryId, keyword, limit, lang }) {
-		return axios.get(`${prefix}/article`, {
-			query: {
+	async getArticleList({ categoryId, keyword, limit, lang }) {
+		const res = await axios.get(`${prefix}/article`, {
+			params: {
 				categoryId, keyword, limit, lang
 			}
 		});
+
+		return res.data;
 	}
 };

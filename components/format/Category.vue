@@ -13,7 +13,7 @@
       <b-container>
         <b-row>
           <b-col
-            v-for="(nav,index) in options.navbar"
+            v-for="(nav, index) in options.navbar"
             :key="index"
             :class="{active:indexActive === index,'class-label-tap': true}"
             @click="activeClass(index)"
@@ -23,7 +23,7 @@
               :to="nav.url"
               >
               <b-card-text class="text-center py-3">
-                {{ nav.title | substr }}
+                {{ nav.label | substr }}
               </b-card-text>
             </b-link>
           </b-col>

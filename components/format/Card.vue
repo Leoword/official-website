@@ -50,7 +50,7 @@ export default {
 			return {
 				id: article.id,
 				thumbnail: article.thumbnail,
-				abstract: article.abstract
+				abstract: article.abstract 
 			};
 		});
 	}

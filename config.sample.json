@@ -5,8 +5,6 @@
 		"password": "password",
 		"host": "host"
 	},
-	"store": {
-		"path": "C:\\Users",
-		"filename": "store.json"
-	}
+	"store": "C:\\Users\\store.json",
+	"websiteURL": "http://localhost:3000"
 }

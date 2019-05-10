@@ -23,8 +23,7 @@ export default {
 
 		for (let section of body) {
 			const {name, options, classList} = section;
-
-			const collection = await methodMapping[name](options, {
+			const collection = await methodMapping[name](options ? options : {}, {
 				id: params.id
 			}, {
 				query
@@ -43,10 +42,17 @@ export default {
 		};
 	},
 	head() {
-		return {
-			title: this.head.title,
-			meta: this.head.meta
-		};
+		const head = {};
+
+		if (this.head.title) {
+			head.title = this.head.title;
+		}
+
+		if (this.head.meta) {
+			head.meta = this.head.meta;
+		}
+
+		return head;
 	},
 	mounted() {
 		const lang = this.$route.params.lang;

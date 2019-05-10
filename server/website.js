@@ -1,9 +1,11 @@
 const { Nuxt, Builder } = require('nuxt');
 
 function merge(config, pageList) {
+
 	return Object.assign({}, config, {
 		router: {
 			extendRoutes(routes) {
+
 				pageList.forEach(page => {
 					const {name, title, meta, router, body} = page;
 
@@ -16,7 +18,7 @@ function merge(config, pageList) {
 						}
 					}, {
 						path: `/:lang${router}`,
-						name: name,
+						name: `${name}-lang`,
 						component: '~/components/index.vue',
 						meta: {
 							title, meta, body

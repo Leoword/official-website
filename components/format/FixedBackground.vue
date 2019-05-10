@@ -30,9 +30,9 @@
 						variant="outline-secondary"
 						size="lg"
 						style="position:absolute;right:1rem;bottom:1rem;"
-						to=""
+						:to="`/article/${item.id}`"
 					>
-						{{ $t(fixed.see) }}
+						{{ $t('fixed.see') }}
 					</b-button>
 				</b-card>
 			</b-card-group>
@@ -65,7 +65,7 @@ export default {
 			keyword, lang
 		});
 
-		return articleList[0];
+		return articleList;
 	}
 };
 </script>

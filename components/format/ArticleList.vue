@@ -11,9 +11,9 @@
 						>
 						<h4 :title="article.title">
 							<b-link
-								to="/article"
+								:to="`/article/${article.id}`"
 								>
-								{{ article.id }}{{ article.title }}
+								{{ article.title }}
 							</b-link>
 						</h4>
 						<b-card-text 
@@ -46,7 +46,7 @@
 							>
 							<b-link 
 								target="_blank"
-								:to="item.url"
+								:to="`/article/${item.id}`"
 								>
 								<b-img
 									:src="item.thumbnail"
@@ -128,7 +128,7 @@ export default {
 		let articleList = [];
 		let recommend = [];
 
-		articleList = await axios.getArticleList();
+		articleList = await axios.getArticleList({});
 
 		if (id) {
 			articleList = await axios.getArticleList({
