@@ -56,12 +56,8 @@ module.exports = class Website {
 		const config = merge(this.config, pageList);
 		const nuxt = new Nuxt(config);
 
-		if (config.dev) {
-			const builder = new Builder(nuxt);
-			await builder.build();
-		} else {
-			await nuxt.ready();
-		}
+		const builder = new Builder(nuxt);
+		await builder.build();
 
 		return this.nuxt = nuxt;
 	}
