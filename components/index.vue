@@ -25,9 +25,7 @@ export default {
 			const {name, options, classList} = section;
 			const collection = await methodMapping[name](options ? options : {}, {
 				id: params.id
-			}, {
-				query
-			}, context);
+			}, query, context);
 			
 			sectionList.push({
 				name, classList, options: collection

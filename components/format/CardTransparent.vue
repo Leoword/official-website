@@ -8,7 +8,7 @@
 					class="card-transparent-button"
 					variant="primary"
 					size="lg"
-					:to="`/article/${options.id}`"
+					:to="`/article/${options.id}?lang=${options.lang}`"
 				>{{ $t('content.more') }}</b-button>
 			</b-card>
     </b-container>

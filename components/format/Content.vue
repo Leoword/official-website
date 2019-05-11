@@ -22,7 +22,7 @@
 					<b-button
 						variant="outline-info"
 						block
-						:to="`/article/${options.id}`"
+						:to="`/article/${options.id}?lang=${options.lang}`"
 						class="position-absolute fixed-bottom"
 						>
 						{{ $t('content.more') }}

@@ -33,6 +33,7 @@
 
         <!-- 推荐阅读 -->
         <b-col 
+					v-if="options.recommend.length !== 0"
           cols="3"
           class="d-none d-md-block"
 					>
@@ -51,7 +52,7 @@
 							>
               <b-link 
                 target="_blank"
-								:to="`/article/${item.id}`"
+								:to="`/article/${item.id}?lang=${item.lang}`"
                 >
                 <b-img 
 									:src="item.thumbnail" 
@@ -81,15 +82,15 @@ export default {
 		'options'
 	],
 	methods: {
-		render(content) {
+		render(content = '') {
 			return md.render(content);
 		}
 	},
 	async asyncData(options, {
 		id
-	}) {
+	}, { lang }) {
 		const articleId = id ? id : options.articleId;
-		const article = await axios.getArticle(articleId, options.lang);
+		const article = await axios.getArticle(articleId, lang ? lang : options.lang);
 		let recommend = [];
 
 		if (options.recommend) {
@@ -99,19 +100,8 @@ export default {
 		}
 
 		return {
-			article: {
-				title: article.title,
-				author: article.author,
-				text: article.text,
-				createdAt: article.createdAt
-			},
-			recommend: recommend.map(article => {
-				return {
-					id: article.id,
-					thumbnail: article.thumbnail,
-					title: article.title
-				};
-			})
+			article,
+			recommend
 		};
 	}
 };

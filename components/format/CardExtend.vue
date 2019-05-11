@@ -28,8 +28,7 @@
 					variant="primary"
 					class="position-absolute w-50 rounded-0 ml-4 card-extend-button"
 					style="bottom:-20px"
-					:href="`/article/${item.id}`"
-					:to="`/article/${item.id}`"
+					:to="`/article/${item.id}?lang=${item.lang}`"
 					>
 					{{ $t('cardExtend.link') }}
 				</b-button>

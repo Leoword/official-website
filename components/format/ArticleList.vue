@@ -11,7 +11,7 @@
 						>
 						<h4 :title="article.title">
 							<b-link
-								:to="`/article/${article.id}`"
+								:to="`/article/${article.id}?lang=${article.lang}`"
 								>
 								{{ article.title }}
 							</b-link>
@@ -28,6 +28,7 @@
 				</b-col>
 				<!-- 推荐阅读 -->
 				<b-col
+					v-if="options.recommend.length !== 0"
 					cols="3"
 					class="d-none d-md-block pt-5"
 					>
@@ -46,7 +47,7 @@
 							>
 							<b-link 
 								target="_blank"
-								:to="`/article/${item.id}`"
+								:to="`/article/${item.id}?lang=${item.lang}`"
 								>
 								<b-img
 									:src="item.thumbnail"
@@ -158,22 +159,8 @@ export default {
 		}
 
 		return {
-			articleList: articleList.map(article =>  {
-				return {
-					id: article.id,
-					title: article.title,
-					abstract: article.abstract,
-					author: article.author,
-					createdAt: article.createdAt
-				};
-			}),
-			recommend: recommend.map(article => {
-				return {
-					id: article.id,
-					thumbnail: article.thumbnail,
-					title: article.title
-				};
-			})
+			articleList,
+			recommend
 		};
 	}
 };

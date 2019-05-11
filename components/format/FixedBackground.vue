@@ -30,7 +30,7 @@
 						variant="outline-secondary"
 						size="lg"
 						style="position:absolute;right:1rem;bottom:1rem;"
-						:to="`/article/${item.id}`"
+						:to="`/article/${item.id}?lang=${item.lang}`"
 					>
 						{{ $t('fixed.see') }}
 					</b-button>

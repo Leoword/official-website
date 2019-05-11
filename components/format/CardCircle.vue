@@ -17,7 +17,7 @@
               width: `${radius}px`,
               height: `${radius}px`
             }"
-            :to="`/article/${item.id}`"
+            :to="`/article/${item.id}?lang=${item.lang}`"
             >
             <b-img 
               class="rounded-circle"

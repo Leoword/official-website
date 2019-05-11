@@ -10,7 +10,7 @@
 					:key="index"
 					no-body
 					>
-					<b-link :to="`/article/${item.id}`">
+					<b-link :to="`/article/${item.id}?lang=${item.lang}`">
 						<b-img
 							:src="item.thumbnail" 
 							fluid
@@ -46,13 +46,7 @@ export default {
 			keyword, lang
 		});
 
-		return articleList.map(article => {
-			return {
-				id: article.id,
-				thumbnail: article.thumbnail,
-				abstract: article.abstract 
-			};
-		});
+		return articleList;
 	}
 };
 </script>

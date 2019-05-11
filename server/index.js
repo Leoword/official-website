@@ -2,18 +2,21 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const router = require('./router');
 
+const Page = require('./model/page');
+const Context = require('./model/content');
+
+Page.setBackend(require('../backend/fs'));
+Context.setBackend(require('../backend/content'));
+
 const db = require('./model');
 const Website = require('./website');
 const config = require('../nuxt.config.js');
-const { setBackend } = require('./model/page');
-
-setBackend(require('../backend/fs'));
 
 const app = new Koa();
+app.context.db = db;
 
 config.dev = !(app.env === 'production');
 
-app.context.db = db;
 const website = app.context.website = new Website(config, async function () {
 	return await db.Page.read();
 });

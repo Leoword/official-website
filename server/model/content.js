@@ -1,58 +1,67 @@
-const Article = require('./article');
-const Commit = require('./commit');
-const {Base, Interface} = require('../../../content');
+let backend = null;
 
-const interfaceInstance = new Interface({
-	content: {
-		async read(id) {
-			const article = await Article.findByPk(id);
-
-			return article;
-		}
-	},
-	i18n: { 
-		async langs(id) {
-			const commits = await Commit.findAll({
-				where: {
-					articleId: id
-				},
-				attributes: ['lang']
-			});
-			const langs = [];
-
-			commits.forEach(commit => {
-				if (commit.lang && langs.indexOf(commit.lang) === -1) {
-					langs.push(commit.lang);
-				}
-			});
-
-			return langs;
-		}
-	},
-	commit: {
-		async read(id, lang) {
-			const commits = await Commit.findAll({
-				where: {
-					articleId: id, lang
-				},
-				order: [['createdAt', 'DESC']]
-			});
-
-			return commits[0];
-		},
-		async query(id, lang) {
-			const commits = await Commit.findAll({
-				where: {
-					articleId: id, lang
-				},
-				order: [['createdAt', 'DESC']]
-			});
-
-			return commits;
-		}
+exports.Content = class Content {
+	constructor(id) {
+		this.id = id;
 	}
-});
 
-module.exports = new Base(interfaceInstance, {
-	defaultLang: 'zh'
-});
+	async get(lang) {
+		const content = await backend.content.lang.get(this.id, lang);
+
+		if(!content) {
+			return null;
+		}
+
+		return {
+			id: this.id,
+			hash: content.hash,
+			lang: content.lang,
+			title: content.title,
+			abstract: content.abstract,
+			text: content.text,
+			thumbnail: content.thumbnail,
+			author: content.author,
+			createdAt: content.createdAt
+		};
+	}
+
+	async langs(params) {
+		const contentList = await backend.content.lang.query(this.id, params);
+
+		if (!Array.isArray(contentList)) {
+			throw new Error('The interface query of lang MUST return an array.');
+		}
+
+		return contentList.map(({
+			hash, lang, title, abstract, thumbnail, author, createdAt
+		}) => {
+			return {
+				id: this.id,	hash, lang, title, abstract, thumbnail, author, createdAt
+			};
+		});
+	}
+
+	static async get(id) {
+		const content = await backend.content.get(id);
+
+		if (!content) {
+			return null;
+		}
+
+		return new this(id);
+	}
+
+	static async query(params) {
+		const contentList = await backend.content.query(params);
+
+		if (!Array.isArray(contentList)) {
+			throw new Error('The interface query of content MUST return an array.');
+		}
+
+		return contentList.map(content => new this(content.id));
+	}
+};
+
+exports.setBackend = function (newBackend) {
+	backend = newBackend;
+};
