@@ -11,9 +11,6 @@ module.exports = {
 			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
 		]
 	},
-	env: {
-		baseUrl: 'http://localhost:3000'
-	},
 	loading: { color: '#fff' },
 	css: [
 		{src: '@fortawesome/fontawesome-free/css/all.min.css'},
@@ -45,5 +42,7 @@ module.exports = {
 			});
 		}
 	},
-	server: {}
+	server: {
+		port: 8080
+	}
 };
