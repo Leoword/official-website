@@ -4,6 +4,10 @@
 		style="min-height:500px;"
 	>
     <b-container>
+			<h2 
+				class="text-center" 
+				style="color:#fff;"
+			>{{ $t('fixed.name') }}</h2>
 			<div class="fixed-background-line"></div>
 			<b-card-group>
 				<b-card
@@ -18,8 +22,8 @@
 						class="pt-4 px-4"
 					>
 						<i
-						class="fas fa-quote-left pr-1"
-						style="font-size:1.5em;"
+							class="fas fa-quote-left pr-1"
+							style="font-size:1.5em;"
 						></i>
 						{{ item.abstract }}
 					</b-card-text>
@@ -31,9 +35,7 @@
 						size="lg"
 						style="position:absolute;right:1rem;bottom:1rem;"
 						:to="`/article/${item.id}?lang=${item.lang}`"
-					>
-						{{ $t('fixed.see') }}
-					</b-button>
+					>{{ $t('fixed.see') }}</b-button>
 				</b-card>
 			</b-card-group>
 		</b-container>

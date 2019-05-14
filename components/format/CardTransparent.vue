@@ -1,7 +1,10 @@
 <template>
 	<div class="format-card-transparent py-5">
     <b-container>
-			<b-card class="card-transparent-content position-relative pt-4 px-5">
+			<b-card 
+				class="card-transparent-content"
+				no-body
+			>
 				<h1>{{ options.title }}</h1>
 				<b-card-text style="padding-bottom:4rem;">{{ options.abstract | substr }}</b-card-text>
 				<b-button
@@ -57,19 +60,41 @@ export default {
 </script>
 
 <style lang='less'>
-  .format-card-transparent {
-		min-height: 400px;
-		background: url('../../assets/images/bg2.jpg') center center;
+.format-card-transparent {
+	min-height: 400px;
+	background: url('../../assets/images/bg2.jpg') center center;
+
+	.card-transparent-content {
+		position: relative;
+		padding: 2rem 4rem 0rem 4rem;
+		min-height:300px;
+		color: #ffffff;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	.card-transparent-button {
+		position: absolute;
+		left: 4rem;
+		bottom: 2rem;
+		padding: 0.5rem 2.5rem;
+	}
+}
+@media screen and (max-width:576px) {
+	.format-card-transparent {
 		.card-transparent-content {
-			min-height:300px;
-			color: #ffffff;
-			background-color: rgba(0, 0, 0, 0.5);
+			padding: 2rem 2rem 0rem 2rem;
+
+			h1 {
+				text-align: center;
+			}
 		}
+
 		.card-transparent-button {
-			position: absolute;
-			left:4rem;
-			bottom:2rem;
-			padding: 0.5rem 3rem;
+			bottom: 0;
+			left: 0;
+			display: block;
+			width: 100%;
 		}
-  }
+	}
+}
 </style>

@@ -1,8 +1,8 @@
 <template>
 	<div>
     <b-carousel
-      id="carousel"
       v-model="slide"
+      class="format-carousel"
       :interval="3000"
       controls
       indicators
@@ -10,15 +10,13 @@
       @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd"
     >
-			<b-link>
-				<b-carousel-slide
-					v-for="(item,index) in options"
-					:key="index"
-					:img-src="item.image"
-					>
-					<h1>{{ item.text | substr }}</h1>
-				</b-carousel-slide>
-			</b-link>
+			<b-carousel-slide
+				v-for="(item, index) in options"
+				:key="index"
+				:style="`background-image:url(${ item.image });`"
+			>
+				<h1>{{ item.text | substr }}</h1>
+			</b-carousel-slide>
     </b-carousel>
   </div>
 </template>
@@ -28,17 +26,17 @@ import {getSubStr} from './mixin.js';
 
 export default {
 	name: 'format-carousel',
+	filters: {
+		substr(value) {
+			return getSubStr(value, 80, 30);
+		}
+	},
 	props: ['options'],
 	data() {
 		return {
 			slide: 0,
 			sliding: null,
 		};
-	},
-	filters: {
-		substr(value) {
-			return getSubStr(value, 80, 30);
-		}
 	},
 	methods: {
 		onSlideStart() {
@@ -47,28 +45,24 @@ export default {
 		onSlideEnd() {
 			this.sliding = false;
 		}
-	},
-	async asyncData(options) {
-		return options;
 	}
 };
 </script>
 
-<style lang="less" scoped>
-#carousel {
+<style lang="less">
+.format-carousel {
 	max-height: 400px;
 	overflow: hidden;
+
 	.carousel-item {
-		max-height: 400px;
-		overflow: hidden;
+		height: 400px;
+		background-repeat: no-repeat;
+		background-size: cover;
 	}
 }
-.img-fluid {
-  height: 0;
-}
-.carousel-item {
-	image {
-		max-height: 200px;
+@media screen and (max-width:576px) {
+	.format-carousel .carousel-item {
+		height: 200px;
 	}
 }
 </style>

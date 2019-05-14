@@ -109,7 +109,7 @@ export default {
 	}
 	
 	.card-text {
-		max-height: 60px;
+		max-height: 75px;
 		overflow-y: hidden;
 		font-size: 14px;
 	}
