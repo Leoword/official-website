@@ -3,7 +3,7 @@
     <b-container>
 			<b-card class="card-transparent-content position-relative pt-4 px-5">
 				<h1>{{ options.title }}</h1>
-				<b-card-text style="padding-bottom:4rem;">{{ options.abstract }}</b-card-text>
+				<b-card-text style="padding-bottom:4rem;">{{ options.abstract | substr }}</b-card-text>
 				<b-button
 					class="card-transparent-button"
 					variant="primary"
@@ -16,12 +16,18 @@
 </template>
 
 <script>
+import { getSubStr } from './mixin.js';
 import axios from '~/plugins/axios.js';
 
 export default {
 	name: 'format-card-transparent',
+	filters: {
+		substr(value) {
+			return getSubStr(value, 220, 75);
+		}
+	},
 	props: ['options'],
-	async asyncData(context, options) {
+	async asyncData(options) {
 		const { articleId, categoryId, keyword, lang } = options;
 
 		if (articleId) {
