@@ -14,7 +14,7 @@
 							style="height:60px;width:60px;"
 							/>
 						<b-card-text class="text-center pt-2">
-							{{ nav.title | substr }}
+							{{ nav.label | substr }}
 						</b-card-text>
 					</b-link>
 				</b-col>
