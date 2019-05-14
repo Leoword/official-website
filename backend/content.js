@@ -149,8 +149,8 @@ module.exports = {
 					}
 				});
 
-				for (let key in commits) {
-					result.push(commits[key]);
+				for (let key in langs) {
+					result.push(langs[key]);
 				}
 
 				return result;
