@@ -5,30 +5,35 @@
 			v-for="(section, index) in sectionList"
 			:key="index"
 			:options="section.options"
+			:render-data="section.data"
 			:class="section.classList"
-			>
-			</component>
+		/>
 	</div>
 </template>
 
 <script>
 import Vue from 'vue';
+import TestContent from '../components/format/Content';
 
 export default {
+	components: {
+		TestContent
+	},
 	async asyncData(context) {
 		const {title, body, meta} = context.route.meta[0];
 		const {params, query} = context.route;
-		const methodMapping = Vue.$components;
+		const formatRegistry = Vue.$format;
 		const sectionList = [];
 
 		for (let section of body) {
-			const {name, options, classList} = section;
-			const collection = await methodMapping[name](options ? options : {}, {
-				id: params.id
-			}, query, context);
-			
+			const { name, options = {}, classList } = section;
+			const asyncData = formatRegistry[name].asyncData;
+
 			sectionList.push({
-				name, classList, options: collection
+				name, classList, options,
+				data: asyncData && await asyncData(options, {
+					id: params.id
+				}, query, context)
 			});
 		}
 

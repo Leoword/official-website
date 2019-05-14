@@ -3,25 +3,23 @@
 		id="header" 
 		toggleable="md" 
 		style="z-index:2000"
-		>
+	>
 		<b-navbar-brand 
 			id="logo"
 			href="/" 
-			>
-			{{ $t('info.shortName') }}
-		</b-navbar-brand>
+		>{{ $t('info.shortName') }}</b-navbar-brand>
 
 		<b-navbar-toggle 
 			ref="collapseButton"
 			target="nav-collapse"
 			class="nav-collapsing"
-			></b-navbar-toggle>
+		></b-navbar-toggle>
 
 		<b-collapse 
 			id="nav-collapse" 
 			is-nav 
 			class="nav-collapsing"
-			>
+		>
 			<b-navbar-nav>
 				<span
 					v-for="(item, index) in options"
@@ -30,9 +28,7 @@
 					<b-nav-item 
 						v-if="!item.children"
 						:href="item.url"
-					>
-						{{ item.label }}
-					</b-nav-item>
+					>{{ item.label }}</b-nav-item>
 
 					<b-nav-item-dropdown
 						v-if="item.children"
@@ -43,9 +39,7 @@
 							v-for="(dropdownItem, dropdownId) in item.children"
 							:key="dropdownId" 
 							:href="dropdownItem.url"
-						>
-							{{ dropdownItem.label }}
-						</b-dropdown-item>
+						>{{ dropdownItem.label }}</b-dropdown-item>
 					</b-nav-item-dropdown>
 				</span>
 			</b-navbar-nav>
@@ -57,14 +51,12 @@
 						size="sm" 
 						class="mr-sm-2" 
 						placeholder="Search"
-						></b-form-input>
+					></b-form-input>
 					<b-button 
 						size="sm" 
 						class="my-2 my-sm-0" 
 						@click="jumpTo"
-						>
-						{{ $t('operate.search') }}
-					</b-button>
+					>{{ $t('operate.search') }}</b-button>
 				</b-nav-form>
 			</b-navbar-nav>
 		</b-collapse>
@@ -74,12 +66,12 @@
 <script>
 export default {
 	name: 'format-header',
+	props: ['options'],
 	data() {
 		return {
 			keyword: ''
 		};
 	},
-	props: ['options'],
 	methods: {
 		jumpTo() {
 			this.$router.push(
@@ -91,10 +83,6 @@ export default {
 				}
 			);
 		}
-	},
-	async asyncData(options) {
-		return options;
-
 	}
 };
 </script>
