@@ -18,6 +18,7 @@ content:
   more: '查看更多'
 
 fixed:
+  name: '推荐阅读'
   see: '去看看'
 
 article:

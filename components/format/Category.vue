@@ -3,11 +3,11 @@
     <b-card
       no-body
       class="format-class-link"
-      >
+    >
       <b-img 
         :src="options.image"
         fluid-grow 
-        />
+      />
     </b-card>
     <div class="format-class-label position-absolute fixed-bottom">
       <b-container>
@@ -17,14 +17,12 @@
             :key="index"
             :class="{active:indexActive === index,'class-label-tap': true}"
             @click="activeClass(index)"
-						>
+					>
             <b-link
               class="text-white"
               :to="nav.url"
-              >
-              <b-card-text class="text-center py-3">
-                {{ nav.label | substr }}
-              </b-card-text>
+            >
+              <b-card-text class="text-center py-3">{{ nav.label | substr }}</b-card-text>
             </b-link>
           </b-col>
         </b-row>
@@ -34,7 +32,7 @@
 </template>
 
 <script>
-import {getSubStr} from './mixin.js';
+import { getSubStr } from './mixin.js';
 
 export default {
 	name: 'format-category',
@@ -54,7 +52,7 @@ export default {
 			this.indexActive = index;
 		}
 	},
-	async asyncData(options) {
+	async getRenderData(options) {
 		const {image, navbar} = options;
 
 		return {

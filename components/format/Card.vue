@@ -4,29 +4,27 @@
 			<b-card-group 
 				deck
 				class="animated bounceInLeft"
-				>
+			>
 				<b-card 
 					v-for="(item, index) in options"
 					:key="index"
 					no-body
-					>
+				>
 					<b-link :to="`/article/${item.id}?lang=${item.lang}`">
 						<b-img
 							:src="item.thumbnail" 
 							fluid
-							/>
+						/>
 					</b-link>
-					<b-card-text class="px-3 py-2">
-						{{ item.abstract | substr }}
-					</b-card-text>
+					<b-card-text class="px-3 py-2">{{ item.abstract | substr }}</b-card-text>
 				</b-card>
 			</b-card-group>
-		</b-container>	
+		</b-container>
 	</div>
 </template>
 
 <script>
-import {getSubStr} from './mixin.js';
+import { getSubStr } from './mixin.js';
 import axios from '~/plugins/axios.js';
 
 export default {
@@ -37,7 +35,7 @@ export default {
 		}
 	},
 	props: ['options'],
-	async asyncData(options) {
+	async getRenderData(options) {
 		const { categoryId, limit, keyword, lang } = options;
 
 		const articleList = await axios.getArticleList({

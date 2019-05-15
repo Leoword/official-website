@@ -30,7 +30,7 @@ export default {
 		}
 	},
 	props: ['options'],
-	async asyncData(options) {
+	async getRenderData(options) {
 		const { articleId, categoryId, keyword, lang } = options;
 
 		if (articleId) {
@@ -90,10 +90,11 @@ export default {
 		}
 
 		.card-transparent-button {
-			bottom: 0;
-			left: 0;
+			bottom: 1rem;
+			left: 50%;
+			transform: translateX(-51%);
 			display: block;
-			width: 100%;
+			width: 80%;
 		}
 	}
 }

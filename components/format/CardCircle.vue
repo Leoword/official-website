@@ -3,13 +3,13 @@
 		<b-container class="pt-5 pb-4">
 			<b-row>
 				<b-col
-					v-for="(item,index) in options"
+					v-for="(item, index) in options"
 					:key="index"
 					ref="cardList"
 					class="text-center circle-card"
 					cols="6"
 					lg="3"
-					>
+				>
 					<b-link
 						class="rounded-circle"
 						:style="{
@@ -17,7 +17,7 @@
 							height: `${radius}px`
 						}"
 						:to="`/article/${item.id}?lang=${item.lang}`"
-						>
+					>
 						<b-img 
 							class="rounded-circle"
 							:src="item.thumbnail"
@@ -26,11 +26,9 @@
 								height: `${radius}px`
 							}"
 							fluid 
-							/>
+						/>
 					</b-link>
-					<b-card-text class="text-center pt-2">
-						{{ item.abstract | substr }}
-					</b-card-text>
+					<b-card-text class="text-center pt-2">{{ item.abstract | substr }}</b-card-text>
 				</b-col>
 			</b-row>
 		</b-container>	
@@ -38,7 +36,7 @@
 </template>
 
 <script>
-import {getSubStr} from './mixin.js';
+import { getSubStr } from './mixin.js';
 import axios from '~/plugins/axios.js';
 
 export default {
@@ -72,7 +70,7 @@ export default {
 			}
 		}
 	},
-	async asyncData(options) {
+	async getRenderData(options) {
 		const { categoryId, limit, keyword, lang } = options;
 
 		const articleList = await axios.getArticleList({

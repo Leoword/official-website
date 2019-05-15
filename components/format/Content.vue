@@ -3,30 +3,26 @@
     <b-container>
 			<b-row>
 				<b-col
-				cols="4"
-				class="d-none d-md-block"
+					cols="4"
+					class="d-none d-md-block"
 				>
 					<img
 						:src="options.thumbnail"
 						fluid
 						style="width: 100%;max-height: 300px"
-						/>
+					/>
 				</b-col>
 				<b-col>
 					<p
 						class="border-0"
 						style="color:#999;"
-						>
-						{{ options.abstract | substr }}
-					</p>
+					>{{ options.abstract | substr }}</p>
 					<b-button
 						variant="outline-info"
 						block
 						:to="`/article/${options.id}?lang=${options.lang}`"
 						class="position-absolute fixed-bottom"
-						>
-						{{ $t('content.more') }}
-					</b-button>
+					>{{ $t('content.more') }}</b-button>
 				</b-col>
 			</b-row>
     </b-container>
@@ -34,7 +30,7 @@
 </template>
 
 <script>
-import {getSubStr} from './mixin.js';
+import { getSubStr } from './mixin.js';
 import axios from '~/plugins/axios.js';
 import { request } from 'http';
 
@@ -50,7 +46,7 @@ export default {
 		return {
 		};
 	},
-	async asyncData(options) {
+	async getRenderData(options) {
 		const { articleId, categoryId, keyword, lang } = options;
 
 		if (articleId) {

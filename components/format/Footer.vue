@@ -6,11 +6,11 @@
 		<div id="info">
 			<div id="logo"><img src="~/assets/images/logo.png" /></div>
 			<p id="name">{{ $t('info.name') }}</p>
-			<p>{{ $t('info.address.label') }}:&nbsp;{{ $t('info.address.value') }}</p>
-			<p>{{ $t('info.Tel') }}: 022-27956116</p>
-			<p>{{ $t('info.email') }}: lemonce@or-change.cn</p>
+			<p>{{ $t('info.address.label') }}:&nbsp;{{ options.address }}</p>
+			<p>{{ $t('info.Tel') }}:&nbsp;{{ options.tel }}</p>
+			<p>{{ $t('info.email') }}:&nbsp;{{ options.email }}</p>
 		</div>
-		<p>Copyright © {{ options.start }} - {{ year }} {{ $t('info.name') }}</p>
+		<p>Copyright&nbsp;©&nbsp;{{ options.start }}&nbsp;-&nbsp;{{ year }}&nbsp;{{ $t('info.name') }}</p>
   </div>
 </template>
 

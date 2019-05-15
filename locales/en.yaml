@@ -18,6 +18,7 @@ content:
   more: 'More'
 
 fixed:
+  name: 'Recommend'
   see: 'To See'
 
 article:

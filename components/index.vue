@@ -27,7 +27,7 @@ export default {
 
 		for (let section of body) {
 			const { name, options = {}, classList } = section;
-			const asyncData = formatRegistry[name].asyncData;
+			const asyncData = formatRegistry[name].getRenderData;
 
 			sectionList.push({
 				name, classList, options,
@@ -62,7 +62,11 @@ export default {
 
 		if (this.$language[lang]) {
 			this.$i18n.locale = lang;
+
+			return;
 		}
+
+		this.$i18n.locale = 'zh-CN';
 	}
 };
 </script>

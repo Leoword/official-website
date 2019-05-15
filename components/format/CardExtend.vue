@@ -3,35 +3,29 @@
 	<b-container>
 		<b-card-group
 			deck
-			>
+		>
 			<b-card
-				v-for="(item,index) in options"
+				v-for="(item, index) in options"
 				:key="index"
 				no-body
 				class="rounded-0 position-relative my-4"
 				style="min-height:240px;"
-				>
-				<h4 class="text-center px-2 pt-3">
-					{{ item.title }}
-				</h4>
+			>
+				<h4 class="text-center px-2 pt-3">{{ item.title }}</h4>
 				<i
 					class="fas fa-quote-left pl-3 pb-3"
 					style="color:#007BFF;font-size:1.3em;"
-					></i>
+				/>
 				<b-card-text
 					class="px-3 pb-4"
 					style="color:#999;"
-					>
-					{{ item.abstract | substr }}
-				</b-card-text>
+				>{{ item.abstract | substr }}</b-card-text>
 				<b-button
 					variant="primary"
 					class="position-absolute w-50 rounded-0 ml-4 card-extend-button"
 					style="bottom:-20px"
 					:to="`/article/${item.id}?lang=${item.lang}`"
-					>
-					{{ $t('cardExtend.link') }}
-				</b-button>
+				>{{ $t('cardExtend.link') }}</b-button>
 			</b-card>
 		</b-card-group>
 	</b-container>
@@ -39,7 +33,7 @@
 </template>
 
 <script>
-import {getSubStr} from './mixin.js';
+import { getSubStr } from './mixin.js';
 import axios from '~/plugins/axios.js';
 
 export default {
@@ -55,7 +49,7 @@ export default {
 			
 		};
 	},
-	async asyncData(options) {
+	async getRenderData(options) {
 		const { categoryId, limit, keyword, lang } = options;
 
 		const articleList = await axios.getArticleList({

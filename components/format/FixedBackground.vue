@@ -24,7 +24,7 @@
 						<i
 							class="fas fa-quote-left pr-1"
 							style="font-size:1.5em;"
-						></i>
+						/>
 						{{ item.abstract }}
 					</b-card-text>
 						<h4
@@ -48,7 +48,7 @@ import axios from '~/plugins/axios.js';
 export default {
 	name: 'format-fixed-background',
 	props: ['options'],
-	async asyncData(options) {
+	async getRenderData(options) {
 		const { articleId, categoryId, limit, keyword, lang } = options;
 
 		if (articleId) {

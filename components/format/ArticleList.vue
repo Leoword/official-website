@@ -4,25 +4,23 @@
 			<b-row>
 				<b-col class="pt-3">
 					<b-card
-						v-for="(article,index) in options.articleList"
+						v-for="(article, index) in options.articleList"
 						id="list"
 						:key="index"
 						class="border-0"
-						>
+					>
 						<h4 :title="article.title">
 							<b-link
 								:to="`/article/${article.id}?lang=${article.lang}`"
-								>
-								{{ article.title }}
-							</b-link>
+							>{{ article.title }}</b-link>
 						</h4>
 						<b-card-text 
 							class="list-summary" 
-							>
+						>
 							<small>{{ article.abstract | substr }}</small>
 						</b-card-text>
 						<b-card-text style="color:#999;">
-							<small> {{ $t('article.by') }} {{ article.author }} {{ $t('article.published') }} {{ article.createdAt }}</small>
+							<small>{{ $t('article.by') }}&nbsp;{{ article.author }}&nbsp;{{ $t('article.published') }}&nbsp;{{ article.createdAt }}</small>
 						</b-card-text>
 					</b-card>
 				</b-col>
@@ -31,28 +29,26 @@
 					v-if="options.recommend.length !== 0"
 					cols="3"
 					class="d-none d-md-block pt-5"
-					>
+				>
 					<b-card
 						class="rounded-0"
 						body-class="pb-0"
-						>
-						<h5 class="mb-4">
-							{{ $t('article.recommend') }}
-						</h5>
+					>
+						<h5 class="mb-4">{{ $t('article.recommend') }}</h5>
 						<b-card
-							v-for="(item,index) in options.recommend"
+							v-for="(item, index) in options.recommend"
 							:key="index"
 							no-body
 							class="border-0 pb-4"
-							>
+						>
 							<b-link 
 								target="_blank"
 								:to="`/article/${item.id}?lang=${item.lang}`"
-								>
+							>
 								<b-img
 									:src="item.thumbnail"
 									fluid
-									/>
+								/>
 							</b-link>
 							<b-card-text class="text-center mt-3">
 								<small>{{ item.title }}</small>
@@ -75,7 +71,7 @@
 </template>
 
 <script>
-import {getSubStr} from './mixin.js';
+import { getSubStr } from './mixin.js';
 import axios from '~/plugins/axios.js';
 
 export default {
@@ -121,7 +117,7 @@ export default {
 			},10);
 		}
 	},
-	async asyncData(options, {
+	async getRenderData(options, {
 		id
 	}, {
 		keyword

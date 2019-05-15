@@ -3,7 +3,7 @@
 		<b-container class="py-4">
 			<b-row>
 				<b-col
-					v-for="(nav,index) in options"
+					v-for="(nav, index) in options"
 					:key="index"
 					class="text-center nav-img-ele"
 				>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {getSubStr} from './mixin.js';
+import { getSubStr } from './mixin.js';
 
 export default {
 	name: 'format-category-card',

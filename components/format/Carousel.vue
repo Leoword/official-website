@@ -13,7 +13,7 @@
 			<b-carousel-slide
 				v-for="(item, index) in options"
 				:key="index"
-				:style="`background-image:url(${ item.image });`"
+				:style="`background-image:url(${item.image});`"
 			>
 				<h1>{{ item.text | substr }}</h1>
 			</b-carousel-slide>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {getSubStr} from './mixin.js';
+import { getSubStr } from './mixin.js';
 
 export default {
 	name: 'format-carousel',
