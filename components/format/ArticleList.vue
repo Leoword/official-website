@@ -4,7 +4,7 @@
 			<b-row>
 				<b-col class="pt-3">
 					<b-card
-						v-for="(article, index) in options.articleList"
+						v-for="(article, index) in articleList"
 						id="list"
 						:key="index"
 						class="border-0"
@@ -26,7 +26,7 @@
 				</b-col>
 				<!-- 推荐阅读 -->
 				<b-col
-					v-if="options.recommend.length !== 0"
+					v-if="renderData.recommend.length !== 0"
 					cols="3"
 					class="d-none d-md-block pt-5"
 				>
@@ -36,7 +36,7 @@
 					>
 						<h5 class="mb-4">{{ $t('article.recommend') }}</h5>
 						<b-card
-							v-for="(item, index) in options.recommend"
+							v-for="(item, index) in renderData.recommend"
 							:key="index"
 							no-body
 							class="border-0 pb-4"
@@ -89,7 +89,7 @@ export default {
 			heading: '',
 			perPage: 8,
 			currentPage: 1,
-			data: this.options
+			data: this.renderData.articleList
 		};
 	},
 	computed: {
@@ -117,7 +117,7 @@ export default {
 			},10);
 		}
 	},
-	async getRenderData(options, {
+	async renderData(options, {
 		id
 	}, {
 		keyword

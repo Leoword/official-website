@@ -48,7 +48,7 @@ import axios from '~/plugins/axios.js';
 export default {
 	name: 'format-fixed-background',
 	props: ['options'],
-	async getRenderData(options) {
+	async renderData(options) {
 		const { articleId, categoryId, limit, keyword, lang } = options;
 
 		if (articleId) {

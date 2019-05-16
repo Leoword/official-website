@@ -70,7 +70,7 @@ export default {
 			}
 		}
 	},
-	async getRenderData(options) {
+	async renderData(options) {
 		const { categoryId, limit, keyword, lang } = options;
 
 		const articleList = await axios.getArticleList({

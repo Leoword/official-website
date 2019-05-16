@@ -81,7 +81,7 @@ export default {
 			return md.render(content);
 		}
 	},
-	async getRenderData(options, {
+	async renderData(options, {
 		id
 	}, { lang }) {
 		const articleId = id ? id : options.articleId;

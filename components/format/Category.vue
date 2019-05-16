@@ -52,7 +52,7 @@ export default {
 			this.indexActive = index;
 		}
 	},
-	async getRenderData(options) {
+	async renderData(options) {
 		const {image, navbar} = options;
 
 		return {

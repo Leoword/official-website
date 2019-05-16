@@ -25,7 +25,7 @@
 export default {
 	name: 'format-category-card',
 	props: ['options'],
-	async getRenderData(options, { id }, query, context) {
+	async renderData(options, { id }, query, context) {
 		return options[context.params.lang || 'zh-CN'];
 	}
 };

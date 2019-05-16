@@ -23,11 +23,11 @@ export default {
 
 		for (let format of body) {
 			const { name, options = {}, classList } = format;
-			const getRenderData = formatRegistry[name].getRenderData;
+			const renderData = formatRegistry[name].renderData;
 
 			formatList.push({
 				name, classList, options,
-				data: getRenderData && await getRenderData(options, {
+				data: renderData && await renderData(options, {
 					id: params.id
 				}, query, context)
 			});

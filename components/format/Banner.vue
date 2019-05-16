@@ -20,7 +20,7 @@ export default {
 		return {
 		};
 	},
-	async getRenderData(options) {
+	async renderData(options) {
 		return {
 			image: options.image,
 			text: options.text

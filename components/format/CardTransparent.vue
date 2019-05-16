@@ -30,7 +30,7 @@ export default {
 		}
 	},
 	props: ['options'],
-	async getRenderData(options) {
+	async renderData(options) {
 		const { articleId, categoryId, keyword, lang } = options;
 
 		if (articleId) {
