@@ -1,37 +1,33 @@
 <template>
 	<div id="app">
 		<component
-			:is="section.name"
-			v-for="(section, index) in sectionList"
+			:is="format.name"
+			v-for="(format, index) in formatList"
 			:key="index"
-			:options="section.options"
-			:render-data="section.data"
-			:class="section.classList"
+			:options="format.options"
+			:render-data="format.data"
+			:class="format.classList"
 		/>
 	</div>
 </template>
 
 <script>
 import Vue from 'vue';
-import TestContent from '../components/format/Content';
 
 export default {
-	components: {
-		TestContent
-	},
 	async asyncData(context) {
 		const {title, body, meta} = context.route.meta[0];
 		const {params, query} = context.route;
 		const formatRegistry = Vue.$format;
-		const sectionList = [];
+		const formatList = [];
 
-		for (let section of body) {
-			const { name, options = {}, classList } = section;
-			const asyncData = formatRegistry[name].getRenderData;
+		for (let format of body) {
+			const { name, options = {}, classList } = format;
+			const getRenderData = formatRegistry[name].getRenderData;
 
-			sectionList.push({
+			formatList.push({
 				name, classList, options,
-				data: asyncData && await asyncData(options, {
+				data: getRenderData && await getRenderData(options, {
 					id: params.id
 				}, query, context)
 			});
@@ -41,7 +37,7 @@ export default {
 			head: {
 				title, meta
 			},
-			sectionList
+			formatList
 		};
 	},
 	head() {

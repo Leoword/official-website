@@ -3,7 +3,7 @@
 		<b-container class="py-4">
 			<b-row>
 				<b-col
-					v-for="(nav, index) in options"
+					v-for="(nav, index) in renderData"
 					:key="index"
 					class="text-center nav-img-ele"
 				>
@@ -13,7 +13,7 @@
 							:src="nav.image" 
 							style="height:60px;width:60px;"
 						/>
-						<b-card-text class="text-center pt-2">{{ nav.label | substr }}</b-card-text>
+						<b-card-text class="text-center pt-2">{{ nav.label }}</b-card-text>
 					</b-link>
 				</b-col>
 			</b-row>
@@ -22,19 +22,11 @@
 </template>
 
 <script>
-import { getSubStr } from './mixin.js';
-
 export default {
 	name: 'format-category-card',
-	filters: {
-		substr(value) {
-			return getSubStr(value, 5, 3);
-		}
-	},
 	props: ['options'],
-	data() {
-		return {
-		};
+	async getRenderData(options, { id }, query, context) {
+		return options[context.params.lang || 'zh-CN'];
 	}
 };
 </script>

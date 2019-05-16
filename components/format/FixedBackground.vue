@@ -63,7 +63,7 @@ export default {
 
 		const articleList = await axios.getArticleList({
 			categoryId,
-			limit: limit ? limit : 1,
+			limit: limit ? limit : 2,
 			keyword, lang
 		});
 

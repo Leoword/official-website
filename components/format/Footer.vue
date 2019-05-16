@@ -6,11 +6,11 @@
 		<div id="info">
 			<div id="logo"><img src="~/assets/images/logo.png" /></div>
 			<p id="name">{{ $t('info.name') }}</p>
-			<p>{{ $t('info.address.label') }}:&nbsp;{{ options.address }}</p>
-			<p>{{ $t('info.Tel') }}:&nbsp;{{ options.tel }}</p>
-			<p>{{ $t('info.email') }}:&nbsp;{{ options.email }}</p>
+			<p>{{ $t('info.address') }}:&nbsp;{{ renderData.address }}</p>
+			<p>{{ $t('info.Tel') }}:&nbsp;{{ renderData.tel }}</p>
+			<p>{{ $t('info.email') }}:&nbsp;{{ renderData.email }}</p>
 		</div>
-		<p>Copyright&nbsp;©&nbsp;{{ options.start }}&nbsp;-&nbsp;{{ year }}&nbsp;{{ $t('info.name') }}</p>
+		<p>Copyright&nbsp;©&nbsp;{{ renderData.start }}&nbsp;-&nbsp;{{ year }}&nbsp;{{ $t('info.name') }}</p>
   </div>
 </template>
 
@@ -22,6 +22,9 @@ export default {
 		year() {
 			return new Date().getFullYear();
 		}
+	},
+	async getRenderData(options, { id }, query, context) {
+		return options[context.params.lang || 'zh-CN'];
 	}
 };
 </script>

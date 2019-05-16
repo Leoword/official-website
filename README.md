@@ -50,7 +50,20 @@
 ## format-footer
 
 ```
-no config
+{
+	"zh-CN": {
+		"start": 2014,
+		"tel": "022-27956116",
+		"email": "lemonce@or-change.cn",
+		"address": "天津市西青区李七庄街凌奥创意产业园一期7号楼一层101室"
+	},
+	"en": {
+		"start": 2014,
+		"tel": "022-27956116",
+		"email": "lemonce@or-change.cn",
+		"address": "Room 101, Building 7, Li Qi Zhuang Street Lingao Creative Industry Park,Tianjin"
+	}
+}
 ```
 
 ## format-banner
@@ -170,13 +183,22 @@ no config
 
 ## format-category-card
 ```
-[
-	{
-		label: '',
-		url: '',
-		image: '
-	}
-]
+{
+	"zh-CN": [
+		{
+			label: '你好',
+			url: '',
+			image: ''
+		}
+	],
+	"en": [
+		{
+			label: 'hello',
+			url: '',
+			image: ''
+		}
+	]
+}
 ```
 
 ## format-content
