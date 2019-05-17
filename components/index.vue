@@ -13,13 +13,44 @@
 
 <script>
 import Vue from 'vue';
+import axios from 'axios';
+import config from '../config.json';
+import { Promise } from 'q';
+const prefix = `${config.websiteURL}/api`;
 
 export default {
 	async asyncData(context) {
 		const {title, body, meta} = context.route.meta[0];
-		const {params, query} = context.route;
 		const formatRegistry = Vue.$format;
 		const formatList = [];
+
+		// 由 articleId 获取指定文章
+		async function getArticle(articleId, lang) {
+			const promises = articleId.map((id) => {
+				return axios.get(`${prefix}/article/${id}`, {
+					params: {
+						lang: lang
+					}
+				});
+			});
+
+			return Promise.all(promises).then((res) => {
+				return res.map((ele) => {
+					return ele.data;
+				});
+			});
+		}
+
+		// 由 categoryId 获取一类文章
+		async function getArticleList({ categoryId, keyword, limit, lang }) {
+			const res = await axios.get(`${prefix}/article`, {
+				params: {
+					categoryId, keyword, limit, lang
+				}
+			});
+
+			return res.data;
+		}
 
 		for (let format of body) {
 			const { name, options = {}, classList } = format;
@@ -27,9 +58,7 @@ export default {
 
 			formatList.push({
 				name, classList, options,
-				data: renderData && await renderData(options, {
-					id: params.id
-				}, query, context)
+				data: renderData && await renderData(options, context, getArticle, getArticleList)
 			});
 		}
 

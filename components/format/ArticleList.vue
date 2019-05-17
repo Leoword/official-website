@@ -72,7 +72,6 @@
 
 <script>
 import { getSubStr } from './mixin.js';
-import axios from '~/plugins/axios.js';
 
 export default {
 	name: 'format-article-list',
@@ -117,41 +116,36 @@ export default {
 			},10);
 		}
 	},
-	async renderData(options, {
-		id
-	}, {
-		keyword
-	}) {
+	async renderData(options, context, getArticle, getArticleList) {
 		let articleList = [];
 		let recommend = [];
 
-		articleList = await axios.getArticleList({});
-
-		if (id) {
-			articleList = await axios.getArticleList({
-				categoryId: id
-			});
-		}
-
-		if (keyword) {
-			articleList = await axios.getArticleList({
-				keyword
-			});
-		}
+		articleList = await getArticleList({});
 
 		if (options.articleList) {
-			const { categoryId, limit, keyword, lang } = options.articleList;
+			const { categoryId, limit, keyword } = options.articleList;
 
-			articleList = await axios.getArticleList({
-				categoryId: id ? id : categoryId,
-				limit, keyword, lang
+			articleList = await getArticleList({
+				categoryId: context.params.id ? context.params.id : categoryId,
+				limit, 
+				keyword, 
+				lang: context.params.lang
 			});
 		}
 
 		if (options.recommend) {
-			const { categoryId, limit, keyword, lang } = options.recommend;
+			const { articleId,categoryId, limit, keyword } = options.recommend;
 
-			recommend = await axios.getArticleList({categoryId, limit, keyword, lang});
+			if (articleId) {
+				recommend = await getArticle(articleId, context.params.lang);
+			} else {
+				recommend = await getArticleList({
+					categoryId, 
+					limit: limit ? limit : 4, 
+					keyword, 
+					lang: context.params.lang
+				});
+			}
 		}
 
 		return {

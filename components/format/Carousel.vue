@@ -11,7 +11,7 @@
       @sliding-end="onSlideEnd"
     >
 			<b-carousel-slide
-				v-for="(item, index) in options"
+				v-for="(item, index) in renderData"
 				:key="index"
 				:style="`background-image:url(${item.image});`"
 			>
@@ -45,6 +45,9 @@ export default {
 		onSlideEnd() {
 			this.sliding = false;
 		}
+	},
+	async renderData(options, context) {
+		return options[context.params.lang || 'zh-CN'];
 	}
 };
 </script>

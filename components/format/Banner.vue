@@ -1,12 +1,12 @@
 <template>
 	<div class="format-banner">
 		<b-img 
-			:src="options.image"
+			:src="renderData.image"
 			fluid-grow 
 		/>
 		<div class="cover"></div>
 		<div class="banner-text">
-			<h2>{{ options.text }}</h2>
+			<h2>{{ renderData.text }}</h2>
 		</div>
 	</div>
 </template>
@@ -16,15 +16,8 @@
 export default {
 	name: 'format-banner',
 	props: ['options'],
-	data() {
-		return {
-		};
-	},
-	async renderData(options) {
-		return {
-			image: options.image,
-			text: options.text
-		};
+	async renderData(options, context) {
+		return options[context.params.lang || 'zh-CN'];
 	}
 };
 </script>

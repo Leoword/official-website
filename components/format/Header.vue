@@ -22,7 +22,7 @@
 		>
 			<b-navbar-nav>
 				<span
-					v-for="(item, index) in options"
+					v-for="(item, index) in renderData"
 					:key="index"
 				>
 					<b-nav-item 
@@ -83,6 +83,9 @@ export default {
 				}
 			);
 		}
+	},
+	async renderData(options, context) {
+		return options[context.params.lang || 'zh-CN'];
 	}
 };
 </script>

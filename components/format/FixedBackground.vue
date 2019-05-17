@@ -11,7 +11,7 @@
 			<div class="fixed-background-line"></div>
 			<b-card-group>
 				<b-card
-					v-for="(item, index) in options"
+					v-for="(item, index) in renderData"
 					:key="index"
 					class="mx-4 rounded position-relative"
 					style="min-height:250px;"
@@ -43,28 +43,21 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios.js';
-
 export default {
 	name: 'format-fixed-background',
 	props: ['options'],
-	async renderData(options) {
-		const { articleId, categoryId, limit, keyword, lang } = options;
+	async renderData(options, context, getArticle, getArticleList) {
+		const { articleId, categoryId, limit, keyword } = options;
 
 		if (articleId) {
-			const article = await axios.getArticle(articleId, options.lang);
-
-			return {
-				id: article,
-				thumbnail: article.thumbnail,
-				abstract: article.abstract
-			};
+			return await getArticle(articleId, context.params.lang);
 		}
 
-		const articleList = await axios.getArticleList({
+		const articleList = await getArticleList({
 			categoryId,
 			limit: limit ? limit : 2,
-			keyword, lang
+			keyword, 
+			lang: context.params.lang
 		});
 
 		return articleList;

@@ -4,9 +4,9 @@
       <div 
         class="pb-3"
 				>
-        <b-link to="/article">{{ $t('article.list') }}</b-link>
+        <b-link to="/category">{{ $t('article.list') }}</b-link>
         <i class="fas fa-angle-right px-2"></i>
-        <small style="color:#999">{{ options.article.title }}</small>
+        <small style="color:#999">{{ renderData.article[0].title }}</small>
       </div>
 			<b-row>
         <!-- 文章内容 -->
@@ -17,20 +17,20 @@
 					<h3 
             class="p-3"
             style="font-weight:bold;"
-					>{{ options.article.title }}</h3>
+					>{{ renderData.article[0].title }}</h3>
 					<b-card-text 
             class="pl-3 pb-3"
             style="color:#999;"
-					>{{ $t('article.by') }}&nbsp;{{ options.article.author }}&nbsp;{{ $t('article.published') }}&nbsp;{{ options.article.createdAt }}</b-card-text>
+					>{{ $t('article.by') }}&nbsp;{{ renderData.article[0].author }}&nbsp;{{ $t('article.published') }}&nbsp;{{ renderData.article[0].createdAt }}</b-card-text>
 					<b-card 
 						class="border-0 p-3"
-						v-html="render(options.article.text)"
+						v-html="render(renderData.article[0].text)"
 					></b-card>
         </b-col>
 
         <!-- 推荐阅读 -->
         <b-col 
-					v-if="options.recommend.length !== 0"
+					v-if="renderData.recommend.length !== 0"
           cols="3"
           class="d-none d-md-block"
 				>
@@ -40,7 +40,7 @@
 					>
             <h5 class="mb-4">{{ $t('article.recommend') }}</h5>
             <b-card
-              v-for="(item, index) in options.recommend"
+              v-for="(item, index) in renderData.recommend"
               :key="index"
               no-body
               class="border-0 pb-4"
@@ -66,7 +66,6 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios.js';
 import Markdown from 'markdown-it';
 
 const md = new Markdown();
@@ -81,17 +80,26 @@ export default {
 			return md.render(content);
 		}
 	},
-	async renderData(options, {
-		id
-	}, { lang }) {
-		const articleId = id ? id : options.articleId;
-		const article = await axios.getArticle(articleId, lang ? lang : options.lang);
+	async renderData(options, context, getArticle, getArticleList) {
+		const articleId = context.params.id ? context.params.id : options.articleId;
+		const lang = context.query.lang ? context.query.lang : context.params.lang;
+
+		const article = await getArticle([articleId], lang);
 		let recommend = [];
 
 		if (options.recommend) {
-			const { categoryId, limit, keyword, lang } = options.recommend;
+			const { articleId,categoryId, limit, keyword } = options.recommend;
 
-			recommend = await axios.getArticleList({categoryId, limit, keyword, lang});
+			if (articleId) {
+				recommend = await getArticle(articleId, context.params.lang);
+			} else {
+				recommend = await getArticleList({
+					categoryId, 
+					limit: limit ? limit : 4, 
+					keyword, 
+					lang: context.params.lang
+				});
+			}
 		}
 
 		return {

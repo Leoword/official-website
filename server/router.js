@@ -57,6 +57,11 @@ router.get('/article', async (ctx) => {
 		const langList = await content.langs({limit, lang, keyword});
 		result.push(...langList);
 	}
+	
+	if (limit) {
+		ctx.body = result.slice(0, limit);
+	} else {
+		ctx.body = result;
+	}
 
-	ctx.body = result;
 });

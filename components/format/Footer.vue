@@ -23,7 +23,7 @@ export default {
 			return new Date().getFullYear();
 		}
 	},
-	async renderData(options, { id }, query, context) {
+	async renderData(options, context) {
 		return options[context.params.lang || 'zh-CN'];
 	}
 };

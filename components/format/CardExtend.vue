@@ -5,7 +5,7 @@
 			deck
 		>
 			<b-card
-				v-for="(item, index) in options"
+				v-for="(item, index) in renderData"
 				:key="index"
 				no-body
 				class="rounded-0 position-relative my-4"
@@ -34,7 +34,6 @@
 
 <script>
 import { getSubStr } from './mixin.js';
-import axios from '~/plugins/axios.js';
 
 export default {
 	name: 'format-card-extend',
@@ -49,13 +48,17 @@ export default {
 			
 		};
 	},
-	async renderData(options) {
-		const { categoryId, limit, keyword, lang } = options;
+	async renderData(options, context, getArticle, getArticleList) {
+		const { articleId, categoryId, limit } = options;
 
-		const articleList = await axios.getArticleList({
+		if (articleId) {
+			return await getArticle(articleId, context.params.lang);
+		}
+
+		const articleList = await getArticleList({
 			categoryId,
 			limit: limit ? limit : 4,
-			keyword, lang
+			lang: context.params.lang
 		});
 
 		return articleList;

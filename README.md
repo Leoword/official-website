@@ -2,20 +2,20 @@
 
 ```
 {
-	name: 'page name', (required)
-	title: 'page title',
-	meta: [
+	"name": "page name", (required)
+	"title": "page title",
+	"meta": [
 		// page meta information
 	],
-	router: '/index', (required)
-	body: [
+	"router": "/index", (required)
+	"body": [
 		//format config
 		{
-			name: 'format name', (required)
-			options: {
+			"name": "format name", (required)
+			"options": {
 				// format config (required)
 			},
-			classList: [] //for format
+			"classList": [] //for format
 		}
 	]
 }
@@ -26,25 +26,47 @@
 ## format-header
 
 ```
-[
-	{
-		url: 'http://xxxx.com',
-		label: 'label1'
-	},
-	{
-		label: 'label2',
-		children: [
-			{
-				url: 'http://xxxx.com',
-				label: 'label3'
-			},
-			{
-				url: 'http://xxxx.com',
-				label: 'label4'
-			}
-		]
-	}
-]
+{
+    "zh-CN":[
+    	// 点击 link
+        {
+            "url": "http://xxxx.com",
+            "label": "标签1"
+        },
+        // 点击 dropdown
+        {
+            "label": "标签2",
+            "children": [
+                {
+                    "url": "http://xxxx.com",
+                    "label": "标签3"
+                },
+                {
+                    ...
+                }
+            ]
+        }
+    ],
+    "en": [
+        {
+            "url": "http://xxxx.com",
+            "label": "label1"
+        },
+        {
+            "label": "label2",
+            "children": [
+                {
+                    "url": "http://xxxx.com",
+                    "label": "label3"
+                },
+                {
+                    ...
+                }
+            ]
+        }
+    ]
+}
+
 ```
 
 ## format-footer
@@ -52,16 +74,16 @@
 ```
 {
 	"zh-CN": {
-		"start": 2014,
-		"tel": "022-27956116",
-		"email": "lemonce@or-change.cn",
-		"address": "天津市西青区李七庄街凌奥创意产业园一期7号楼一层101室"
+		"start": Company registration time,
+		"tel": phone number,
+		"email": email,
+		"address": Company address
 	},
 	"en": {
-		"start": 2014,
-		"tel": "022-27956116",
-		"email": "lemonce@or-change.cn",
-		"address": "Room 101, Building 7, Li Qi Zhuang Street Lingao Creative Industry Park,Tianjin"
+		"start": Company registration time,
+		"tel": phone number,
+		"email": email,
+		"address": Company address
 	}
 }
 ```
@@ -70,41 +92,55 @@
 
 ```
 {
-	image: 'http://xxxx',
-	text: 'test'
+	"zh-CN": {
+        "image": "http://xxxx",
+		"text": "测试"
+	},
+	"en": {
+        "image": "http://xxxx",
+		"text": "test"
+	}
 }
 ```
 
 ## format-carousel
 
 ```
-[
-	{
-		image: 'http://xxxx',
-		text: 'test'
-	},
-	{
-		image: 'http://xxxx',
-		text: 'test'
-	},
-	{
-		image: 'http://xxxx',
-		text: 'test'
-	}
-]
+{
+	"zh-CN": [
+        {
+            "image": "http://xxxx",
+            "text": "测试"
+        },
+        {
+            ...
+        }
+	],
+	"en": [
+        {
+            "image": "http://xxxx",
+            "text": "test"
+        },
+        {
+            ...
+        }
+	]
+}
 ```
 
 ## format-article
 
 ```
 {
-	articleId: the id of article,
-	lang: the lang of article,
-	recommend: {
-		categoryId: the id of category,
-		limit: the limit of article length,
-		keyword: keyword of title or abstract,
-		lang: the lang of article
+	"articleId": [the id of article],
+	"recommend": {
+		"categoryId": the id of category,
+		"limit": the limit of article length,
+		"keyword": keyword of title or abstract
+	} 
+	OR 
+	{
+		"articleId": the id of article, id...
 	}
 }
 ```
@@ -114,16 +150,18 @@
 ```
 {
 	articleList: {
-		categoryId: the id of category,
-		limit: the length fo article,
-		keyword: the keyword to find article,
-		lang: the lang of article
+		"categoryId": the id of category,
+		"limit": the limit of article length,
+		"keyword": keyword of title or abstract,
 	},
 	recommend: {
-		categoryId: the id of category,
-		limit: the length fo article,
-		keyword: the keyword to find article,
-		lang: the lang of article
+		"categoryId": the id of category,
+		"limit": the limit of article length,
+		"keyword": keyword of title or abstract
+	} 
+	OR 
+	{
+		"articleId": [the id of article, id...]
 	}
 }
 ```
@@ -131,51 +169,69 @@
 ## format-card
 ```
 {
-	categoryId: the id of category,
-	limit: the length of article list,
-	keyword: search article list,
-	lang: the lang of article
+	"categoryId": the id of category,
+	"limit": the length of article list,
+	"keyword": search article list,
+}
+OR
+{
+	"articleId": [the id of article, id, id, id],
 }
 ```
 
 ## format-card-circle
 ```
 {
-	categoryId: the id of category,
-	limit: the length of article list,
-	keyword: search article list,
-	lang: the lang of article
+	"categoryId": the id of category,
+	"limit": the length of article list,
+	"keyword": search article list,
+}
+OR
+{
+	"articleId": [the id of article, id, id, id],
 }
 ```
 
 ## format-card-extend
 ```
 {
-	categoryId: the id of category,
-	limit: the length of article list,
-	keyword: search article list,
-	lang: the lang of article
+	"categoryId": the id of category,
+	"limit": the length of article list,
+	"keyword": search article list,
+}
+OR
+{
+	"articleId": [the id of article, id, id, id],
 }
 ```
 
 ## format-card-transparent
 ```
 {
-	articleId: the id of article,
-	categoryId: the id of category,
-	keyword: search article list,
-	lang: the lang of article
+	"articleId": [the id of article]
 }
 ```
 
 ## format-category
 ```
 {
-	image: background-image,
-	navbar: [
+	"image": background-image,
+	"zh-CN": [
+        {
+            "label": "类别1",
+            "url": ""
+        },
+        {
+            ...
+        }
+	],
+	"en": [
 		{
-			label: '',
-			url: ''
+			"label": "category1",
+			"url": ""
+		},
+		{
+            ...
 		}
 	]
 }
@@ -186,16 +242,16 @@
 {
 	"zh-CN": [
 		{
-			label: '你好',
-			url: '',
-			image: ''
+			"label": "你好",
+			"url": "",
+			"image": ""
 		}
 	],
 	"en": [
 		{
-			label: 'hello',
-			url: '',
-			image: ''
+			"label": "hello",
+			"url": "",
+			"image": ""
 		}
 	]
 }
@@ -204,20 +260,19 @@
 ## format-content
 ```
 {
-	articleId: the id of article,
-	categoryId: the id of category,
-	keyword: search article list,
-	lang: the lang of article
+	"articleId": [the id of article]
 }
 ```
 
 ## format-fixed-background
 ```
 {
-	articleId: the id of article,
-	categoryId: the id of category,
-	limit: the length of article list,
-	keyword: search article list,
-	lang: the lang of article
+	"categoryId": the id of category,
+	"limit": the length of article list,
+	"keyword": search article list,
+}
+OR
+{
+	"articleId": [the id of article, id, ...],
 }
 ```

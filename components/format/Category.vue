@@ -13,7 +13,7 @@
       <b-container>
         <b-row>
           <b-col
-            v-for="(nav, index) in options.navbar"
+            v-for="(nav, index) in renderData"
             :key="index"
             :class="{active:indexActive === index,'class-label-tap': true}"
             @click="activeClass(index)"
@@ -52,12 +52,8 @@ export default {
 			this.indexActive = index;
 		}
 	},
-	async renderData(options) {
-		const {image, navbar} = options;
-
-		return {
-			image, navbar
-		};
+	async renderData(options, context) {
+		return options[context.params.lang || 'zh-CN'];
 	}
 };
 </script>
