@@ -5,7 +5,7 @@
 			deck
 		>
 			<b-card
-				v-for="(item, index) in renderData"
+				v-for="(item, index) in renderData.articleList"
 				:key="index"
 				no-body
 				class="rounded-0 position-relative my-4"
@@ -24,7 +24,7 @@
 					variant="primary"
 					class="position-absolute w-50 rounded-0 ml-4 card-extend-button"
 					style="bottom:-20px"
-					:to="`/article/${item.id}?lang=${item.lang}`"
+					:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`"
 				>{{ $t('cardExtend.link') }}</b-button>
 			</b-card>
 		</b-card-group>
@@ -43,11 +43,6 @@ export default {
 		}
 	},
 	props: ['options'],
-	data () {
-		return {
-			
-		};
-	},
 	async renderData(options, context, getArticle, getArticleList) {
 		const { articleId, categoryId, limit } = options;
 
@@ -61,7 +56,10 @@ export default {
 			lang: context.params.lang
 		});
 
-		return articleList;
+		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
+			articleList
+		};
 	}
 };
 </script>

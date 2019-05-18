@@ -3,11 +3,11 @@
 		<b-container class="py-4">
 			<b-row>
 				<b-col
-					v-for="(nav, index) in renderData"
+					v-for="(nav, index) in renderData.data"
 					:key="index"
 					class="text-center nav-img-ele"
 				>
-					<b-link :to="nav.url"> 
+					<b-link :to="`${renderData.lang}/category/${nav.categoryId}`">
 						<b-img
 							class="rounded-circle"
 							:src="nav.image" 
@@ -26,7 +26,10 @@ export default {
 	name: 'format-category-card',
 	props: ['options'],
 	async renderData(options, context) {
-		return options[context.params.lang || 'zh-CN'];
+		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
+			data: options[context.params.lang || 'zh-CN']
+		};
 	}
 };
 </script>

@@ -219,7 +219,7 @@ OR
 	"zh-CN": [
         {
             "label": "类别1",
-            "url": ""
+            "categoryId": ""
         },
         {
             ...
@@ -228,7 +228,7 @@ OR
 	"en": [
 		{
 			"label": "category1",
-			"url": ""
+			"categoryId": ""
 		},
 		{
             ...
@@ -243,14 +243,14 @@ OR
 	"zh-CN": [
 		{
 			"label": "你好",
-			"url": "",
+			"categoryId": "",
 			"image": ""
 		}
 	],
 	"en": [
 		{
 			"label": "hello",
-			"url": "",
+			"categoryId": "",
 			"image": ""
 		}
 	]

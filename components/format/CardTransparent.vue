@@ -5,13 +5,13 @@
 				class="card-transparent-content"
 				no-body
 			>
-				<h1>{{ renderData[0].title }}</h1>
-				<b-card-text style="padding-bottom:4rem;">{{ renderData[0].abstract | substr }}</b-card-text>
+				<h1>{{ renderData.data[0].title }}</h1>
+				<b-card-text style="padding-bottom:4rem;">{{ renderData.data[0].abstract | substr }}</b-card-text>
 				<b-button
 					class="card-transparent-button"
 					variant="primary"
 					size="lg"
-					:to="`/article/${renderData[0].id}?lang=${renderData[0].lang}`"
+					:to="`${renderData.lang}/article/${renderData.data[0].id}?lang=${renderData.data[0].lang}`"
 				>{{ $t('content.more') }}</b-button>
 			</b-card>
     </b-container>
@@ -30,7 +30,10 @@ export default {
 	},
 	props: ['options'],
 	async renderData(options, context, getArticle) {
-		return await getArticle(options[0].articleId, context.params.lang);
+		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
+			data: await getArticle(options[0].articleId, context.params.lang)
+		};
 	}
 }; 
 </script>

@@ -11,7 +11,7 @@
 			<div class="fixed-background-line"></div>
 			<b-card-group>
 				<b-card
-					v-for="(item, index) in renderData"
+					v-for="(item, index) in renderData.articleList"
 					:key="index"
 					class="mx-4 rounded position-relative"
 					style="min-height:250px;"
@@ -34,7 +34,7 @@
 						variant="outline-secondary"
 						size="lg"
 						style="position:absolute;right:1rem;bottom:1rem;"
-						:to="`/article/${item.id}?lang=${item.lang}`"
+						:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`"
 					>{{ $t('fixed.see') }}</b-button>
 				</b-card>
 			</b-card-group>
@@ -48,19 +48,23 @@ export default {
 	props: ['options'],
 	async renderData(options, context, getArticle, getArticleList) {
 		const { articleId, categoryId, limit, keyword } = options;
+		let articleList = [];
 
 		if (articleId) {
-			return await getArticle(articleId, context.params.lang);
+			articleList = await getArticle(articleId, context.params.lang);
+		} else {
+			articleList = await getArticleList({
+				categoryId,
+				limit: limit ? limit : 2,
+				keyword, 
+				lang: context.params.lang
+			});
 		}
 
-		const articleList = await getArticleList({
-			categoryId,
-			limit: limit ? limit : 2,
-			keyword, 
-			lang: context.params.lang
-		});
-
-		return articleList;
+		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
+			articleList
+		};
 	}
 };
 </script>

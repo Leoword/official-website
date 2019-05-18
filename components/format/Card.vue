@@ -6,11 +6,11 @@
 				class="animated bounceInLeft"
 			>
 				<b-card 
-					v-for="(item, index) in renderData"
+					v-for="(item, index) in renderData.articleList"
 					:key="index"
 					no-body
 				>
-					<b-link :to="`/article/${item.id}?lang=${item.lang}`">
+					<b-link :to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`">
 						<b-img
 							:src="item.thumbnail" 
 							fluid
@@ -47,7 +47,10 @@ export default {
 			lang: context.params.lang
 		});
 
-		return articleList;
+		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
+			data: articleList
+		};
 	}
 };
 </script>

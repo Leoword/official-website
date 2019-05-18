@@ -17,7 +17,7 @@
 <script>
 export default {
 	name: 'format-footer',
-	props: ['options'],
+	props: ['options'],	
 	computed: {
 		year() {
 			return new Date().getFullYear();

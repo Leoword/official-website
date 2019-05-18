@@ -6,7 +6,7 @@
 	>
 		<b-navbar-brand 
 			id="logo"
-			href="/" 
+			:to="`${renderData.lang}/index`" 
 		>{{ $t('info.shortName') }}</b-navbar-brand>
 
 		<b-navbar-toggle 
@@ -22,7 +22,7 @@
 		>
 			<b-navbar-nav>
 				<span
-					v-for="(item, index) in renderData"
+					v-for="(item, index) in renderData.data"
 					:key="index"
 				>
 					<b-nav-item 
@@ -74,18 +74,19 @@ export default {
 	},
 	methods: {
 		jumpTo() {
-			this.$router.push(
-				{
-					path: '/article', 
-					query: {
-						keyword: this.keyword
-					}
+			this.$router.push({
+				path: '/article', 
+				query: {
+					keyword: this.keyword
 				}
-			);
+			});
 		}
 	},
 	async renderData(options, context) {
-		return options[context.params.lang || 'zh-CN'];
+		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
+			data: options[context.params.lang || 'zh-CN']
+		};
 	}
 };
 </script>

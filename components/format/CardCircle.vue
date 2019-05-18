@@ -3,7 +3,7 @@
 		<b-container class="pt-5 pb-4">
 			<b-row>
 				<b-col
-					v-for="(item, index) in renderData"
+					v-for="(item, index) in renderData.articleList"
 					:key="index"
 					ref="cardList"
 					class="text-center circle-card"
@@ -16,7 +16,7 @@
 							width: `${radius}px`,
 							height: `${radius}px`
 						}"
-						:to="`/article/${item.id}?lang=${item.lang}`"
+						:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`"
 					>
 						<b-img 
 							class="rounded-circle"
@@ -82,7 +82,10 @@ export default {
 			lang: context.params.lang
 		});
 
-		return articleList;
+		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
+			articleList
+		};
 	}
 };
 </script>

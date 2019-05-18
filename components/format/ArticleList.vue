@@ -11,7 +11,7 @@
 					>
 						<h4 :title="article.title">
 							<b-link
-								:to="`/article/${article.id}?lang=${article.lang}`"
+								:to="`${renderData.lang}/article/${article.id}?lang=${article.lang}`"
 							>{{ article.title }}</b-link>
 						</h4>
 						<b-card-text 
@@ -43,7 +43,7 @@
 						>
 							<b-link 
 								target="_blank"
-								:to="`/article/${item.id}?lang=${item.lang}`"
+								:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`"
 							>
 								<b-img
 									:src="item.thumbnail"
@@ -149,6 +149,7 @@ export default {
 		}
 
 		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
 			articleList,
 			recommend
 		};

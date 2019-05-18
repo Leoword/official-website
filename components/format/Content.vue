@@ -7,7 +7,7 @@
 					class="d-none d-md-block"
 				>
 					<img
-						:src="renderData.thumbnail"
+						:src="renderData.article.thumbnail"
 						fluid
 						style="width: 100%;max-height: 300px"
 					/>
@@ -16,11 +16,11 @@
 					<p
 						class="border-0"
 						style="color:#999;"
-					>{{ renderData.abstract | substr }}</p>
+					>{{ renderData.data.abstract | substr }}</p>
 					<b-button
 						variant="outline-info"
 						block
-						:to="`/article/${renderData.id}?lang=${renderData.lang}`"
+						:to="`${renderData.lang}/article/${renderData.data.id}?lang=${renderData.data.lang}`"
 						class="position-absolute fixed-bottom"
 					>{{ $t('content.more') }}</b-button>
 				</b-col>
@@ -41,7 +41,10 @@ export default {
 	},
 	props: ['options'],
 	async renderData(options, context, getArticle) {
-		return await getArticle(options[0].articleId, context.params.lang);
+		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
+			data: await getArticle(options[0].articleId, context.params.lang)
+		};
 	}
 };
 </script>

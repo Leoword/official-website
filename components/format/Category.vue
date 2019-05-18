@@ -1,34 +1,34 @@
 <template>
 	<div class="format-class position-relative">
-    <b-card
-      no-body
-      class="format-class-link"
-    >
-      <b-img 
-        :src="options.image"
-        fluid-grow 
-      />
-    </b-card>
-    <div class="format-class-label position-absolute fixed-bottom">
-      <b-container>
-        <b-row>
-          <b-col
-            v-for="(nav, index) in renderData"
-            :key="index"
-            :class="{active:indexActive === index,'class-label-tap': true}"
-            @click="activeClass(index)"
+		<b-card
+			no-body
+			class="format-class-link"
+		>
+			<b-img 
+				:src="options.image"
+				fluid-grow 
+			/>
+		</b-card>
+		<div class="format-class-label position-absolute fixed-bottom">
+			<b-container>
+				<b-row>
+					<b-col
+						v-for="(nav, index) in renderData.data"
+						:key="index"
+						:class="{active:indexActive === index,'class-label-tap': true}"
+						@click="activeClass(index)"
 					>
-            <b-link
-              class="text-white"
-              :to="nav.url"
-            >
-              <b-card-text class="text-center py-3">{{ nav.label | substr }}</b-card-text>
-            </b-link>
-          </b-col>
-        </b-row>
-      </b-container>
-    </div>
-  </div>
+						<b-link
+							class="text-white"
+							:to="`${renderData.lang}/category/${nav.categoryId}`"
+						>
+							<b-card-text class="text-center py-3">{{ nav.label | substr }}</b-card-text>
+						</b-link>
+					</b-col>
+				</b-row>
+			</b-container>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -53,7 +53,10 @@ export default {
 		}
 	},
 	async renderData(options, context) {
-		return options[context.params.lang || 'zh-CN'];
+		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
+			data: options[context.params.lang || 'zh-CN']
+		}; 
 	}
 };
 </script>
@@ -62,26 +65,26 @@ export default {
 .format-class {
 	height: 400px;
 	overflow: hidden;
-  .format-class-label {
-    background-color: rgba(0, 0, 0, 0.5);
-    .class-label-tap {
+	.format-class-label {
+		background-color: rgba(0, 0, 0, 0.5);
+		.class-label-tap {
 			transition: all 0.2s;
-      a {
-        text-decoration: none;
-        font-size: 14px;
-      }
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.2);
-      }
-    }
-  }
-  .format-class-link {
-    img {
-      max-height: 400px;
-    }
-  }
-  .active {
-    background-color: #3f82fc !important;
-  }
+			a {
+				text-decoration: none;
+				font-size: 14px;
+			}
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.2);
+			}
+		}
+	}
+	.format-class-link {
+		img {
+			max-height: 400px;
+		}
+	}
+	.active {
+		background-color: #3f82fc !important;
+	}
 }
 </style>

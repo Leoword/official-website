@@ -4,7 +4,7 @@
       <div 
         class="pb-3"
 				>
-        <b-link to="/category">{{ $t('article.list') }}</b-link>
+        <b-link :to="`${renderData.lang}/category`">{{ $t('article.list') }}</b-link>
         <i class="fas fa-angle-right px-2"></i>
         <small style="color:#999">{{ renderData.article[0].title }}</small>
       </div>
@@ -47,7 +47,7 @@
 						>
               <b-link 
                 target="_blank"
-								:to="`/article/${item.id}?lang=${item.lang}`"
+								:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`"
               >
                 <b-img 
 									:src="item.thumbnail" 
@@ -83,9 +83,9 @@ export default {
 	async renderData(options, context, getArticle, getArticleList) {
 		const articleId = context.params.id ? context.params.id : options.articleId;
 		const lang = context.query.lang ? context.query.lang : context.params.lang;
+		let recommend = [];
 
 		const article = await getArticle([articleId], lang);
-		let recommend = [];
 
 		if (options.recommend) {
 			const { articleId,categoryId, limit, keyword } = options.recommend;
@@ -103,6 +103,7 @@ export default {
 		}
 
 		return {
+			lang: context.params.lang ? `/${context.params.lang}` : '',
 			article,
 			recommend
 		};
