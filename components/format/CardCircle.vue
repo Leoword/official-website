@@ -16,7 +16,7 @@
 							width: `${radius}px`,
 							height: `${radius}px`
 						}"
-						:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`"
+						:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}&title=${item.title}`"
 					>
 						<b-img 
 							class="rounded-circle"

@@ -11,7 +11,7 @@
 					>
 						<h4 :title="article.title">
 							<b-link
-								:to="`${renderData.lang}/article/${article.id}?lang=${article.lang}`"
+								:to="`${renderData.lang}/article/${article.id}?lang=${article.lang}&title=${article.title}`"
 							>{{ article.title }}</b-link>
 						</h4>
 						<b-card-text 
@@ -43,7 +43,7 @@
 						>
 							<b-link 
 								target="_blank"
-								:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`"
+								:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}&title=${item.title}`"
 							>
 								<b-img
 									:src="item.thumbnail"

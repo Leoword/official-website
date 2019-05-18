@@ -11,7 +11,7 @@
 					class="card-transparent-button"
 					variant="primary"
 					size="lg"
-					:to="`${renderData.lang}/article/${renderData.data[0].id}?lang=${renderData.data[0].lang}`"
+					:to="`${renderData.lang}/article/${renderData.data[0].id}?lang=${renderData.data[0].lang}&title=${renderData.data[0].title}`"
 				>{{ $t('content.more') }}</b-button>
 			</b-card>
     </b-container>

@@ -5,13 +5,13 @@
 			deck
 		>
 			<b-card
-				v-for="(item, index) in renderData.articleList"
+				v-for="(article, index) in renderData.articleList"
 				:key="index"
 				no-body
 				class="rounded-0 position-relative my-4"
 				style="min-height:240px;"
 			>
-				<h4 class="text-center px-2 pt-3">{{ item.title }}</h4>
+				<h4 class="text-center px-2 pt-3">{{ article.title }}</h4>
 				<i
 					class="fas fa-quote-left pl-3 pb-3"
 					style="color:#007BFF;font-size:1.3em;"
@@ -19,12 +19,12 @@
 				<b-card-text
 					class="px-3 pb-4"
 					style="color:#999;"
-				>{{ item.abstract | substr }}</b-card-text>
+				>{{ article.abstract | substr }}</b-card-text>
 				<b-button
 					variant="primary"
 					class="position-absolute w-50 rounded-0 ml-4 card-extend-button"
 					style="bottom:-20px"
-					:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`"
+					:to="`${renderData.lang}/article/${article.id}?lang=${article.lang}&title=${article.title}`"
 				>{{ $t('cardExtend.link') }}</b-button>
 			</b-card>
 		</b-card-group>

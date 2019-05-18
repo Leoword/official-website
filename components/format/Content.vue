@@ -20,7 +20,7 @@
 					<b-button
 						variant="outline-info"
 						block
-						:to="`${renderData.lang}/article/${renderData.data.id}?lang=${renderData.data.lang}`"
+						:to="`${renderData.lang}/article/${renderData.data.id}?lang=${renderData.data.lang}&title=${renderData.data.title}`"
 						class="position-absolute fixed-bottom"
 					>{{ $t('content.more') }}</b-button>
 				</b-col>

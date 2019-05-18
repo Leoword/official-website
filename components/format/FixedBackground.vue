@@ -11,7 +11,7 @@
 			<div class="fixed-background-line"></div>
 			<b-card-group>
 				<b-card
-					v-for="(item, index) in renderData.articleList"
+					v-for="(article, index) in renderData.articleList"
 					:key="index"
 					class="mx-4 rounded position-relative"
 					style="min-height:250px;"
@@ -25,16 +25,16 @@
 							class="fas fa-quote-left pr-1"
 							style="font-size:1.5em;"
 						/>
-						{{ item.abstract }}
+						{{ article.abstract }}
 					</b-card-text>
 						<h4
 							class="position-absolute fixed-bottom ml-4 mb-5"
-						>{{ item.author }}</h4>
+						>{{ article.author }}</h4>
 					<b-button
 						variant="outline-secondary"
 						size="lg"
 						style="position:absolute;right:1rem;bottom:1rem;"
-						:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`"
+						:to="`${renderData.lang}/article/${article.id}?lang=${article.lang}&title=${article.title}`"
 					>{{ $t('fixed.see') }}</b-button>
 				</b-card>
 			</b-card-group>

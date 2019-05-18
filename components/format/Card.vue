@@ -10,7 +10,7 @@
 					:key="index"
 					no-body
 				>
-					<b-link :to="`${renderData.lang}/article/${item.id}?lang=${item.lang}`">
+					<b-link :to="`${renderData.lang}/article/${item.id}?lang=${item.lang}&title=${item.title}`">
 						<b-img
 							:src="item.thumbnail" 
 							fluid
