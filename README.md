@@ -140,7 +140,7 @@
 	} 
 	OR 
 	{
-		"articleId": the id of article, id...
+		"articleIdList": the id of article, id...
 	}
 }
 ```
@@ -161,7 +161,7 @@
 	} 
 	OR 
 	{
-		"articleId": [the id of article, id...]
+		"articleIdList": [the id of article, id...]
 	}
 }
 ```
@@ -175,7 +175,7 @@
 }
 OR
 {
-	"articleId": [the id of article, id, id, id],
+	"articleIdList": [the id of article, id, id, id],
 }
 ```
 
@@ -188,7 +188,7 @@ OR
 }
 OR
 {
-	"articleId": [the id of article, id, id, id],
+	"articleIdList": [the id of article, id, id, id],
 }
 ```
 
@@ -201,14 +201,14 @@ OR
 }
 OR
 {
-	"articleId": [the id of article, id, id, id],
+	"articleIdList": [the id of article, id, id, id],
 }
 ```
 
 ## format-card-transparent
 ```
 {
-	"articleId": [the id of article]
+	"articleId": the id of article
 }
 ```
 
@@ -260,7 +260,7 @@ OR
 ## format-content
 ```
 {
-	"articleId": [the id of article]
+	"articleId": the id of article
 }
 ```
 
@@ -273,6 +273,6 @@ OR
 }
 OR
 {
-	"articleId": [the id of article, id, ...],
+	"articleIdList": [the id of article, id, ...],
 }
 ```

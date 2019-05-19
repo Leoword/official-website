@@ -26,18 +26,10 @@ export default {
 
 		// 由 articleId 获取指定文章
 		async function getArticle(articleId, lang) {
-			const promises = articleId.map((id) => {
-				return axios.get(`${prefix}/article/${id}`, {
-					params: {
-						lang: lang
-					}
-				});
-			});
-
-			return Promise.all(promises).then((res) => {
-				return res.map((ele) => {
-					return ele.data;
-				});
+			return await axios.get(`${prefix}/article/${articleId}`, {
+				params: {
+					lang: lang
+				}
 			});
 		}
 

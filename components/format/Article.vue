@@ -6,7 +6,7 @@
 				>
         <b-link :to="`${renderData.lang}/category`">{{ $t('article.list') }}</b-link>
         <i class="fas fa-angle-right px-2"></i>
-        <small style="color:#999">{{ renderData.article[0].title }}</small>
+        <small style="color:#999">{{ renderData.article.title }}</small>
       </div>
 			<b-row>
         <!-- 文章内容 -->
@@ -17,14 +17,14 @@
 					<h3 
             class="p-3"
             style="font-weight:bold;"
-					>{{ renderData.article[0].title }}</h3>
+					>{{ renderData.article.title }}</h3>
 					<b-card-text 
             class="pl-3 pb-3"
             style="color:#999;"
-					>{{ $t('article.by') }}&nbsp;{{ renderData.article[0].author }}&nbsp;{{ $t('article.published') }}&nbsp;{{ renderData.article[0].createdAt }}</b-card-text>
+					>{{ $t('article.by') }}&nbsp;{{ renderData.article.author }}&nbsp;{{ $t('article.published') }}&nbsp;{{ renderData.article.createdAt }}</b-card-text>
 					<b-card 
 						class="border-0 p-3"
-						v-html="render(renderData.article[0].text)"
+						v-html="render(renderData.article.text)"
 					></b-card>
         </b-col>
 
@@ -84,14 +84,24 @@ export default {
 		const articleId = context.params.id ? context.params.id : options.articleId;
 		const lang = context.query.lang ? context.query.lang : context.params.lang;
 		let recommend = [];
+		console.log(articleId);
+		
 
-		const article = await getArticle([articleId], lang);
+		const article = (await getArticle(articleId, lang)).data;
 
 		if (options.recommend) {
-			const { articleId,categoryId, limit, keyword } = options.recommend;
+			const { articleIdList,categoryId, limit, keyword } = options.recommend;
 
-			if (articleId) {
-				recommend = await getArticle(articleId, context.params.lang);
+			if (articleIdList) {
+				const promises = articleIdList.map((id) => {
+					return getArticle(id, context.params.lang);
+				});
+
+				recommend = await Promise.all(promises).then((res) => {
+					return res.map((ele) => {
+						return ele.data;
+					});
+				});
 			} else {
 				recommend = await getArticleList({
 					categoryId, 

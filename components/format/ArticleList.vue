@@ -11,6 +11,7 @@
 					>
 						<h4 :title="article.title">
 							<b-link
+								target="_blank"
 								:to="`${renderData.lang}/article/${article.id}?lang=${article.lang}&title=${article.title}`"
 							>{{ article.title }}</b-link>
 						</h4>
@@ -117,27 +118,29 @@ export default {
 		}
 	},
 	async renderData(options, context, getArticle, getArticleList) {
-		let articleList = [];
+		const { categoryId, limit, keyword } = options.articleList;
 		let recommend = [];
 
-		articleList = await getArticleList({});
-
-		if (options.articleList) {
-			const { categoryId, limit, keyword } = options.articleList;
-
-			articleList = await getArticleList({
-				categoryId: context.params.id ? context.params.id : categoryId,
-				limit, 
-				keyword, 
-				lang: context.params.lang
-			});
-		}
+		const articleList = await getArticleList({
+			categoryId: context.params.id ? context.params.id : categoryId,
+			limit, 
+			keyword, 
+			lang: context.params.lang
+		});
 
 		if (options.recommend) {
-			const { articleId,categoryId, limit, keyword } = options.recommend;
+			const { articleIdList,categoryId, limit, keyword } = options.recommend;
 
-			if (articleId) {
-				recommend = await getArticle(articleId, context.params.lang);
+			if (articleIdList) {
+				const promises = articleIdList.map((id) => {
+					return getArticle(id, context.params.lang);
+				});
+
+				recommend = await Promise.all(promises).then((res) => {
+					return res.map((ele) => {
+						return ele.data;
+					});
+				});
 			} else {
 				recommend = await getArticleList({
 					categoryId, 

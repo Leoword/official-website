@@ -7,7 +7,7 @@
 					class="d-none d-md-block"
 				>
 					<img
-						:src="renderData.article.thumbnail"
+						:src="renderData.data.thumbnail"
 						fluid
 						style="width: 100%;max-height: 300px"
 					/>
@@ -43,7 +43,7 @@ export default {
 	async renderData(options, context, getArticle) {
 		return {
 			lang: context.params.lang ? `/${context.params.lang}` : '',
-			data: await getArticle(options[0].articleId, context.params.lang)
+			data: (await getArticle(options.articleId, context.params.lang)).data
 		};
 	}
 };

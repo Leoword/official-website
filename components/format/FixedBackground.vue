@@ -47,11 +47,20 @@ export default {
 	name: 'format-fixed-background',
 	props: ['options'],
 	async renderData(options, context, getArticle, getArticleList) {
-		const { articleId, categoryId, limit, keyword } = options;
+		const { articleIdList, categoryId, limit, keyword } = options;
 		let articleList = [];
 
-		if (articleId) {
-			articleList = await getArticle(articleId, context.params.lang);
+		if (articleIdList) {
+			const promises = articleIdList.map((id) => {
+				return getArticle(id, context.params.lang);
+			});
+
+			articleList = await Promise.all(promises).then((res) => {
+				return res.map((ele) => {
+					return ele.data;
+				});
+			});
+
 		} else {
 			articleList = await getArticleList({
 				categoryId,

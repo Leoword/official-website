@@ -35,21 +35,32 @@ export default {
 	},
 	props: ['options'],
 	async renderData(options, context, getArticle, getArticleList) {
-		const { articleId, categoryId, limit } = options;
+		const { articleIdList, categoryId, limit, keyword } = options;
+		let articleList = [];
 
-		if (articleId) {
-			return await getArticle(articleId, context.params.lang);
+		if (articleIdList) {
+			const promises = articleIdList.map((id) => {
+				return getArticle(id, context.params.lang);
+			});
+
+			articleList = await Promise.all(promises).then((res) => {
+				return res.map((ele) => {
+					return ele.data;
+				});
+			});
+
+		} else {
+			articleList = await getArticleList({
+				categoryId,
+				limit: limit ? limit : 2,
+				keyword, 
+				lang: context.params.lang
+			});
 		}
-
-		const articleList = await getArticleList({
-			categoryId,
-			limit: limit ? limit : 4,
-			lang: context.params.lang
-		});
 
 		return {
 			lang: context.params.lang ? `/${context.params.lang}` : '',
-			data: articleList
+			articleList
 		};
 	}
 };
