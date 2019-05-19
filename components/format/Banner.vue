@@ -1,9 +1,12 @@
 <template>
-	<div class="format-banner">
-		<b-img 
+	<div 
+		class="format-banner"
+		:style="`background-image:url(${renderData.image});`"
+	>
+		<!-- <b-img 
 			:src="renderData.image"
 			fluid-grow 
-		/>
+		/> -->
 		<div class="cover"></div>
 		<div class="banner-text">
 			<h2>{{ renderData.text }}</h2>
@@ -25,10 +28,9 @@ export default {
 <style lang="less">
 .format-banner {
 	position: relative;
+	background-repeat: no-repeat;
+	background-size: cover;
 	height: 300px;
-	img {
-		height: 100%;
-	}
 	.banner-text {
 		position: absolute;
 		top: 50%;
@@ -46,6 +48,11 @@ export default {
 		position: absolute;
 		top: 0;
 		left: 0;
+	}
+}
+@media screen and (max-width:576px) {
+	.format-banner {
+		height: 200px;
 	}
 }
 </style>

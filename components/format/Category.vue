@@ -1,22 +1,20 @@
 <template>
-	<div class="format-class position-relative">
-		<b-card
+	<div 
+		class="format-category position-relative"
+		:style="`background-image:url(${options.image});`"
+	>
+		<!-- <b-card
 			no-body
 			class="format-class-link"
-		>
-			<b-img 
-				:src="options.image"
-				fluid-grow 
-			/>
-		</b-card>
-		<div class="format-class-label position-absolute fixed-bottom">
+		></b-card>
+		<div ></div> -->
+		<div class="format-category-label position-absolute fixed-bottom">
 			<b-container>
 				<b-row>
 					<b-col
 						v-for="(nav, index) in renderData.data"
 						:key="index"
-						:class="{active:indexActive === index,'class-label-tap': true}"
-						@click="activeClass(index)"
+						:class="{active:indexActive === nav.categoryId,'category-label-tap': true}"
 					>
 						<b-link
 							class="text-white"
@@ -44,7 +42,7 @@ export default {
 	props: ['options'],
 	data() {
 		return {
-			indexActive: 0
+			indexActive: this.renderData.indexActive || this.renderData.data[0].categoryId
 		};
 	},
 	methods: {
@@ -54,6 +52,7 @@ export default {
 	},
 	async renderData(options, context) {
 		return {
+			indexActive: context.params.id,
 			lang: context.params.lang ? `/${context.params.lang}` : '',
 			data: options[context.params.lang || 'zh-CN']
 		}; 
@@ -62,12 +61,14 @@ export default {
 </script>
 
 <style lang="less">
-.format-class {
+.format-category {
 	height: 400px;
 	overflow: hidden;
-	.format-class-label {
+	background-repeat: no-repeat;
+	background-size: cover;
+	.format-category-label {
 		background-color: rgba(0, 0, 0, 0.5);
-		.class-label-tap {
+		.category-label-tap {
 			transition: all 0.2s;
 			a {
 				text-decoration: none;
@@ -78,13 +79,13 @@ export default {
 			}
 		}
 	}
-	.format-class-link {
-		img {
-			max-height: 400px;
-		}
-	}
 	.active {
 		background-color: #3f82fc !important;
+	}
+}
+@media screen and (max-width:576px) {
+	.format-category {
+		height: 200px;
 	}
 }
 </style>
