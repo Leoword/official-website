@@ -1,17 +1,15 @@
 const Router = require('koa-router');
 
-const router = module.exports = new Router({prefix: '/api'});
-
-router.get('/reset', async (ctx) => {
+module.exports = new Router({
+	prefix: '/app/api'
+}).get('/reset', async (ctx) => {
 	await ctx.website.reset();
 
 	ctx.body = ctx.website.pageList;
-});
+}).get('/article/:id', async (ctx) => {
+	const { params, appDB, query } = ctx;
 
-router.get('/article/:id', async (ctx) => {
-	const { params, db, query } = ctx;
-
-	const content = await db.Content.get(params.id);
+	const content = await appDB.Content.get(params.id);
 
 
 	if (!content) {
@@ -23,10 +21,8 @@ router.get('/article/:id', async (ctx) => {
 	const commit = await content.get(query.lang);
 
 	ctx.body = commit;
-});
-
-router.get('/article', async (ctx) => {
-	const  {query, db } = ctx;
+}).get('/article', async (ctx) => {
+	const  {query, appDB } = ctx;
 
 	const { categoryId, limit, lang, keyword } = query;
 
@@ -34,7 +30,7 @@ router.get('/article', async (ctx) => {
 	const result = [];
 
 	if (categoryId) {
-		const classificationList = await db.Classification.findAll({
+		const classificationList = await appDB.Classification.findAll({
 			where: {
 				categoryId
 			},
@@ -42,14 +38,14 @@ router.get('/article', async (ctx) => {
 		});
 
 		for (let classification of classificationList) {
-			const content = await db.Content.get(classification.articleId);
+			const content = await appDB.Content.get(classification.articleId);
 
 			if (content) {
 				contentList.push(content);
 			}
 		}
 	} else {
-		const list = await db.Content.query();
+		const list = await appDB.Content.query();
 		contentList.push(...list);
 	}
 

@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../server/model/sequelize');
-
 const markdownIt = require('markdown-it');
+const path = require('path');
+
+const sequelize = require(path.resolve('server/sequelize.js'));
 
 const Article = sequelize.define('article', {
 	id: {
