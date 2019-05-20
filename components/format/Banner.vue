@@ -19,8 +19,8 @@
 export default {
 	name: 'format-banner',
 	props: ['options'],
-	async renderData(options, context) {
-		return options[context.params.lang || 'zh-CN'];
+	async renderData({options, lang}) {
+		return options[lang || 'zh-CN'];
 	}
 };
 </script>

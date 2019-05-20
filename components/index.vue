@@ -15,42 +15,52 @@
 import Vue from 'vue';
 import axios from 'axios';
 import config from '../config.json';
-import { Promise } from 'q';
+
+let lang;
 const prefix = `${config.websiteURL}/api`;
+
+const Article = {
+	async get(articleId, lang) {
+		return axios.get(`${prefix}/article/${articleId}`, {
+			params: {
+				lang: lang
+			}
+		}).then(res => res.data);
+	},
+	async list({ categoryId, keyword, limit, lang }) {
+		return await axios.get(`${prefix}/article`, {
+			params: {
+				categoryId, keyword, limit, lang
+			}
+		}).then(res => res.data);
+	}
+};
 
 export default {
 	async asyncData(context) {
 		const {title, body, meta} = context.route.meta[0];
+		const params = context.params;
+
 		const formatRegistry = Vue.$format;
+		const languageRegistry = Vue.$language;
+
 		const formatList = [];
 
-		// 由 articleId 获取指定文章
-		async function getArticle(articleId, lang) {
-			return await axios.get(`${prefix}/article/${articleId}`, {
-				params: {
-					lang: lang
-				}
-			});
-		}
-
-		// 由 categoryId 获取一类文章
-		async function getArticleList({ categoryId, keyword, limit, lang }) {
-			const res = await axios.get(`${prefix}/article`, {
-				params: {
-					categoryId, keyword, limit, lang
-				}
-			});
-
-			return res.data;
+		if (languageRegistry[params.lang]) {
+			lang = params.lang;
 		}
 
 		for (let format of body) {
-			const { name, options = {}, classList } = format;
+			const { name, options = {}, classList, mapping } = format;
 			const renderData = formatRegistry[name].renderData;
 
 			formatList.push({
 				name, classList, options,
-				data: renderData && await renderData(options, context, getArticle, getArticleList)
+				data: renderData && await renderData({
+					options, mapping,
+					lang, params, Article,
+					context
+				})
 			});
 		}
 
@@ -77,7 +87,7 @@ export default {
 	mounted() {
 		const lang = this.$route.params.lang;
 
-		if (this.$language[lang]) {
+		if (Vue.$language[lang]) {
 			this.$i18n.locale = lang;
 
 			return;

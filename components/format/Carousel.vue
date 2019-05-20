@@ -46,8 +46,8 @@ export default {
 			this.sliding = false;
 		}
 	},
-	async renderData(options, context) {
-		return options[context.params.lang || 'zh-CN'];
+	async renderData({ options, lang }) {
+		return options[lang || 'zh-CN'];
 	}
 };
 </script>

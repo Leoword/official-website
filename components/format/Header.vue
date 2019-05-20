@@ -6,7 +6,7 @@
 	>
 		<b-navbar-brand 
 			id="logo"
-			:to="`${renderData.lang}/index`" 
+			:to="renderData.href" 
 		>{{ $t('info.shortName') }}</b-navbar-brand>
 
 		<b-navbar-toggle 
@@ -82,10 +82,10 @@ export default {
 			});
 		}
 	},
-	async renderData(options, context) {
+	async renderData({options, lang}) {
 		return {
-			lang: context.params.lang ? `/${context.params.lang}` : '',
-			data: options[context.params.lang || 'zh-CN']
+			href: (lang ? `/${lang}` : '') + '/index',
+			data: options[lang || 'zh-CN']
 		};
 	}
 };

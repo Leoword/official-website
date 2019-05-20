@@ -5,13 +5,13 @@
 				class="card-transparent-content"
 				no-body
 			>
-				<h1>{{ renderData.data.title }}</h1>
-				<b-card-text style="padding-bottom:4rem;">{{ renderData.data.abstract | substr }}</b-card-text>
+				<h1>{{ renderData.title }}</h1>
+				<b-card-text style="padding-bottom:4rem;">{{ renderData.abstract | substr }}</b-card-text>
 				<b-button
 					class="card-transparent-button"
 					variant="primary"
 					size="lg"
-					:to="`${renderData.lang}/article/${renderData.data.id}?lang=${renderData.data.lang}&title=${renderData.data.title}`"
+					:to="renderData.href"
 				>{{ $t('content.more') }}</b-button>
 			</b-card>
     </b-container>
@@ -29,11 +29,14 @@ export default {
 		}
 	},
 	props: ['options'],
-	async renderData(options, context, getArticle) {
-		return {
-			lang: context.params.lang ? `/${context.params.lang}` : '',
-			data: (await getArticle(options.articleId, context.params.lang)).data
-		};
+	async renderData({ options, lang, Article }) {
+		return Article.get(options.articleId, lang).then(article => {
+			return {
+				href: (lang ? `/${lang}` : '') + `/article/${article.id}/${article.title}`,
+				title: article.title,
+				abstract: article.abstract
+			};
+		});
 	}
 }; 
 </script>

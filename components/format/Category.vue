@@ -3,22 +3,17 @@
 		class="format-category position-relative"
 		:style="`background-image:url(${options.image});`"
 	>
-		<!-- <b-card
-			no-body
-			class="format-class-link"
-		></b-card>
-		<div ></div> -->
 		<div class="format-category-label position-absolute fixed-bottom">
 			<b-container>
 				<b-row>
 					<b-col
-						v-for="(nav, index) in renderData.data"
+						v-for="(nav, index) in renderData.category"
 						:key="index"
 						:class="{active:indexActive === nav.categoryId,'category-label-tap': true}"
 					>
 						<b-link
 							class="text-white"
-							:to="`${renderData.lang}/category/${nav.categoryId}`"
+							:to="nav.href"
 						>
 							<b-card-text class="text-center py-3">{{ nav.label | substr }}</b-card-text>
 						</b-link>
@@ -42,7 +37,7 @@ export default {
 	props: ['options'],
 	data() {
 		return {
-			indexActive: this.renderData.indexActive || this.renderData.data[0].categoryId
+			indexActive: this.renderData.indexActive || this.renderData.category[0].categoryId
 		};
 	},
 	methods: {
@@ -50,12 +45,19 @@ export default {
 			this.indexActive = index;
 		}
 	},
-	async renderData(options, context) {
+	async renderData({ options, lang, params, mapping }) {
+		const category = options[lang || 'zh-CN'].map(option => {
+			return {
+				href: (lang ? `/${lang}` : '') + `/category/${option.categoryId}`,
+				categoryId: option.categoryId,
+				label: option.label
+			};
+		});
+
 		return {
-			indexActive: context.params.id,
-			lang: context.params.lang ? `/${context.params.lang}` : '',
-			data: options[context.params.lang || 'zh-CN']
-		}; 
+			indexActive: params[mapping['categoryId']],
+			category
+		};
 	}
 };
 </script>

@@ -4,7 +4,7 @@
       <div 
         class="pb-3"
 				>
-        <b-link :to="`${renderData.lang}/category`">{{ $t('article.list') }}</b-link>
+        <b-link :to="renderData.href">{{ $t('article.list') }}</b-link>
         <i class="fas fa-angle-right px-2"></i>
         <small style="color:#999">{{ renderData.article.title }}</small>
       </div>
@@ -47,7 +47,7 @@
 						>
               <b-link 
                 target="_blank"
-								:to="`${renderData.lang}/article/${item.id}?lang=${item.lang}&title=${item.title}`"
+								:to="item.href"
               >
                 <b-img 
 									:src="item.thumbnail" 
@@ -69,6 +69,7 @@
 import Markdown from 'markdown-it';
 
 const md = new Markdown();
+const MAX_ITEM_LENGTH = 4;
 
 export default {
 	name: 'format-article',
@@ -80,40 +81,40 @@ export default {
 			return md.render(content);
 		}
 	},
-	async renderData(options, context, getArticle, getArticleList) {
-		const articleId = context.params.id ? context.params.id : options.articleId;
-		const lang = context.query.lang ? context.query.lang : context.params.lang;
+	async renderData({ options, mapping, params, Article }) {
+		const articleId = params[mapping['articleId']];
+		const lang = params.lang;
 		let recommend = [];
-		console.log(articleId);
-		
 
-		const article = (await getArticle(articleId, lang)).data;
+		const article = await Article.get(articleId, lang);
 
 		if (options.recommend) {
-			const { articleIdList,categoryId, limit, keyword } = options.recommend;
+			const { selector } = options.recommend;
 
-			if (articleIdList) {
-				const promises = articleIdList.map((id) => {
-					return getArticle(id, context.params.lang);
-				});
-
-				recommend = await Promise.all(promises).then((res) => {
-					return res.map((ele) => {
-						return ele.data;
+			recommend = await ({
+				category(id) {
+					return Article.list({
+						categoryId: id,
+						limit: MAX_ITEM_LENGTH,
+						lang
 					});
-				});
-			} else {
-				recommend = await getArticleList({
-					categoryId, 
-					limit: limit ? limit : 4, 
-					keyword, 
-					lang: context.params.lang
-				});
-			}
+				},
+				enum(list) {
+					return Promise.all(list.slice(0, MAX_ITEM_LENGTH - 1).map(articleId => {
+						return Article.get(articleId, lang);
+					}));
+				}
+			})[selector.name].call(null, selector.payload).then(list => list.map(article => {
+				return {
+					href: (lang ? `/${lang}` : '') + `/article/${article.id}/${article.title}`,
+					thumbnail: article.thumbnail,
+					title: article.title
+				};
+			}));
 		}
 
 		return {
-			lang: context.params.lang ? `/${context.params.lang}` : '',
+			href: (lang ? `/${lang}` : '') + '/category',
 			article,
 			recommend
 		};

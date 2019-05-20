@@ -18,5 +18,5 @@ export default ({ app }) => {
 		messages: list
 	});
 
-	Vue.prototype.$language = list;
+	Vue.$language = list;
 };

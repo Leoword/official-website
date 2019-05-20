@@ -6,11 +6,11 @@
 				class="animated bounceInLeft"
 			>
 				<b-card 
-					v-for="(item, index) in renderData.articleList"
+					v-for="(item, index) in renderData"
 					:key="index"
 					no-body
 				>
-					<b-link :to="`${renderData.lang}/article/${item.id}?lang=${item.lang}&title=${item.title}`">
+					<b-link :to="item.href">
 						<b-img
 							:src="item.thumbnail" 
 							fluid
@@ -26,6 +26,8 @@
 <script>
 import { getSubStr } from './mixin.js';
 
+const MAX_ITEM_LENGTH = 4;
+
 export default {
 	name: 'format-card',
 	filters: {
@@ -34,34 +36,29 @@ export default {
 		}
 	},
 	props: ['options'],
-	async renderData(options, context, getArticle, getArticleList) {
-		const { articleIdList, categoryId, limit, keyword } = options;
-		let articleList = [];
+	async renderData({ options, lang, Article }) {
+		const { selector } = options;
 
-		if (articleIdList) {
-			const promises = articleIdList.map((id) => {
-				return getArticle(id, context.params.lang);
-			});
-
-			articleList = await Promise.all(promises).then((res) => {
-				return res.map((ele) => {
-					return ele.data;
+		return ({
+			category(id) {
+				return Article.list({
+					categoryId: id,
+					limit: MAX_ITEM_LENGTH,
+					lang
 				});
-			});
-
-		} else {
-			articleList = await getArticleList({
-				categoryId,
-				limit: limit ? limit : 2,
-				keyword, 
-				lang: context.params.lang
-			});
-		}
-
-		return {
-			lang: context.params.lang ? `/${context.params.lang}` : '',
-			articleList
-		};
+			},
+			enum(list) {
+				return Promise.all(list.slice(0, MAX_ITEM_LENGTH - 1).map(articleId => {
+					return Article.get(articleId, lang);
+				}));
+			}
+		})[selector.name].call(null, selector.payload).then(list => list.map(article => {
+			return {
+				href: (lang ? `/${lang}` : '') + `/article/${article.id}/${article.title}`,
+				thumbnail: article.thumbnail,
+				abstract: article.abstract
+			};
+		}));
 	}
 };
 </script>

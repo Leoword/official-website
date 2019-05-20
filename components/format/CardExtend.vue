@@ -5,7 +5,7 @@
 			deck
 		>
 			<b-card
-				v-for="(article, index) in renderData.articleList"
+				v-for="(article, index) in renderData"
 				:key="index"
 				no-body
 				class="rounded-0 position-relative my-4"
@@ -24,7 +24,7 @@
 					variant="primary"
 					class="position-absolute w-50 rounded-0 ml-4 card-extend-button"
 					style="bottom:-20px"
-					:to="`${renderData.lang}/article/${article.id}?lang=${article.lang}&title=${article.title}`"
+					:to="article.href"
 				>{{ $t('cardExtend.link') }}</b-button>
 			</b-card>
 		</b-card-group>
@@ -35,6 +35,8 @@
 <script>
 import { getSubStr } from './mixin.js';
 
+const MAX_ITEM_LENGTH = 3;
+
 export default {
 	name: 'format-card-extend',
 	filters: {
@@ -43,34 +45,29 @@ export default {
 		}
 	},
 	props: ['options'],
-	async renderData(options, context, getArticle, getArticleList) {
-		const { articleIdList, categoryId, limit, keyword } = options;
-		let articleList = [];
+	async renderData({ options, lang, Article }) {
+		const { selector } = options;
 
-		if (articleIdList) {
-			const promises = articleIdList.map((id) => {
-				return getArticle(id, context.params.lang);
-			});
-
-			articleList = await Promise.all(promises).then((res) => {
-				return res.map((ele) => {
-					return ele.data;
+		return ({
+			category(id) {
+				return Article.list({
+					categoryId: id,
+					limit: MAX_ITEM_LENGTH,
+					lang
 				});
-			});
-
-		} else {
-			articleList = await getArticleList({
-				categoryId,
-				limit: limit ? limit : 2,
-				keyword, 
-				lang: context.params.lang
-			});
-		}
-
-		return {
-			lang: context.params.lang ? `/${context.params.lang}` : '',
-			articleList
-		};
+			},
+			enum(list) {
+				return Promise.all(list.slice(0, MAX_ITEM_LENGTH - 1).map(articleId => {
+					return Article.get(articleId, lang);
+				}));
+			}
+		})[selector.name].call(null, selector.payload).then(list => list.map(article => {
+			return {
+				href: (lang ? `/${lang}` : '') + `/article/${article.id}/${article.title}`,
+				title: article.title,
+				abstract: article.abstract
+			};
+		}));
 	}
 };
 </script>

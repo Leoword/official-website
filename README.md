@@ -15,6 +15,9 @@
 			"options": {
 				// format config (required)
 			},
+			"mapping": {
+				"articleId": "id"
+			}
 			"classList": [] //for format
 		}
 	]
@@ -169,13 +172,18 @@
 ## format-card
 ```
 {
-	"categoryId": the id of category,
-	"limit": the length of article list,
-	"keyword": search article list,
+	"selector" {
+        "name": "category",
+		"payload": categoryId
+	}	
 }
-OR
+```
+```
 {
-	"articleIdList": [the id of article, id, id, id],
+	"selector" {
+        "name": "enum",
+		"payload": [articleIdList]
+	}
 }
 ```
 
@@ -267,12 +275,17 @@ OR
 ## format-fixed-background
 ```
 {
-	"categoryId": the id of category,
-	"limit": the length of article list,
-	"keyword": search article list,
+	"selector" {
+        "name": "category",
+		"payload": categoryId
+	}	
 }
-OR
+```
+```
 {
-	"articleIdList": [the id of article, id, ...],
+	"selector" {
+        "name": "enum",
+		"payload": [articleIdList]
+	}
 }
 ```
