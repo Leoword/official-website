@@ -152,19 +152,19 @@ module.exports = {
 
 			return await Article.create({id});
 		},
-		async destroy(id) {
-			const article = store[id];
+		async destroy({
+			articleId, lang
+		}) {
+			const article = store[articleId];
 			const commits = [];
 
 			if (!article) {
 				return;
 			}
 
-			for (let lang in article) {
-				article[lang].forEach(commit => {
-					commits.push(commit.hash);
-				});
-			}
+			article[lang].forEach(commit => {
+				commits.push(commit.hash);
+			});
 
 			await Commit.destroy({
 				where: {
@@ -174,13 +174,7 @@ module.exports = {
 				}
 			});
 
-			await Article.destroy({
-				where: {
-					id
-				}
-			});
-
-			delete store[id];
+			delete store[articleId][lang];
 		}
 	},
 	i18n: { 

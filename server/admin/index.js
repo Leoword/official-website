@@ -1,5 +1,4 @@
 const path = require('path');
-const db = require('./model');
 
 const Page = require('./model/page');
 const User = require('./model/user');
@@ -13,6 +12,7 @@ Content.setBackend(contentBackend);
 Page.setBackend(pagebackend);
 
 const router = require('./router');
+const db = require('./model');
 
 userBackend.initCache();
 

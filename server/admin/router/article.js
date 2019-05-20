@@ -20,7 +20,7 @@ module.exports = new Router({
 }).post('/', async function (ctx) {
 	const { request } = ctx;
 
-	const content = await ctx.Content.create(request.body.language);
+	const content = await ctx.Content.create(request.body.lang);
 	const commit = await content.write(request.body);
 
 	commit.articleId = content.id;
@@ -60,9 +60,12 @@ module.exports = new Router({
 
 	ctx.body = await content.read(query.lang);
 }).delete('/:id', async function (ctx) {
-	const { params } = ctx;
+	const { params, query } = ctx;
 
-	const article = await ctx.Content.remove(params.id);
+	const article = await ctx.Content.remove({
+		articleId: params.id,
+		lang: query.lang
+	});
 
 	await ctx.db.Classification.destroy({
 		where: {

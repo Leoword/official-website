@@ -5,6 +5,17 @@
 		"password": "password",
 		"host": "host"
 	},
+	"server": {
+		"port": "8080",
+		"url": "http://localhost:8080"
+	},
+	"static": {
+		"path": "./www"
+	},
+	"account": {
+		"username": "admin",
+		"password": "admin"
+	},
 	"store": "C:\\Users\\store.json",
 	"websiteURL": "http://localhost:3000"
 }

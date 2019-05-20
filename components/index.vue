@@ -17,7 +17,7 @@ import axios from 'axios';
 import config from '../config.json';
 
 let lang;
-const prefix = `${config.websiteURL}/api`;
+const prefix = `${config.websiteURL}/app/api`;
 
 const Article = {
 	async get(articleId, lang) {
