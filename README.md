@@ -16,7 +16,7 @@
 				// format config (required)
 			},
 			"mapping": {
-				"articleId": "id"
+				// mapping of router params
 			}
 			"classList": [] //for format
 		}
@@ -24,19 +24,18 @@
 }
 ```
 
-# format (format name and options)
+# format (format name and options and mapping)
 
 ## format-header
-
 ```
 {
     "zh-CN":[
-    	// 点击 link
+    	// link
         {
             "url": "http://xxxx.com",
             "label": "标签1"
         },
-        // 点击 dropdown
+        // dropdown
         {
             "label": "标签2",
             "children": [
@@ -133,43 +132,84 @@
 
 ## format-article
 
+### options:
+
 ```
 {
 	"articleId": [the id of article],
 	"recommend": {
-		"categoryId": the id of category,
-		"limit": the limit of article length,
-		"keyword": keyword of title or abstract
+		"selector": {
+            "name": "category",
+            "payload": the id of category
+		}
 	} 
-	OR 
-	{
-		"articleIdList": the id of article, id...
-	}
+}
+```
+
+```
+{
+	"articleId": [the id of article],
+	"recommend": {
+		"selector": {
+            "name": "enum",
+            "payload": [articleIdList]
+		}
+	} 
+}
+```
+
+### mapping:
+
+```
+{
+    "articleId": "id"
 }
 ```
 
 ## format-article-list
 
+### options:
+
 ```
 {
 	articleList: {
 		"categoryId": the id of category,
-		"limit": the limit of article length,
 		"keyword": keyword of title or abstract,
 	},
-	recommend: {
-		"categoryId": the id of category,
-		"limit": the limit of article length,
-		"keyword": keyword of title or abstract
+	"recommend": {
+		"selector": {
+            "name": "category",
+            "payload": the id of category
+		}
 	} 
-	OR 
-	{
-		"articleIdList": [the id of article, id...]
-	}
+}
+```
+
+``` 
+{
+	articleList: {
+		"categoryId": the id of category,
+		"keyword": keyword of title or abstract,
+	},
+	"recommend": {
+		"selector": {
+            "name": "enum",
+            "payload": [articleIdList]
+		}
+	} 
+}
+```
+
+### mapping:
+
+```
+{
+    "category": "id"
 }
 ```
 
 ## format-card
+
 ```
 {
 	"selector" {
@@ -190,30 +230,44 @@
 ## format-card-circle
 ```
 {
-	"categoryId": the id of category,
-	"limit": the length of article list,
-	"keyword": search article list,
+	"selector" {
+        "name": "category",
+		"payload": categoryId
+	}	
 }
-OR
+```
+
+```
 {
-	"articleIdList": [the id of article, id, id, id],
+	"selector" {
+        "name": "enum",
+		"payload": [articleIdList]
+	}
 }
 ```
 
 ## format-card-extend
+
 ```
 {
-	"categoryId": the id of category,
-	"limit": the length of article list,
-	"keyword": search article list,
+	"selector" {
+        "name": "category",
+		"payload": categoryId
+	}	
 }
-OR
+```
+
+``` 
 {
-	"articleIdList": [the id of article, id, id, id],
+	"selector" {
+        "name": "enum",
+		"payload": [articleIdList]
+	}
 }
 ```
 
 ## format-card-transparent
+
 ```
 {
 	"articleId": the id of article
@@ -221,13 +275,16 @@ OR
 ```
 
 ## format-category
+
+### options:
+
 ```
 {
 	"image": background-image,
 	"zh-CN": [
         {
             "label": "类别1",
-            "categoryId": ""
+            "categoryId": the id of category
         },
         {
             ...
@@ -236,7 +293,7 @@ OR
 	"en": [
 		{
 			"label": "category1",
-			"categoryId": ""
+			"categoryId": the id of category
 		},
 		{
             ...
@@ -245,7 +302,16 @@ OR
 }
 ```
 
+### mapping:
+
+```
+{
+    "category": "id"
+}
+```
+
 ## format-category-card
+
 ```
 {
 	"zh-CN": [

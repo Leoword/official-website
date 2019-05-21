@@ -1,14 +1,10 @@
 <template>
 	<div>
     <b-carousel
-      v-model="slide"
       class="format-carousel"
       :interval="3000"
       controls
-      indicators
       style="text-shadow: 1px 1px 2px #333;"
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
     >
 			<b-carousel-slide
 				v-for="(item, index) in renderData"
@@ -32,20 +28,6 @@ export default {
 		}
 	},
 	props: ['options'],
-	data() {
-		return {
-			slide: 0,
-			sliding: null,
-		};
-	},
-	methods: {
-		onSlideStart() {
-			this.sliding = true;
-		},
-		onSlideEnd() {
-			this.sliding = false;
-		}
-	},
 	async renderData({ options, lang }) {
 		return options[lang || 'zh-CN'];
 	}

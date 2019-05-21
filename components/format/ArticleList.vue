@@ -21,7 +21,7 @@
 							<small>{{ article.abstract | substr }}</small>
 						</b-card-text>
 						<b-card-text style="color:#999;">
-							<small>{{ $t('article.by') }}&nbsp;{{ article.author }}&nbsp;{{ $t('article.published') }}&nbsp;{{ article.createdAt }}</small>
+							<small>{{ $t('article.by') }}&nbsp;{{ article.author }}&nbsp;{{ $t('article.published') }}&nbsp;{{ article.createdAt | format }}</small>
 						</b-card-text>
 					</b-card>
 				</b-col>
@@ -73,6 +73,7 @@
 
 <script>
 import { getSubStr } from './mixin.js';
+import dateFormat from 'dateformat';
 
 const MAX_ITEM_LENGTH =4;
 
@@ -81,6 +82,13 @@ export default {
 	filters: {
 		substr(value) {
 			return getSubStr(value, 150, 60);
+		},
+		format(time) {
+			if (!time) {
+				return '------';
+			}
+
+			return dateFormat(time, 'yyyy/mm/dd HH:mm:ss');
 		}
 	},
 	props: [
@@ -131,7 +139,8 @@ export default {
 				href: (lang ? `/${lang}` : '') + `/article/${article.id}/${article.title}`,
 				title: article.title,
 				abstract: article.abstract,
-				author: article.author
+				author: article.author,
+				createdAt: article.createdAt
 			};
 		}));
 

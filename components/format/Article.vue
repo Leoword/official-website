@@ -21,7 +21,7 @@
 					<b-card-text 
             class="pl-3 pb-3"
             style="color:#999;"
-					>{{ $t('article.by') }}&nbsp;{{ renderData.article.author }}&nbsp;{{ $t('article.published') }}&nbsp;{{ renderData.article.createdAt }}</b-card-text>
+					>{{ $t('article.by') }}&nbsp;{{ renderData.article.author }}&nbsp;{{ $t('article.published') }}&nbsp;{{ renderData.article.createdAt | format }}</b-card-text>
 					<b-card 
 						class="border-0 p-3"
 						v-html="render(renderData.article.text)"
@@ -67,12 +67,22 @@
 
 <script>
 import Markdown from 'markdown-it';
+import dateFormat from 'dateformat';
 
 const md = new Markdown();
 const MAX_ITEM_LENGTH = 4;
 
 export default {
 	name: 'format-article',
+	filters: {
+		format(time) {
+			if (!time) {
+				return '------';
+			}
+
+			return dateFormat(time, 'yyyy/mm/dd HH:mm:ss');
+		}
+	},
 	props: [
 		'options'
 	],
