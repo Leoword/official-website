@@ -25,7 +25,7 @@ app
 		key: 'website:session',
 		maxAge: 43200000
 	}, app))
-	.use(serve(path.resolve(__dirname, config.static.path), {
+	.use(serve(path.resolve(config.static.path), {
 		maxAge: 3600000,
 		gzip: true
 	}));

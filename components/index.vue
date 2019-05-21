@@ -16,7 +16,6 @@ import Vue from 'vue';
 import axios from 'axios';
 import config from '../config.json';
 
-let lang;
 const prefix = `${config.websiteURL}/app/api`;
 
 const Article = {
@@ -40,6 +39,7 @@ export default {
 	async asyncData(context) {
 		const {title, body, meta} = context.route.meta[0];
 		const params = context.params;
+		let lang;
 
 		const formatRegistry = Vue.$format;
 		const languageRegistry = Vue.$language;

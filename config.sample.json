@@ -5,12 +5,8 @@
 		"password": "password",
 		"host": "host"
 	},
-	"server": {
-		"port": "8080",
-		"url": "http://localhost:8080"
-	},
 	"static": {
-		"path": "./www"
+		"path": "www"
 	},
 	"account": {
 		"username": "admin",
