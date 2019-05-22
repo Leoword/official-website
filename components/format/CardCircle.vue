@@ -28,7 +28,7 @@
 							fluid 
 						/>
 					</b-link>
-					<b-card-text class="text-center pt-2">{{ item.abstract | substr }}</b-card-text>
+					<b-card-text class="text-center pt-2">{{ item.title | substr }}</b-card-text>
 				</b-col>
 			</b-row>
 		</b-container>	
@@ -91,7 +91,7 @@ export default {
 			return {
 				href: (lang ? `/${lang}` : '') + `/article/${article.id}/${article.title}`,
 				thumbnail: article.thumbnail,
-				abstract: article.abstract
+				title: article.title
 			};
 		}));
 	}
